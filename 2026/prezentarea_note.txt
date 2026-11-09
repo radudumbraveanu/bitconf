@@ -1,0 +1,49 @@
+Titlu: Navigating Complexity with GenAI
+
+1. Probleme: perspective diferite
+---------------------------------
+Nu toate problemele sunt la fel
+  
+<img src="elefant_original.jpg/>  
+
+În lucrul zi-de-zi ne lovim de diferite probleme.
+Acestea, în funcție de aspectul pe care îl alegem, pot fi împărțite în diferite categorii.
+
+De exemplu, prin prisma vizibilității drumului spre soluție, putem avea probleme la care vedem foarte clar ce reguli trebuie aplicate pentru a ajunge la soluție;
+și invers, sunt probleme la care știm care e soluția, dar nu e clar drumul. Astfel de probleme ne ajută să inventăm noi reguli de rezolvare.
+
+La fel, din punct de vedere al efortului necesar pentru a parcurge drumul către soluție, pot fi probleme care se rezolvă foarte repede, în câteva zile, în câteva săptămâni etc.
+Un caz particular în tehnologia informației sunt problemele la care vedem drumul foarte clar și știm că efortul este mare. Aceste probleme pot fi rezolvate acum prin AI, care poate executa unele părți ale drumului repede.
+
+Din punct de vedere al relației dintre factorii problemei, interconectați: tu vezi clar ce trebuie remediat, dar dacă remediezi, strici tot ce funcționa până acum, pentru că factorii sunt foarte interconectați.
+
+Problemele care fac praf tot ce știam până acum le zic axiomele personale.
+
+Putem privi problemele și din punctul de vedere al celui care le rezolvă.
+Sunt probleme care sunt privite doar ca probleme și reprezintă o sursă de stres, dar sunt și probleme care pot fi privite ca ocazii de a învăța ceva, de a verifica ceva.
+
+La fel, din același punct de vedere, sunt probleme care, în paralel cu soluția, îl dezvoltă și pe cel care le rezolvă.
+
+Unele dintre problemele de mai sus sunt exemple de probleme care țin de așa-numitele fenomene complexe. 
+Fenomene care constau din factori interconectați, între care nu sunt granițe clare și ale căror interacțiuni nu pot fi prezise în totalitate.
+
+Și fiindcă subiectul acestei prezentări sunt fenomenele complexe, haideți să vedem cum le putem aborda.
+
+Există strategii cognitive care dau direcție atunci când nu ai o metodă sigură. Voi porni de la câteva exemple de probleme.
+
+2. Exemplu 1
+------------
+Specializare
+
+Dacă problema generală e prea grea, de ce nu încerc să rezolv un caz particular, care e mai simplu? Din acesta aș putea scoate ideea de rezolvare pentru problema generală.
+
+Treci de la un set dat de obiecte la un set mai mic, inclus în cel dat.
+
+Alegerea unei valori limită: înlocuiești parametrul general cu o valoare particulară, deci treci la un set mai mic de cazuri, inclus în cel inițial.
+
+Problema: Interblocare (eng. Deadlock)
+
+Într-o aplicație, la un moment dat, începe să apară eroarea că nu sunt suficiente conexiuni. Cu alte cuvinte, unele conexiuni sunt luate și nu sunt eliberate. Și de fiecare dată, locul din program (linia de cod) unde apare această eroare este diferit. E destul de complicat să înțelegi cauza unei astfel de erori într-o situație reală și este complicat s-o reproduci local, cu 1-2 utilizatori.
+
+<img src="Process_deadlock.svg" />
+
