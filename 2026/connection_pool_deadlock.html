@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deadlock în pool-ul de conexiuni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one wide simulation stage on top, then chart + explanation side by side.
+   Palette: blue-grey neutrals; blue = DB connections, plum = lock R, amber = waiting, red = deadlock. */
+:root{
+  --bg:#eceff3; --surface:#f8f9fb; --ink:#14202e; --muted:#5b6978; --line:#cdd5de; --line-soft:#dde3ea;
+  --conn:#12708f; --lock:#8b3a6b; --warn:#e0930a; --bad:#c62d2d; --bad-soft:#f6dcdc;
+  --th-fill:var(--ink); --th-text:#f8f9fb; --on-warn:#14202e;
+  --font-body:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e141b; --surface:#151d27; --ink:#e6ebf1; --muted:#8e9cac; --line:#2c3745; --line-soft:#212b37;
+    --conn:#52b8d8; --lock:#e08ab9; --warn:#f2ab2f; --bad:#ff6b6b; --bad-soft:#3a1d22;
+    --th-fill:var(--ink); --th-text:#0e141b; --on-warn:#0e141b; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e141b; --surface:#151d27; --ink:#e6ebf1; --muted:#8e9cac; --line:#2c3745; --line-soft:#212b37;
+  --conn:#52b8d8; --lock:#e08ab9; --warn:#f2ab2f; --bad:#ff6b6b; --bad-soft:#3a1d22;
+  --th-fill:var(--ink); --th-text:#0e141b; --on-warn:#0e141b; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);font-size:15px;line-height:1.5;
+  padding-block:28px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+h1{font-size:clamp(26px,4.4vw,38px);line-height:1.08;font-weight:800;letter-spacing:-.02em;margin:0 0 10px;text-wrap:balance}
+h2{font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+p{margin:0}
+.lede{max-width:68ch;color:var(--muted);font-size:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px}
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+
+/* toolbar */
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.bar .grow{flex:1 1 auto}
+button{font:inherit;font-weight:600;font-size:14px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:7px 13px;cursor:pointer}
+button:hover{border-color:var(--muted)}
+button.primary{background:var(--ink);color:var(--th-text);border-color:var(--ink)}
+button[aria-pressed="true"]{background:var(--ink);color:var(--th-text);border-color:var(--ink)}
+button:focus-visible,input:focus-visible,.bar-hit:focus-visible{outline:2px solid var(--conn);outline-offset:2px}
+.chk{display:inline-flex;gap:7px;align-items:center;font-size:14px;color:var(--muted);cursor:pointer}
+.pill{font-family:var(--font-mono);font-size:12.5px;font-weight:500;padding:5px 11px;border-radius:99px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.pill.run{color:var(--ink);border-color:var(--ink)}
+.pill.dead{background:var(--bad);border-color:var(--bad);color:#fff}
+.pill.ok{color:var(--conn);border-color:var(--conn)}
+
+/* stage */
+.stage{border:1px solid var(--line);border-radius:4px;background:var(--bg);overflow:hidden;transition:border-color .2s,box-shadow .2s}
+.stage.dead{border-color:var(--bad);box-shadow:0 0 0 2px var(--bad-soft)}
+.stage svg{display:block;width:100%;height:auto}
+.readout{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:10px;font-size:13px;color:var(--muted)}
+.readout b{color:var(--ink);font-weight:500}
+
+/* svg */
+.t-c{fill:var(--bg);stroke:var(--line);stroke-width:1.5;transition:fill .15s,stroke .15s}
+.t-idle .t-c{fill:var(--bg);stroke:var(--line)}
+.t-run .t-c{fill:var(--th-fill);stroke:var(--th-fill)}
+.t-wait .t-c{fill:var(--warn);stroke:var(--warn)}
+.t-dead .t-c{fill:var(--bad);stroke:var(--bad)}
+.t-n{font-family:var(--font-mono);font-size:11px;font-weight:500;text-anchor:middle;dominant-baseline:central;fill:var(--muted)}
+.t-run .t-n{fill:var(--th-text)} .t-wait .t-n{fill:var(--on-warn)} .t-dead .t-n{fill:#fff}
+.t-tag{font-family:var(--font-mono);font-size:11px;font-weight:500;text-anchor:middle}
+.tag-A{fill:var(--conn)} .tag-B{fill:var(--lock)}
+.ln{fill:none;stroke-width:2;stroke-linecap:round;transition:opacity .15s}
+.ln-conn{stroke:var(--conn)} .ln-lock{stroke:var(--lock)}
+.ln-wait{stroke:var(--warn);stroke-dasharray:5 5;stroke-width:1.8}
+.ln-dead{stroke:var(--bad);stroke-dasharray:5 5;stroke-width:2.4;animation:flow .9s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-20}}
+.box{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.box-pool{stroke:var(--conn)} .box-lock{stroke:var(--lock)}
+.stage.dead .box{stroke:var(--bad)}
+.slot{fill:none;stroke:var(--line);stroke-width:1.5;stroke-dasharray:3 3;transition:fill .15s}
+.slot.held{fill:var(--conn);stroke:var(--conn);stroke-dasharray:none}
+.slot.sdead{fill:var(--bad);stroke:var(--bad);stroke-dasharray:none}
+.slot-t{font-family:var(--font-mono);font-size:10.5px;text-anchor:middle;dominant-baseline:central;fill:var(--bg);font-weight:500}
+.cap{font-family:var(--font-body);font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;fill:var(--muted)}
+.cap-sub{font-family:var(--font-mono);font-size:12px;fill:var(--muted)}
+.lock-body{fill:var(--lock)} .lock-body.free{fill:none;stroke:var(--lock);stroke-width:1.5;stroke-dasharray:3 3}
+.lock-body.sdead{fill:var(--bad)}
+.lock-shackle{fill:none;stroke:var(--lock);stroke-width:2.5}
+.lock-id{font-family:var(--font-mono);font-size:12px;font-weight:500;text-anchor:middle;dominant-baseline:central;fill:var(--bg)}
+.stage.dead .lock-shackle{stroke:var(--bad)}
+
+/* grid below */
+.grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:20px}
+@media (max-width:860px){.grid{grid-template-columns:minmax(0,1fr)}}
+.controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px 26px;margin-top:16px;padding-top:16px;border-top:1px solid var(--line-soft)}
+.ctl label{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;font-weight:600;margin-bottom:4px}
+.ctl output{font-family:var(--font-mono);font-weight:500;font-size:14px}
+.ctl.big output{font-size:22px;color:var(--conn)}
+input[type=range]{width:100%;accent-color:var(--conn);margin:0}
+.ctl small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+
+/* chart */
+.chart svg{display:block;width:100%;height:auto}
+.ax{font-family:var(--font-mono);font-size:11px;fill:var(--muted)}
+.gl{stroke:var(--line-soft);stroke-width:1}
+.bar-r{fill:var(--bad);opacity:.78;transition:opacity .15s}
+.bar-r.zero{opacity:.35}
+.bar-hit{fill:transparent;cursor:pointer}
+.bar-hit:hover + .bar-r{opacity:1}
+.cur{fill:none;stroke:var(--ink);stroke-width:2}
+.val{font-family:var(--font-mono);font-size:10.5px;text-anchor:middle;fill:var(--ink)}
+.note{font-size:13px;color:var(--muted);margin-top:8px}
+.tally{font-family:var(--font-mono);font-size:13px;margin-top:10px;color:var(--ink)}
+
+/* explanation */
+.why{border-left:3px solid var(--line);padding-left:12px;margin-bottom:14px;min-height:6.6em}
+.why.dead{border-color:var(--bad)}
+.why strong{font-weight:600}
+.legend{display:flex;flex-direction:column;gap:10px;font-size:14px}
+.legend div{display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:start}
+.chip{font-family:var(--font-mono);font-weight:500;font-size:12px;text-align:center;border-radius:3px;padding:1px 0;color:var(--bg)}
+.chip.a{background:var(--conn)} .chip.b{background:var(--lock)}
+.key{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:14px;font-size:12.5px;color:var(--muted)}
+.key span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+@media (prefers-reduced-motion: reduce){.ln-dead{animation:none}*{transition:none!important}}
+body{margin:0}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <h1>Deadlock în pool-ul de conexiuni</h1>
+    <p class="lede">Un fir de execuție ține o conexiune la baza de date și are nevoie de o resursă ținută de alt fir. Acel fir eliberează resursa doar dacă primește o conexiune liberă. Micșorează pool-ul și urmărește cum se apropie de 100% șansa ca blocajul să apară.</p>
+  </header>
+
+  <section class="panel" aria-label="Simulare">
+    <div class="bar">
+      <button id="btnPlay" class="primary" type="button">Pauză</button>
+      <button id="btnRestart" type="button">Repornește</button>
+      <button id="btnShrink" type="button" aria-pressed="false">Micșorează automat 10 → 1</button>
+      <label class="chk"><input id="chkAuto" type="checkbox" checked> Repornește după rezultat</label>
+      <span class="grow"></span>
+      <span id="pill" class="pill run" role="status" aria-live="polite">Rulează</span>
+    </div>
+    <div id="stage" class="stage">
+      <svg id="svg" viewBox="0 0 960 430" role="img" aria-label="Fire de execuție, pool de conexiuni și resursa R"></svg>
+    </div>
+    <div class="readout mono" id="readout"></div>
+
+    <div class="controls">
+      <div class="ctl big">
+        <label for="rPool">Conexiuni în pool <output id="oPool">10</output></label>
+        <input id="rPool" type="range" min="1" max="16" step="1" value="10">
+      </div>
+      <div class="ctl">
+        <label for="rThreads">Fire de execuție <output id="oThreads">16</output></label>
+        <input id="rThreads" type="range" min="4" max="16" step="1" value="16">
+      </div>
+      <div class="ctl">
+        <label for="rB">Cereri de tip B <output id="oB">10%</output></label>
+        <input id="rB" type="range" min="0" max="50" step="5" value="10">
+        <small>La 0% nu există ciclu, deci nici deadlock.</small>
+      </div>
+      <div class="ctl">
+        <label for="rSpeed">Viteză <output id="oSpeed">30 tick/s</output></label>
+        <input id="rSpeed" type="range" min="10" max="120" step="5" value="30">
+      </div>
+    </div>
+  </section>
+
+  <div class="grid">
+    <section class="panel chart" aria-label="Probabilitate">
+      <h2>Șansa de deadlock după mărimea pool-ului</h2>
+      <svg id="chart" viewBox="0 0 640 282" role="img" aria-label="Probabilitatea de deadlock pentru fiecare mărime de pool"></svg>
+      <p class="note" id="chartNote"></p>
+      <p class="tally" id="tally"></p>
+    </section>
+
+    <section class="panel" aria-label="Explicație">
+      <h2>Ce se întâmplă acum</h2>
+      <div id="why" class="why"></div>
+      <div class="legend">
+        <div><span class="chip a">A</span><span>Cerere de tip A: ia o conexiune, apoi are nevoie de resursa R (de exemplu un lock sau o cache partajată).</span></div>
+        <div><span class="chip b">B</span><span>Cerere de tip B: ia resursa R, apoi are nevoie de o conexiune ca să termine și să o elibereze.</span></div>
+      </div>
+      <div class="key">
+        <span><i class="dot" style="background:var(--th-fill)"></i>lucrează</span>
+        <span><i class="dot" style="background:var(--warn)"></i>așteaptă</span>
+        <span><i class="dot" style="background:var(--bad)"></i>blocat în deadlock</span>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- simulation core (pure; also used for the Monte Carlo chart) ---------- */
+var IDLE=0,WANT1=1,WORK1=2,WANT2=3,WORK2=4;
+var HORIZON=300, MC_RUNS=250, PMAX=16;
+function ri(a,b){return a+Math.floor(Math.random()*(b-a+1));}
+function createSim(T,P,pB){
+  var s={T:T,P:P,pB:pB,tick:0,th:[],slots:[],lock:-1,qC:[],qL:[],dead:null};
+  for(var i=0;i<P;i++)s.slots.push(-1);
+  for(var j=0;j<T;j++)s.th.push({id:j,st:IDLE,type:'A',timer:ri(1,40),slot:-1,hasLock:false,wait:null});
+  return s;
+}
+function enqueue(s,t){
+  var first=(t.st===WANT1);
+  t.wait=(first===(t.type==='A'))?'conn':'lock';
+  (t.wait==='conn'?s.qC:s.qL).push(t.id);
+}
+function step(s){
+  s.tick++;
+  var off=ri(0,s.T-1);
+  for(var k=0;k<s.T;k++){
+    var t=s.th[(k+off)%s.T];
+    if(t.st===IDLE){
+      if(--t.timer<=0){t.type=(Math.random()<s.pB)?'B':'A';t.st=WANT1;enqueue(s,t);}
+    }else if(t.st===WORK1){
+      if(--t.timer<=0){t.st=WANT2;enqueue(s,t);}
+    }else if(t.st===WORK2){
+      if(--t.timer<=0){
+        s.slots[t.slot]=-1;t.slot=-1;
+        if(t.hasLock){s.lock=-1;t.hasLock=false;}
+        t.st=IDLE;t.timer=ri(10,60);t.wait=null;
+      }
+    }
+  }
+  while(s.qC.length){
+    var f=s.slots.indexOf(-1);if(f<0)break;
+    var c=s.th[s.qC.shift()];
+    s.slots[f]=c.id;c.slot=f;c.wait=null;c.st=(c.st===WANT1)?WORK1:WORK2;c.timer=ri(2,5);
+  }
+  if(s.qL.length&&s.lock<0){
+    var l=s.th[s.qL.shift()];
+    s.lock=l.id;l.hasLock=true;l.wait=null;l.st=(l.st===WANT1)?WORK1:WORK2;l.timer=ri(2,5);
+  }
+  if(s.qC.length){ /* a cycle needs somebody waiting for a connection */
+    var cand={},n=0,i;
+    for(i=0;i<s.T;i++)if(s.th[i].wait){cand[i]=1;n++;}
+    var changed=true;
+    while(changed){
+      changed=false;
+      for(i=0;i<s.T;i++){
+        if(!cand[i])continue;
+        var th=s.th[i],ok=true;
+        if(th.wait==='lock'){ok=s.lock>=0&&!!cand[s.lock];}
+        else{for(var h=0;h<s.slots.length;h++){var o=s.slots[h];if(o<0||!cand[o]){ok=false;break;}}}
+        if(!ok){delete cand[i];n--;changed=true;}
+      }
+    }
+    if(n>0){s.dead=Object.keys(cand).map(Number);return true;}
+  }
+  return false;
+}
+function estimate(T,P,pB){
+  if(P>=T)return 0; /* B always finds a free connection */
+  var d=0;
+  for(var r=0;r<MC_RUNS;r++){
+    var s=createSim(T,P,pB);
+    for(var i=0;i<HORIZON;i++){if(step(s)){d++;break;}}
+  }
+  return d/MC_RUNS;
+}
+
+/* ---------- state ---------- */
+var $=function(id){return document.getElementById(id);};
+var cfg={pool:10,threads:16,pB:10,speed:30,paused:false,autoRestart:true,shrink:false};
+var sim=null,phase='running',phaseLeft=0,acc=0,tally={n:0,d:0},shrinkRuns=0;
+var results=[],mcToken=0,mcDone=0;
+var SHRINK_RUNS=3;
+
+/* ---------- svg stage ---------- */
+var NS='http://www.w3.org/2000/svg';
+function el(tag,attrs,parent){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+var svg=$('svg'),G={};
+var TY=84,TR=15,POOL={x:36,y:296,w:668,h:116},LOCK={x:756,y:296,w:168,h:116};
+function cubic(x0,y0,x1,y1){var dy=(y1-y0)*.55;return 'M'+x0+','+y0+' C'+x0+','+(y0+dy)+' '+x1+','+(y1-dy)+' '+x1+','+y1;}
+function build(){
+  svg.innerHTML='';
+  var T=cfg.threads,P=cfg.pool;
+  G.lines=el('g',{},svg);
+  G.pool=el('g',{},svg);G.lock=el('g',{},svg);G.th=el('g',{},svg);
+  /* pool box */
+  el('rect',{x:POOL.x,y:POOL.y,width:POOL.w,height:POOL.h,rx:4,class:'box box-pool'},G.pool);
+  G.poolCap=el('text',{x:POOL.x+14,y:POOL.y+POOL.h-14,class:'cap'},G.pool);
+  G.poolSub=el('text',{x:POOL.x+POOL.w-14,y:POOL.y+POOL.h-14,class:'cap-sub','text-anchor':'end'},G.pool);
+  var gap=6,sw=Math.min(44,(POOL.w-28-(P-1)*gap)/P),total=P*sw+(P-1)*gap,sx=POOL.x+(POOL.w-total)/2;
+  G.slotX=[];G.slots=[];G.slotT=[];
+  for(var i=0;i<P;i++){
+    var x=sx+i*(sw+gap);G.slotX.push(x+sw/2);
+    G.slots.push(el('rect',{x:x,y:POOL.y+18,width:sw,height:46,rx:3,class:'slot'},G.pool));
+    G.slotT.push(el('text',{x:x+sw/2,y:POOL.y+41,class:'slot-t'},G.pool));
+  }
+  G.slotTop=POOL.y+18;
+  /* lock box */
+  el('rect',{x:LOCK.x,y:LOCK.y,width:LOCK.w,height:LOCK.h,rx:4,class:'box box-lock'},G.lock);
+  var cx=LOCK.x+LOCK.w/2;
+  el('path',{d:'M'+(cx-11)+','+(LOCK.y+36)+' v-9 a11,11 0 0 1 22,0 v9',class:'lock-shackle'},G.lock);
+  G.lockBody=el('rect',{x:cx-20,y:LOCK.y+34,width:40,height:30,rx:3,class:'lock-body free'},G.lock);
+  G.lockId=el('text',{x:cx,y:LOCK.y+50,class:'lock-id'},G.lock);
+  el('text',{x:LOCK.x+14,y:LOCK.y+LOCK.h-14,class:'cap'},G.lock).textContent='Resursa R';
+  G.lockSub=el('text',{x:LOCK.x+LOCK.w-14,y:LOCK.y+LOCK.h-14,class:'cap-sub','text-anchor':'end'},G.lock);
+  /* threads */
+  var sp=Math.min(54,860/Math.max(1,T-1)),x0=480-sp*(T-1)/2;
+  G.tx=[];G.thEl=[];G.thTag=[];G.thNum=[];G.lnC=[];G.lnL=[];G.lnW=[];
+  for(var j=0;j<T;j++){
+    var tx=x0+j*sp;G.tx.push(tx);
+    var g=el('g',{class:'t-idle'},G.th);
+    el('circle',{cx:tx,cy:TY,r:TR,class:'t-c'},g);
+    G.thNum.push(el('text',{x:tx,y:TY,class:'t-n'},g));G.thNum[j].textContent=(j+1);
+    G.thTag.push(el('text',{x:tx,y:TY-24,class:'t-tag'},g));
+    G.thEl.push(g);
+    G.lnC.push(el('path',{class:'ln ln-conn',opacity:0},G.lines));
+    G.lnL.push(el('path',{class:'ln ln-lock',opacity:0},G.lines));
+    G.lnW.push(el('path',{class:'ln ln-wait',opacity:0},G.lines));
+  }
+  el('text',{x:36,y:TY-40,class:'cap'},svg).textContent='Fire de execuție';
+}
+function lockX(i){return LOCK.x+30+(i/Math.max(1,cfg.threads-1))*(LOCK.w-60);}
+function poolX(i){return Math.max(POOL.x+14,Math.min(POOL.x+POOL.w-14,G.tx[i]));}
+
+function render(){
+  var s=sim,T=cfg.threads,P=cfg.pool,dead={},i;
+  if(s.dead)s.dead.forEach(function(id){dead[id]=1;});
+  var held=0,waiting=0;
+  for(i=0;i<T;i++){
+    var t=s.th[i],cls='t-idle';
+    if(dead[i])cls='t-dead';else if(t.wait)cls='t-wait';else if(t.st!==IDLE)cls='t-run';
+    G.thEl[i].setAttribute('class',cls);
+    G.thTag[i].textContent=t.st===IDLE?'':t.type;
+    G.thTag[i].setAttribute('class','t-tag tag-'+t.type);
+    var y0=TY+TR;
+    if(t.slot>=0){G.lnC[i].setAttribute('d',cubic(G.tx[i],y0,G.slotX[t.slot],G.slotTop));G.lnC[i].setAttribute('opacity',1);}
+    else G.lnC[i].setAttribute('opacity',0);
+    if(t.hasLock){G.lnL[i].setAttribute('d',cubic(G.tx[i],y0,lockX(i),LOCK.y));G.lnL[i].setAttribute('opacity',1);}
+    else G.lnL[i].setAttribute('opacity',0);
+    if(t.wait){
+      var tx=t.wait==='conn'?poolX(i):lockX(i),ty=t.wait==='conn'?POOL.y:LOCK.y;
+      G.lnW[i].setAttribute('d',cubic(G.tx[i],y0,tx,ty));
+      G.lnW[i].setAttribute('class','ln '+(dead[i]?'ln-dead':'ln-wait'));
+      G.lnW[i].setAttribute('opacity',1);waiting++;
+    }else G.lnW[i].setAttribute('opacity',0);
+  }
+  for(var k=0;k<P;k++){
+    var o=s.slots[k];
+    G.slots[k].setAttribute('class','slot'+(o>=0?(dead[o]?' sdead':' held'):''));
+    G.slotT[k].textContent=o>=0?'T'+(o+1):'';
+    if(o>=0)held++;
+  }
+  G.poolCap.textContent='Pool de conexiuni';
+  G.poolSub.textContent=held+' / '+P+' ocupate';
+  var lk=s.lock;
+  G.lockBody.setAttribute('class','lock-body'+(lk<0?' free':(dead[lk]?' sdead':'')));
+  G.lockId.textContent=lk>=0?'T'+(lk+1):'';
+  G.lockSub.textContent=lk>=0?'ținută':'liberă';
+  $('stage').classList.toggle('dead',phase==='dead');
+  $('readout').innerHTML='<span>tick <b>'+s.tick+'</b> / '+HORIZON+'</span><span>conexiuni ocupate <b>'+held+' / '+P+'</b></span><span>fire în așteptare <b>'+waiting+'</b></span>';
+  renderWhy(held,waiting);
+  renderPill();
+}
+function renderPill(){
+  var p=$('pill');
+  if(phase==='dead'){p.className='pill dead';p.textContent='Deadlock la tick '+sim.tick;}
+  else if(phase==='survived'){p.className='pill ok';p.textContent='Fără deadlock în '+HORIZON+' tick-uri';}
+  else if(cfg.paused){p.className='pill';p.textContent='Pauză';}
+  else{p.className='pill run';p.textContent='Rulează';}
+}
+function nm(ids){return ids.map(function(i){return 'T'+(i+1);}).join(', ');}
+function renderWhy(held,waiting){
+  var w=$('why'),s=sim,P=cfg.pool;
+  if(phase==='dead'){
+    w.className='why dead';
+    var holders=s.slots.filter(function(x){return x>=0;});
+    var others=s.dead.length-holders.length-1;
+    var h='<strong>Deadlock.</strong> <b class="mono">T'+(s.lock+1)+'</b> ține resursa R și așteaptă o conexiune. ';
+    h+=(P===1?'Singura conexiune este ținută de ':'Toate cele '+P+' conexiuni sunt ținute de ')+'<b class="mono">'+nm(holders)+'</b>, ';
+    h+=(holders.length===1?'care așteaptă':'care așteaptă fiecare')+' resursa R. ';
+    h+='Niciunul nu poate elibera ce ține, deci nimic nu mai avansează.';
+    if(others>0)h+=' Încă '+others+' '+(others===1?'fir stă':'fire stau')+' în coadă în spatele lor.';
+    w.innerHTML=h;
+  }else if(phase==='survived'){
+    w.className='why';
+    w.innerHTML='<strong>Pool-ul a rezistat.</strong> În '+HORIZON+' de tick-uri, firele care țin R au găsit mereu o conexiune liberă înainte ca cererile de tip A să ocupe tot pool-ul.';
+  }else{
+    w.className='why';
+    var risk=(cfg.pool>=cfg.threads)?'Cu '+cfg.pool+' conexiuni pentru '+cfg.threads+' fire, un fir care ține R găsește mereu o conexiune liberă. Blocajul e imposibil.'
+      :'Blocajul apare dacă toate conexiunile ajung la fire de tip A care așteaptă R, în timp ce un fir de tip B ține R și cere o conexiune.';
+    w.innerHTML='<strong>Rulează.</strong> '+risk;
+  }
+}
+
+/* ---------- run control ---------- */
+function startRun(){
+  sim=createSim(cfg.threads,cfg.pool,cfg.pB/100);
+  phase='running';acc=0;
+  render();renderChart();renderTally();
+}
+function finishRun(dead){
+  tally.n++;if(dead)tally.d++;
+  shrinkRuns++;
+  phase=dead?'dead':'survived';
+  phaseLeft=cfg.shrink?1.6:2.4;
+  renderTally();renderChart();
+}
+function nextRun(){
+  if(cfg.shrink&&shrinkRuns>=SHRINK_RUNS){
+    if(cfg.pool>1){setPool(cfg.pool-1,true);return;}
+    setShrink(false);
+  }
+  startRun();
+}
+function setPool(v,keepShrink){
+  cfg.pool=v;$('rPool').value=v;$('oPool').textContent=v;
+  tally={n:0,d:0};shrinkRuns=0;
+  build();startRun();
+}
+function setShrink(on){
+  cfg.shrink=on;$('btnShrink').setAttribute('aria-pressed',on?'true':'false');
+  $('btnShrink').textContent=on?'Oprește micșorarea':'Micșorează automat 10 → 1';
+}
+function frame(now){
+  var dt=Math.min(.1,(now-(frame.last||now))/1000);frame.last=now;
+  if(!cfg.paused){
+    if(phase==='running'){
+      acc+=dt*cfg.speed;
+      var guard=0,done=false;
+      while(acc>=1&&guard++<20){
+        acc-=1;
+        if(step(sim)){finishRun(true);done=true;break;}
+        if(sim.tick>=HORIZON){finishRun(false);done=true;break;}
+      }
+      render();
+    }else if(cfg.autoRestart||cfg.shrink){
+      phaseLeft-=dt;
+      if(phaseLeft<=0)nextRun();
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+/* ---------- chart ---------- */
+var CH={l:44,r:8,t:16,b:44,w:640,h:282};
+function renderChart(){
+  var c=$('chart'),pw=CH.w-CH.l-CH.r,ph=CH.h-CH.t-CH.b,band=pw/PMAX,bw=band*.7;
+  var html='',i,y;
+  [0,25,50,75,100].forEach(function(v){
+    y=CH.t+ph-ph*v/100;
+    html+='<line class="gl" x1="'+CH.l+'" x2="'+(CH.w-CH.r)+'" y1="'+y+'" y2="'+y+'"/><text class="ax" x="'+(CH.l-6)+'" y="'+(y+4)+'" text-anchor="end">'+v+'%</text>';
+  });
+  for(i=1;i<=PMAX;i++){
+    var x=CH.l+(i-1)*band+(band-bw)/2,r=results[i],known=(r!==undefined&&r!==null);
+    var h=known?Math.max(2,ph*r):2;
+    html+='<text class="ax" x="'+(x+bw/2)+'" y="'+(CH.h-24)+'" text-anchor="middle">'+i+'</text>';
+    html+='<g><rect class="bar-hit" tabindex="0" role="button" aria-label="Pool cu '+i+' conexiuni'+(known?', '+Math.round(r*100)+'% șansă de deadlock':'')+'" data-p="'+i+'" x="'+(CH.l+(i-1)*band)+'" y="'+CH.t+'" width="'+band+'" height="'+ph+'"/>';
+    html+='<rect class="bar-r'+((known&&r===0)?' zero':'')+'" style="pointer-events:none;'+(known?'':'fill:var(--line);opacity:.7')+'" x="'+x+'" y="'+(CH.t+ph-h)+'" width="'+bw+'" height="'+h+'"/></g>';
+    if(known)html+='<text class="val" x="'+(x+bw/2)+'" y="'+(CH.t+ph-h-4)+'">'+Math.round(r*100)+'</text>';
+  }
+  html+='<text class="ax" x="'+(CH.l+pw/2)+'" y="'+(CH.h-1)+'" text-anchor="middle">conexiuni în pool</text>';
+  var cx=CH.l+(cfg.pool-1)*band;
+  html+='<rect class="cur" x="'+(cx+2)+'" y="'+(CH.t-4)+'" width="'+(band-4)+'" height="'+(ph+8)+'" rx="2" style="pointer-events:none"/>';
+  c.innerHTML=html;
+  $('chartNote').textContent=(mcDone<PMAX?'Calculez estimarea… '+mcDone+' / '+PMAX+'. ':'')+
+    'Fiecare bară vine din '+MC_RUNS+' de rulări simulate de câte '+HORIZON+' tick-uri, cu '+cfg.threads+' fire și '+cfg.pB+'% cereri de tip B. De la '+cfg.threads+' conexiuni în sus deadlock-ul e imposibil. Apasă pe o bară ca să alegi pool-ul.';
+}
+function computeChart(){
+  var token=++mcToken,T=cfg.threads,pB=cfg.pB/100,p=1;
+  results=[];mcDone=0;renderChart();
+  (function next(){
+    if(token!==mcToken)return;
+    if(p>PMAX){return;}
+    results[p]=estimate(T,p,pB);mcDone=p;p++;
+    renderChart();
+    setTimeout(next,0);
+  })();
+}
+function renderTally(){
+  var t=$('tally');
+  if(!tally.n){t.textContent='Pool '+cfg.pool+': nicio rulare încheiată încă.';return;}
+  t.textContent='Pool '+cfg.pool+': '+tally.d+' din '+tally.n+(tally.n===1?' rulare':' rulări')+' au intrat în deadlock.';
+}
+
+/* ---------- wiring ---------- */
+$('rPool').addEventListener('input',function(e){setShrink(false);setPool(+e.target.value);});
+$('rThreads').addEventListener('input',function(e){
+  cfg.threads=+e.target.value;$('oThreads').textContent=cfg.threads;tally={n:0,d:0};shrinkRuns=0;build();startRun();computeChart();
+});
+$('rB').addEventListener('input',function(e){
+  cfg.pB=+e.target.value;$('oB').textContent=cfg.pB+'%';tally={n:0,d:0};shrinkRuns=0;startRun();computeChart();
+});
+$('rSpeed').addEventListener('input',function(e){cfg.speed=+e.target.value;$('oSpeed').textContent=cfg.speed+' tick/s';});
+$('btnPlay').addEventListener('click',function(){cfg.paused=!cfg.paused;$('btnPlay').textContent=cfg.paused?'Continuă':'Pauză';renderPill();});
+$('btnRestart').addEventListener('click',function(){startRun();});
+$('chkAuto').addEventListener('change',function(e){cfg.autoRestart=e.target.checked;});
+$('btnShrink').addEventListener('click',function(){
+  if(cfg.shrink){setShrink(false);return;}
+  setShrink(true);
+  cfg.paused=false;$('btnPlay').textContent='Pauză';
+  setPool(Math.min(10,PMAX));
+});
+$('chart').addEventListener('click',function(e){
+  var t=e.target.closest&&e.target.closest('.bar-hit');if(!t)return;
+  setShrink(false);setPool(+t.getAttribute('data-p'));
+});
+$('chart').addEventListener('keydown',function(e){
+  if(e.key!=='Enter'&&e.key!==' ')return;
+  var t=e.target;if(!t.classList||!t.classList.contains('bar-hit'))return;
+  e.preventDefault();setShrink(false);setPool(+t.getAttribute('data-p'));
+});
+
+build();startRun();computeChart();
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

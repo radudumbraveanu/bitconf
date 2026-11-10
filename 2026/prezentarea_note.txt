@@ -44,6 +44,64 @@ Alegerea unei valori limită: înlocuiești parametrul general cu o valoare part
 Problema: Interblocare (eng. Deadlock)
 
 Într-o aplicație, la un moment dat, începe să apară eroarea că nu sunt suficiente conexiuni. Cu alte cuvinte, unele conexiuni sunt luate și nu sunt eliberate. Și de fiecare dată, locul din program (linia de cod) unde apare această eroare este diferit. E destul de complicat să înțelegi cauza unei astfel de erori într-o situație reală și este complicat s-o reproduci local, cu 1-2 utilizatori.
+Fiindcă aplicația folosește un pool de conexiuni (eng. connection pool), aplicând o valoare limită de N=1, adică minimizând numărul de conexiuni la 1, am căpătat din cele două lumi: 
+simplificarea contextului de depanare și forțarea reproducerii erorii.
 
 <img src="Process_deadlock.svg" />
+
+Alte exemple: un OutOfMemory care apare aleatoriu poate fi forțat micșorând memoria.
+
+3. Exemplu 2
+------------------
+Abstractizare
+
+Exemplu: Problema interogărilor N+1 (sau problema N+1, eng. N+1 query).
+„Am un N+1 undeva în aplicație?” Greu de văzut direct. Am acces la log-ul de interogări, dar pot fi multe interogări în jurnalul bazei de date și nu le mai putem reduce la una. Dacă le împărțim în clase după numărul de repetări, atunci clasa [1] o ignorăm, iar clasele [2], [3]... merită deja atenția noastră.
+
+Notă: Când unele cereri rulează mai lent decât ne așteptăm, merită să verificăm ca posibil candidat problema N+1, pentru că problema N+1 are o proprietate: se întâlnește foarte des și se repară ușor.
+
+4. Mai multe strategii cognitive
+--------------------------------
+
+Carte: „How to solve it”
+Autor: George Pólya, matematician maghiar (1887–1985)
+Subiect: metode generale de rezolvare a problemelor, în special matematice, dar aplicabile și în alte domenii
+
+https://en.wikipedia.org/wiki/How_to_Solve_It
+
+El recomandă patru faze în rezolvarea unei probleme:
+1. Înțelege problema. Ce se cere (necunoscuta)? Ce date ai? Care e condiția? Desenează o figură, alege notații, separă părțile condiției.
+2. Alcătuiește un plan. 
+3. Execută planul. Verifici fiecare pas.
+4. Privește înapoi. Verifici rezultatul, cauți altă cale, vezi unde mai poți folosi rezultatul sau metoda.
+
+În faza 2, Polya prezintă un set de metode care ajută să construiești planul, pe care le numește euristici:
+- Analogy (analogie): ai mai rezolvat ceva asemănător?
+- Look at the unknown (privește necunoscuta): ce problemă cunoscută are aceeași necunoscută?
+- Auxiliary elements/problem (elemente sau problemă auxiliară): adaugi o linie, o variabilă sau o problemă ajutătoare.
+- Decomposing and recombining (descompunere și recombinare): împarți și reunești.
+- Generalization (generalizare): o problemă mai generală poate fi mai ușoară.
+- Specialization (specializare): un caz particular.
+- Variation of the problem (variația problemei): reformulezi sau schimbi datele.
+- Working backwards (de la sfârșit spre început): pornești de la ce trebuie obținut.
+- Go back to definitions (revino la definiții).
+- Solve part of the problem (rezolvă o parte): păstrezi doar o parte din condiție.
+- Did you use all the data? (ai folosit toate datele?)
+
+Altele din „Dictionary of Heuristic"
+- Induction (inducție).
+- Reductio ad absurdum (reducere la absurd) și dovada indirectă.
+- Symmetry (simetrie).
+- Inventor's paradox (paradoxul inventatorului): o problemă mai ambițioasă poate fi mai ușor de rezolvat.
+- Signs of progress (semne de progres).
+- Notation (notație).
+
+Exemplul 2 ar putea fi acoperit de „Problemă auxiliară”
+
+5. Încă o metodă de a aborda complexitatea
+------------------------------------------
+
+Toate metodele de până acum au componenta comună: nu abordează problema direct.
+Dacă mergem până la limita de a nu aborda direct, ajungem la: lasă-o pe AI s-o abordeze.
+
 
