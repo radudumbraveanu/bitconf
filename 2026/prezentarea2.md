@@ -139,6 +139,117 @@ Din practica mea: când studiez ceva nou, obișnuiesc să generez carduri cu no�
 
 ---
 
+Despre fenomene care noi le numim complexe și despre probleme care țin de aceste fenomene.
+Probleme ce țin de fenomene complexe le voi numi probleme complexe.
+
+<!-- -- cred că aș putea băga exemplele și aici, am putea începe cu introducerea apoi exemplele, am putea începe cu exemple și introducerea s-o intercalăm -->
+
+---
+
+Toată lumea vorbește acum despre faptul că problemele simple, de rutină, trebuie să le delegăm către IA.
+Dar dacă delegăm problemele simple, cine ne oprește să delegăm și cele complexe? sau altfel,
+dacă IA rezolvă bine problemele simple, de ce să nu delegăm și cele complexe? pentru că am observat că se descurcă foarte bine și cu cele complexe.
+
+---
+
+# Obiecție: delegăm totul IA?
+
+- problemele simple, de rutină, le delegăm deja
+- IA se descurcă bine și cu cele complexe
+- deci de ce nu delegăm întreaga complexitate?
+- fără skill-uri, fără formate de prezentare: dăm problema, luăm răspunsul
+
+<!--
+Mulți ar putea obiecta și spune că putem delega întreaga complexitate către IA, fără skill-uri sau formate de prezentare. Dacă IA rezolvă bine problemele simple, de ce să nu delegăm și cele complexe?
+-->
+
+---
+
+# Răspunsul: modelul mental
+
+- pentru a înțelege un fenomen, îți trebuie un model mental al lui
+- sarcini simple: modelul mental există deja, nu pierdem nimic
+- sarcini complexe: delegându-le, pierdem șansa să ne formăm modelul
+- formarea modelului mental necesită timp
+- noi decidem: ne trebuie modelul sau nu? (raportul timp:rezultat cu IA e foarte bun)
+
+<!--
+Concluzia mea e simplă, pentru a înțelege un fenomen îți trebuie un model mental al acestui fenomen.
+Delegând sarcinile simple către AI, pentru care avem deja modele mentale formate nu pierdem nimic.
+Delegând însă sarcinile complexe către IA pierdem șansa să ne formăm modelul mental.
+Însă formarea modelului mental necesită timp.
+Deja noi trebuie să decidem, ne trebuie oare acest model mental sau nu, pentru că raportul timp:rezultat atunci când folosești IA e foarte bun.
+-->
+
+---
+
+# De ce îți trebuie modelul mental?
+
+- fenomenul complex trebuie abordat astfel încât să abordezi ușor alte fenomene din aceeași familie
+- raportul timp:rezultat nu e suficient, contează și calitatea rezultatului
+- rezultatul poate să nu fie optim (multe iterații): trebuie să schimbi cum abordează IA problema
+- rezultatul poate să nu fie corect (IA e non-deterministă): îți trebuie subrezultate deterministe
+- ambele cer mai mult decât un model superficial al fenomenului
+
+<!--
+Fenomenul complex trebuie abordat astfel încât să poți ușor aborda orice alte fenomene complexe din aceeași familie.
+
+Însă concentrându-mă pe raportul timp:rezultat nu întotdeauna suficient. Mai apare și dimensiunea calității rezultatului:
+1. rezultatul poate să nu fie optim (sau poate să facă multe iterații), și atunci cel mai des îți trebuie să schimbi felul în care abordează IA problema, dar pentru acesta un model superficial al fenomenului nu e suficient
+2. rezultatul poate să nu fie corect din cauza naturii non-deterministe a IA și pentru acesta îți trebuie subrezultate deterministe, la care iarăși nu ajungi cu modele superficiale ale fenomenului.
+-->
+
+---
+
+# Cum abordăm fenomenele complexe?
+
+- lume complexă: participă, în măsură diferită, și omul, și IA
+- întrebarea: cum să le avem pe toate?
+- rapid
+- cu înțelegere
+- ...
+
+<!--
+(Deci trăind într-o lume complexă, e nevoie ca să participe într-o anumită măsură și omul și IA.)
+
+Întrebarea importantă cum să abordăm fenomenele complexe astfel încât să le avem pe toate: rapid, înțelegere etc...
+-->
+
+---
+
+# Al treilea jucător: modelul
+
+- noi polarizăm: de o parte omul, de cealaltă IA
+- al treilea jucător: **modelul**
+- model mintal, model software, cadru științific, cunoștințe
+- la ele avem acces direct, nu ne trebuie IA
+
+<!--
+Eu mi-am răspuns la această întrebare. Răspunsul e subiectiv dar e următorul:
+
+În realitatea actuală, noi tindem s-o polarizăm, într-o parte omul, în altă parte IA. Eu am să numesc al treilea jucător modelul.
+Modelul poate fi mintal, poate fi model software, poate fi cadrul științific, cunoștințele ... la care avem acces direct, nu ne trebuie IA.
+-->
+
+---
+
+# Regula mea
+
+- cine depune efort minim: fenomenul (modelul fenomenului) sau IA?
+- dacă ambii: nu folosim IA
+- întâi: e posibilă o abordare în care modelul fenomenului depune efort minim?
+- IA o folosim pentru că poate, dar mai există și alți actori care pot, ca modelul
+
+<!--
+Deci regula mea este:
+- cine depune efort minim fenomenul (modelul fenomenului) sau IA, dacă ambii atunci nu folosim IA
+- întâi trebuie să ne gândim, e posibilă oare așa o abordare în care fenomenul (modelul fenomenului) depune un efort minim?
+
+Noi folosim IA pentru că poate, dar mai există și alți actori care pot, ca de exemplu modelul.
+-->
+
+---
+
 # Exemplu 1: deadlock
 
 Este destul de complicat de depanat sistemul când avem mulți utilizatori, dar în cazul când ai un număr mic de utilizatori, e ușor de depanat, dar e mai greu de reprodus.
@@ -246,58 +357,6 @@ Structura arborescentă e prea mare. Variante:
 <!--
 Exemplul 4 evidențiază un aspect la care IA e foarte bună: enumerarea variantelor. Îi cer să facă exemple și umple lista cu elemente apropiate semantic: de la o singură idee (paginarea) obțin o familie întreagă de soluții înrudite. Eu aleg apoi ce are sens, de preferință pe rând: câte o variantă, o înțeleg, apoi cer următoarea.
 -->
-
----
-
-Despre fenomene care noi le numim complexe și despre probleme care țin de aceste fenomene.
-Probleme ce țin de fenomene complexe le voi numi probleme complexe.
-
-<!-- -- cred că aș putea băga exemplele și aici, am putea începe cu introducerea apoi exemplele, am putea începe cu exemple și introducerea s-o intercalăm -->
-
----
-
-Toată lumea vorbește acum despre faptul că problemele simple, de rutină, trebuie să le delegăm către IA.
-Dar dacă delegăm problemele simple, cine ne oprește să delegăm și cele complexe? sau altfel,
-dacă IA rezolvă bine problemele simple, de ce să nu delegăm și cele complexe? pentru că am observat că se descurcă foarte bine și cu cele complexe.
-
----
-
-Concluzia mea e simplă, pentru a înțelege un fenomen îți trebuie un model mental al acestui fenomen.
-Delegând sarcinile simple către AI, pentru care avem deja modele mentale formate nu pierdem nimic.
-Delegând însă sarcinile complexe către IA pierdem șansa să ne formăm modelul mental.
-Însă formarea modelului mental necesită timp.
-Deja noi trebuie să decidem, ne trebuie oare acest model mental sau nu, pentru că raportul timp:rezultat atunci când folosești IA e foarte bun.
-
----
-
-Fenomenul complex trebuie abordat astfel încât să poți ușor aborda orice alte fenomene complexe din aceeași familie.
-
----
-
-Însă concentrându-mă pe raportul timp:rezultat nu întotdeauna suficient. Mai apare și dimensiunea calității rezultatului:
-1. rezultatul poate să nu fie optim (sau poate să facă multe iterații), și atunci cel mai des îți trebuie să schimbi felul în care abordează IA problema, dar pentru acesta un model superficial al fenomenului nu e suficient
-2. rezultatul poate să nu fie corect din cauza naturii non-deterministe a IA și pentru acesta îți trebuie subrezultate deterministe, la care iarăși nu ajungi cu modele superficiale ale fenomenului.
-
----
-
-(Deci trăind într-o lume complexă, e nevoie ca să participe într-o anumită măsură și omul și IA.)
-
-Întrebarea importantă cum să abordăm fenomenele complexe astfel încât să le avem pe toate: rapid, înțelegere etc...
-
----
-
-Eu mi-am răspuns la această întrebare. Răspunsul e subiectiv dar e următorul:
-
-În realitatea actuală, noi tindem s-o polarizăm, într-o parte omul, în altă parte IA. Eu am să numesc al treilea jucător modelul.
-Modelul poate fi mintal, poate fi model software, poate fi cadrul științific, cunoștințele ... la care avem acces direct, nu ne trebuie IA.
-
----
-
-Deci regula mea este:
-- cine depune efort minim fenomenul (modelul fenomenului) sau IA, dacă ambii atunci nu folosim IA
-- întâi trebuie să ne gândim, e posibilă oare așa o abordare în care fenomenul (modelul fenomenului) depune un efort minim?
-
-Noi folosim IA pentru că poate, dar mai există și alți actori care pot, ca de exemplu modelul.
 
 ---
 
