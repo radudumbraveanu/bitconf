@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 560" font-family="Segoe UI, Arial, sans-serif">
+<rect width="1100" height="560" fill="#fff"/>
+<text x="40" y="48" font-size="28" font-weight="700" fill="#1a365d">O interogare costă t ms, dar generează alte N interogări</text>
+<rect x="40" y="80" width="300" height="56" rx="8" fill="#2b6cb0"/>
+<text x="56" y="104" font-size="18" fill="#fff" font-family="Consolas, monospace">SELECT * FROM orders</text>
+<text x="56" y="126" font-size="16" fill="#bee3f8">1 interogare · t ms</text>
+<path d="M190 136 V212 H300" fill="none" stroke="#7b8794" stroke-width="2"/>
+<rect x="300" y="190" width="420" height="44" rx="8" fill="#ebf4ff" stroke="#2b6cb0"/>
+<path d="M190 136 V272 H300" fill="none" stroke="#7b8794" stroke-width="2"/>
+<rect x="300" y="250" width="420" height="44" rx="8" fill="#ebf4ff" stroke="#2b6cb0"/>
+<path d="M190 136 V332 H300" fill="none" stroke="#7b8794" stroke-width="2"/>
+<rect x="300" y="310" width="420" height="44" rx="8" fill="#ebf4ff" stroke="#2b6cb0"/>
+<text x="316" y="218" font-size="17" fill="#1a365d" font-family="Consolas, monospace">SELECT * FROM items WHERE order_id = 1</text>
+<text x="316" y="278" font-size="17" fill="#1a365d" font-family="Consolas, monospace">SELECT * FROM items WHERE order_id = 2</text>
+<text x="316" y="338" font-size="17" fill="#1a365d" font-family="Consolas, monospace">SELECT * FROM items WHERE order_id = 3</text>
+<text x="470" y="384" font-size="30" fill="#52606d">⋮</text>
+<rect x="300" y="396" width="420" height="44" rx="8" fill="#ebf4ff" stroke="#2b6cb0"/>
+<path d="M190 136 V418 H300" fill="none" stroke="#7b8794" stroke-width="2"/>
+<text x="316" y="424" font-size="17" fill="#1a365d" font-family="Consolas, monospace">SELECT * FROM items WHERE order_id = N</text>
+<path d="M740 190 V440" stroke="#2b6cb0" stroke-width="2"/><path d="M730 190 H740 M730 440 H740" stroke="#2b6cb0" stroke-width="2"/>
+<text x="756" y="300" font-size="20" fill="#1a365d" font-weight="600">N interogări</text><text x="756" y="326" font-size="18" fill="#52606d">× t ms fiecare</text>
+<rect x="40" y="470" width="1020" height="70" rx="10" fill="#fff5f5" stroke="#c53030" stroke-width="2"/>
+<text x="64" y="502" font-size="22" fill="#9b2c2c" font-weight="700">Cost total = (1 + N) × t</text>
+<text x="64" y="527" font-size="18" fill="#742a2a">ex.: t = 5 ms, N = 100  →  505 ms (vs. 1 interogare cu JOIN, ~ câteva ms)</text>
+</svg>

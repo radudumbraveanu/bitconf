@@ -252,10 +252,17 @@ Noi folosim AI pentru că poate, dar mai există și alți actori care pot, ca d
 
 # Exemplu 1: deadlock
 
+- mulți utilizatori: sistem greu de depanat
+- puțini utilizatori: ușor de depanat, dar greu de reprodus
+- la N+1 fenomenul converge singur spre starea dorită: problema se reproduce și e ușor de studiat
+- alt exemplu: OOM
+
+<!--
 Este destul de complicat de depanat sistemul când avem mulți utilizatori, dar în cazul când ai un număr mic de utilizatori, e ușor de depanat, dar e mai greu de reprodus.
 La N+1 fenomenul însăși converge către starea dorită, se reproduce problema și e ușor de studiat.
 
 Alt exemplu OOM.
+-->
 
 ---
 
@@ -266,14 +273,29 @@ Alt exemplu OOM.
 
 ---
 
+<!-- _class: img -->
+<small>Simulare generată de Claude: pool de conexiuni, micșorat de la 10 la 1</small>
+
+<iframe src="connection_pool_deadlock.html" style="width:1180px;height:580px;border:0;border-radius:8px;background:#fff"></iframe>
+
+---
+
 # Exemplu 2: problema N+1
 
+- problemă de performanță: primul lucru de verificat e N+1
+- presupunem: fără bibliotecă care o detectează, dar cu acces la jurnalul de SQL-uri
+- foarte multe interogări, mai ales cu mulți utilizatori
+- clase de echivalență după numărul de repetări ale interogării: `[1]` excludem, `[2]`, `[3]`... ne interesează
+- am construit o altă problemă, care se rezolvă simplu și se studiază ușor
+
+<!--
 Foarte des când avem problemă de performanță primul lucru ar trebui să verificăm, sunt probleme N+1.
 Sunt biblioteci care au funcția dată activată, dar să presupunem că nu folosim asemenea biblioteci. Să presupunem că avem acces la jurnalul de SQL-uri.
 Sunt foarte multe interogări, și mai ales dacă ai mai mulți utilizatori.
 Dar dacă definim clase de echivalență, în funcție de numărul de repetări ale unei interogări. [1] - le exclude, [2], [3] ... ne interesează.
 
 Am construit o altă problemă, care se rezolvă simplu. În care putem s-o studiem ușor.
+-->
 
 ---
 
@@ -284,19 +306,63 @@ Am construit o altă problemă, care se rezolvă simplu. În care putem s-o stud
 
 ---
 
+<!-- _class: img -->
+
+![](img/n-plus-1-cost.svg)
+
+---
+
 # Exemplu 3: problema interogărilor care nu se termină
 
+- în anumite condiții interogarea din browser nu se termină, apare aleator
+- timeout-uri: presupunem că nu le avem
+- avem log-ul aplicației în CSV, dar nu știm când s-a reprodus eroarea
+
+<!--
 Problema în care în anumite condiții interogarea din browser nu se termină. Apare aleator.
 Prima soluție punem timeout-uri la interogări. Presupunem că nu le avem.
 Dar avem log-ul aplicației în CSV pentru o anumită perioadă de timp. Dar nu știm timpul (timpii) când eroarea a fost reprodusă.
 Fragment de CSV.
+-->
 
 ---
 
+# Fragment de log (CSV)
+
+```csv
+thread,timestamp,message
+http-nio-8080-exec-3,10:15:01.112,GET /orders start
+http-nio-8080-exec-7,10:15:01.140,GET /report start
+http-nio-8080-exec-3,10:15:01.230,GET /orders done
+http-nio-8080-exec-5,10:15:02.004,GET /orders start
+http-nio-8080-exec-5,10:15:02.118,GET /orders done
+http-nio-8080-exec-3,10:15:03.377,GET /orders start
+http-nio-8080-exec-3,10:15:03.490,GET /orders done
+http-nio-8080-exec-5,10:15:04.021,GET /orders start
+http-nio-8080-exec-5,10:15:04.133,GET /orders done
+```
+
+<small>Date ilustrative. Prefixul `http-nio-8080-exec-N` = firul de execuție al serverului web (Apache Tomcat).</small>
+
+<!--
+Fragment de CSV: id-ul firului (thread), timestamp, mesaj. Firul exec-7 a început o cerere și n-a mai terminat-o.
+-->
+
+---
+
+# Aceeași metodă: clase de echivalență
+
+- clase de echivalență după repetarea thread-N
+- firele care n-au răspuns sunt blocate și nu pot fi refolosite: repetările lor sunt mai puține
+- CSV, deci Pandas: cer AI un cod pandas, nu o analiză
+- adaptez fragmentele: învăț pandas și obțin un instrument determinist
+
+<!--
 Se poate aplica metoda de mai sus. Clase de echivalență: repetarea thread-N, teoretic cele care n-au răspuns, sunt blocate și nu pot fi refolosite, deci repetările trebuie să fie mai mici.
 
 Eu când văd CSV mă gândesc la Pandas. "dacă am o listă de înregistrări într-un CSV cu coloane id, timestamp și message. Dă-mi un cod pandas care afișează fiecare id cu ultimul timestamp văzut într-un anumit interval de timp"
 Aceste fragmente le pot apoi adapta și: înveți pandas, + obții un instrument determinist.
+-->
 
 ---
 
@@ -307,25 +373,51 @@ Aceste fragmente le pot apoi adapta și: înveți pandas, + obții un instrument
 
 ---
 
+# Ce diferență fac proprietățile fenomenului
+
+- 3 exemple în care am folosit proprietățile fenomenului, nu am lăsat totul pe AI
+- rezultatul ar fi fost același: problema rezolvată
+- diferența: omul a înțeles mai mult decât înainte
+- exemplul 3 și următoarele combină proprietățile fenomenului cu AI
+- ca la școală: fundamentele întâi, apoi combinarea lor
+- învățăm proprietăți ale fenomenului, capacități ale AI, capacități ale pandas, pentru fenomenele viitoare
+
+<!--
 Vă dați seama care diferență în aceste 3 exemple în care am folosit proprietăți ale fenomenului studiat și n-am pus în totalitate în seama AI?
 Rezultatul ar fi același : problema rezolvată. Dar în primul caz ai și un om care a înțeles ceva mai mult decât înțelesese până la acel fenomen.
 
 Începem să intrăm în tărâmul AI. Avantajele exemplului 3 dar și al următoarelor care vor combina proprietățile fenomenului și AI.
 La fel cum învățăm la școală și universitate fundamentele, ca apoi să le putem combina, așa și învățăm / descoperim proprietăți ale fenomenului, capacități ale AI, capacități ale pandas. Ca în viitor pentru alte fenomene să le combinăm și să abordăm orice problemă complexă.
+-->
 
 ---
 
-# Exemplul 4:
+# Exemplul 4: API care întoarce un arbore
 
+- API întoarce o structură arborescentă, prea mare: pică
+- AI (răspuns mediu): introduceți paginarea
+- paginarea pe arbore e mai complexă decât pe o structură liniară
+
+<!--
 Într-un sistem un API întoarce o structură arborescentă. Structura e prea mare, și pică.
 AI artificială spune (răspuns AVG) că trebuie să introducem paginarea. Paginarea pe o structură arborescentă nu e modificare mai complexă dacă ai introduce pe structură liniară.
+-->
 
 ---
 
+# Exemplul 4: pașii
+
+1. teste care folosesc API-ul și pică
+2. AI face ca API-ul să returneze eroare în toate locurile unde e folosit
+3. pentru fiecare soluție: AI schimbă codul, rulează testele, eu analizez dacă pică și în aceleași condiții
+4. studiez fiecare loc: uneori există deja un API de căutare, alteori ajung doar copiii de primul nivel, nu tot arborele
+
+<!--
 1. am construit câteva teste care folseau acel API și picau.
 2. am rugat AI să comenteze/returneze eroare de la acest API în toate locurile unde e folosit.
 3. m-am gândit la câteva soluții și am rugat AI să genereze fiecare soluție, adică să schimbe codul apoi să ruleze testele și analizez dacă pică sau nu și pică în aceleași condiții sau nu.
 4. am studiat fiecare loc în parte și am descoperit că unele locuri acest API ar fi putut fi înlocuit cu un API de căutare care deja există, iar în alte locuri era nevoie doar de descendenții de primul nivel, adică copiii nu de întreaga structură arborescentă.
+-->
 
 ---
 
@@ -360,20 +452,33 @@ Exemplul 4 evidențiază un aspect la care AI e foarte bună: enumerarea variant
 
 ---
 
-# Exemplul 4:
+# Exemplul 4: git worktree
 
+- problemă de performanță
+- opțiuni: modific ce există sau fac upgrade la o versiune nouă a librăriilor
+- ce aleg? cum măsor?
+- git worktree: experimentăm, salvăm rezultatele, comparăm
+
+<!--
 Am o problemă de performanță. Presupun că pot s-o rezolv modificând ceva existent sau făcând upgrade la o nouă versiune a librăriilor.
 Ce să aleg? Cum să măsor?
 git worktree și experimentăm. salvăm rezultatele. comparăm.
+-->
 
 <!-- TODO desen: nu am găsit o diagramă bună pentru git worktree -->
 
 ---
 
-# Exemplul 5.
+# Exemplul 5: dashboard-uri Grafana
 
+- de monitorizat ceva în Grafana, câteva dashboard-uri noi
+- dashboard-urile sunt JSON
+- AI generează JSON-ul, eu îl import
+
+<!--
 Am de monitorizat ceva în Grafana, trebuie să fac câteva dashboard-uri noi. E timp.
 Știu dashboard-urile sunt în JSON, rog AI să-mi genereze dashboardurile JSON eu le import.
+-->
 
 ---
 
@@ -384,15 +489,28 @@ Am de monitorizat ceva în Grafana, trebuie să fac câteva dashboard-uri noi. E
 
 ---
 
-# Exemplu 7.
+# Exemplu 7: comunicare mașină-mașină
 
+- teste care cer autentificare
+- script Playwright construit de AI
+- acum totul merge determinist
+
+<!--
 In situatiile cand e nevoie comunicarea masina-masina , de exemplu in teste in care e nevoie de autentificare.
 Am un playwright script , construit de AI ... dara acum totul merge determinist.
+-->
 
 ---
 
-# Concluzie:
+# Concluzie
 
+- învățăm esența (adunarea) și pe de rost (tabla înmulțirii), apoi combinăm
+- la fel pentru fenomene complexe: proprietățile fenomenului + AI
+- optim: și modelul, și AI
+- rezultat: cunoștințe și capacitatea de a aborda următoarele situații complexe
+
+<!--
 Așa cum am învățat să adunăm și am înțeles esența, dar și am învățat unele lucruri pe de rost ca tabela înmulțirii, ca mai apoi să le putem combina și să rezolvăm orice așa și în abordarea fenomenelor complexe trebuie folosite în combinație proprietățile fenomenului și AI.
 
 Eu consider că acesta e cel mai optimal să folosesc și modelul și AI în așa fel în rezultat se construiesc cunoștințe și capacitate de a aborda următoarele situații complexe.
+-->
