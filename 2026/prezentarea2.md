@@ -71,14 +71,14 @@ situația.
 
 - început dificil: formulare neclară sau primii pași costisitori
 - Wayfinder pune întrebări, construiește lanțul de pași, ține evidența
-- IA execută pașii tehnici (librării, programe) în câteva minute
+- AI execută pașii tehnici (librării, programe) în câteva minute
 - eu rulez, văd rezultatele, analizez
-- generalizare: **gradul de finețe în interacțiunea cu IA**
+- generalizare: **gradul de finețe în interacțiunea cu AI**
 
 <!--
 Primul exemplu: situațiile când suntem la început, și fie avem o formulare la care chiar dacă o citim de 10 ori nu știm de unde să începem și încotro să ne ducem, sau pașii inițiali necesită mult efort.
 
-În așa situație am o experiență foarte bună cu un instrument public, Wayfinder, de Matt Pocock. Instrumentul pune întrebări, pe baza răspunsurilor definește un lanț de pași și memorează care pas l-ai executat și care mai ai. Îl utilizez și când citesc un articol tehnic cu fragmente de cod de executat, sau care discută algoritmi: cu Wayfinder îmi definesc pașii care îmi trebuie; pașii care presupun instalare de librării și scriere de programe sunt executați de IA în câteva minute, iar eu pot rula programele, vedea rezultatele și analiza. Astfel pot analiza și scoate concluziile dintr-un articol complicat foarte repede.
+În așa situație am o experiență foarte bună cu un instrument public, Wayfinder, de Matt Pocock. Instrumentul pune întrebări, pe baza răspunsurilor definește un lanț de pași și memorează care pas l-ai executat și care mai ai. Îl utilizez și când citesc un articol tehnic cu fragmente de cod de executat, sau care discută algoritmi: cu Wayfinder îmi definesc pașii care îmi trebuie; pașii care presupun instalare de librării și scriere de programe sunt executați de AI în câteva minute, iar eu pot rula programele, vedea rezultatele și analiza. Astfel pot analiza și scoate concluziile dintr-un articol complicat foarte repede.
 
 Metoda se poate generaliza în „gradul de finețe în interacțiunea cu AI”; ambele cuvinte sunt importante: „finețe” (cât de fină vs grosieră) și „interacțiune”.
 -->
@@ -87,7 +87,7 @@ Metoda se poate generaliza în „gradul de finețe în interacțiunea cu AI”;
 
 ---
 
-# IA e foarte bună la enumerare
+# AI e foarte bună la enumerare
 
 - întrebări la care nu m-am gândit
 - riscuri și cazuri limită
@@ -98,12 +98,12 @@ Metoda se poate generaliza în „gradul de finețe în interacțiunea cu AI”;
 - exemple și contraexemple
 
 <!--
-IA e foarte bună la enumerare: întrebări la care nu m-am gândit, riscuri, variante, ipoteze ascunse, criterii de comparare. Umple lista cu elemente apropiate semantic și îmi arată zone la care nu m-aș fi gândit singur. Eu aleg ce are sens și verific.
+AI e foarte bună la enumerare: întrebări la care nu m-am gândit, riscuri, variante, ipoteze ascunse, criterii de comparare. Umple lista cu elemente apropiate semantic și îmi arată zone la care nu m-aș fi gândit singur. Eu aleg ce are sens și verific.
 -->
 
 ---
 
-# Cere și explicația vizuală de la IA
+# Cere și explicația vizuală de la AI
 
 - articol: „How to 5x your communication effectiveness with Claude Code” (Towards Data Science)
 - agentul scrie rezultatele netriviale ca fișier HTML, deschis în browser, nu ca text în terminal
@@ -113,11 +113,11 @@ IA e foarte bună la enumerare: întrebări la care nu m-am gândit, riscuri, va
 - concluziile apar la final, rezultatul e prezentat vizual
 
 <!--
-Exemplul precedent arăta că deseori e binevenit să începem abordarea complexității cu IA. Aici vorbesc despre etapele intermediare, sau chiar etapa finală, și mai ales despre prezentarea rezultatelor.
+Exemplul precedent arăta că deseori e binevenit să începem abordarea complexității cu AI. Aici vorbesc despre etapele intermediare, sau chiar etapa finală, și mai ales despre prezentarea rezultatelor.
 
-Am întâlnit un articol foarte interesant exact în momentul când obosisem să citesc răspunsurile de la IA. Metoda din articol (agentul scrie rezultatul netrivial ca fișier HTML, deschis în browser, în loc de text în terminal) accelerează înțelegerea: pune concluziile la final și prezintă rezultatul vizual. Instrucțiunea merge o singură dată într-un fișier MD la nivel de utilizator; pentru sarcini concrete (ex. raport de teste) se folosesc skill-uri, iar pentru diagrame Archify.
+Am întâlnit un articol foarte interesant exact în momentul când obosisem să citesc răspunsurile de la AI. Metoda din articol (agentul scrie rezultatul netrivial ca fișier HTML, deschis în browser, în loc de text în terminal) accelerează înțelegerea: pune concluziile la final și prezintă rezultatul vizual. Instrucțiunea merge o singură dată într-un fișier MD la nivel de utilizator; pentru sarcini concrete (ex. raport de teste) se folosesc skill-uri, iar pentru diagrame Archify.
 
-Generalizare: „Cere și explicația vizuală de la IA”.
+Generalizare: „Cere și explicația vizuală de la AI”.
 
 Sursa: https://towardsdatascience.com/how-to-5x-your-communication-effectiveness-with-claude-code/
 -->
@@ -146,21 +146,21 @@ Probleme ce țin de fenomene complexe le voi numi probleme complexe.
 
 ---
 
-Toată lumea vorbește acum despre faptul că problemele simple, de rutină, trebuie să le delegăm către IA.
+Toată lumea vorbește acum despre faptul că problemele simple, de rutină, trebuie să le delegăm către AI.
 Dar dacă delegăm problemele simple, cine ne oprește să delegăm și cele complexe? sau altfel,
-dacă IA rezolvă bine problemele simple, de ce să nu delegăm și cele complexe? pentru că am observat că se descurcă foarte bine și cu cele complexe.
+dacă AI rezolvă bine problemele simple, de ce să nu delegăm și cele complexe? pentru că am observat că se descurcă foarte bine și cu cele complexe.
 
 ---
 
-# Obiecție: delegăm totul IA?
+# Obiecție: delegăm totul AI?
 
 - problemele simple, de rutină, le delegăm deja
-- IA se descurcă bine și cu cele complexe
+- AI se descurcă bine și cu cele complexe
 - deci de ce nu delegăm întreaga complexitate?
 - fără skill-uri, fără formate de prezentare: dăm problema, luăm răspunsul
 
 <!--
-Mulți ar putea obiecta și spune că putem delega întreaga complexitate către IA, fără skill-uri sau formate de prezentare. Dacă IA rezolvă bine problemele simple, de ce să nu delegăm și cele complexe?
+Mulți ar putea obiecta și spune că putem delega întreaga complexitate către AI, fără skill-uri sau formate de prezentare. Dacă AI rezolvă bine problemele simple, de ce să nu delegăm și cele complexe?
 -->
 
 ---
@@ -171,14 +171,14 @@ Mulți ar putea obiecta și spune că putem delega întreaga complexitate către
 - sarcini simple: modelul mental există deja, nu pierdem nimic
 - sarcini complexe: delegându-le, pierdem șansa să ne formăm modelul
 - formarea modelului mental necesită timp
-- noi decidem: ne trebuie modelul sau nu? (raportul timp:rezultat cu IA e foarte bun)
+- noi decidem: ne trebuie modelul sau nu? (raportul timp:rezultat cu AI e foarte bun)
 
 <!--
 Concluzia mea e simplă, pentru a înțelege un fenomen îți trebuie un model mental al acestui fenomen.
 Delegând sarcinile simple către AI, pentru care avem deja modele mentale formate nu pierdem nimic.
-Delegând însă sarcinile complexe către IA pierdem șansa să ne formăm modelul mental.
+Delegând însă sarcinile complexe către AI pierdem șansa să ne formăm modelul mental.
 Însă formarea modelului mental necesită timp.
-Deja noi trebuie să decidem, ne trebuie oare acest model mental sau nu, pentru că raportul timp:rezultat atunci când folosești IA e foarte bun.
+Deja noi trebuie să decidem, ne trebuie oare acest model mental sau nu, pentru că raportul timp:rezultat atunci când folosești AI e foarte bun.
 -->
 
 ---
@@ -187,30 +187,30 @@ Deja noi trebuie să decidem, ne trebuie oare acest model mental sau nu, pentru 
 
 - fenomenul complex trebuie abordat astfel încât să abordezi ușor alte fenomene din aceeași familie
 - raportul timp:rezultat nu e suficient, contează și calitatea rezultatului
-- rezultatul poate să nu fie optim (multe iterații): trebuie să schimbi cum abordează IA problema
-- rezultatul poate să nu fie corect (IA e non-deterministă): îți trebuie subrezultate deterministe
+- rezultatul poate să nu fie optim (multe iterații): trebuie să schimbi cum abordează AI problema
+- rezultatul poate să nu fie corect (AI e non-deterministă): îți trebuie subrezultate deterministe
 - ambele cer mai mult decât un model superficial al fenomenului
 
 <!--
 Fenomenul complex trebuie abordat astfel încât să poți ușor aborda orice alte fenomene complexe din aceeași familie.
 
 Însă concentrându-mă pe raportul timp:rezultat nu întotdeauna suficient. Mai apare și dimensiunea calității rezultatului:
-1. rezultatul poate să nu fie optim (sau poate să facă multe iterații), și atunci cel mai des îți trebuie să schimbi felul în care abordează IA problema, dar pentru acesta un model superficial al fenomenului nu e suficient
-2. rezultatul poate să nu fie corect din cauza naturii non-deterministe a IA și pentru acesta îți trebuie subrezultate deterministe, la care iarăși nu ajungi cu modele superficiale ale fenomenului.
+1. rezultatul poate să nu fie optim (sau poate să facă multe iterații), și atunci cel mai des îți trebuie să schimbi felul în care abordează AI problema, dar pentru acesta un model superficial al fenomenului nu e suficient
+2. rezultatul poate să nu fie corect din cauza naturii non-deterministe a AI și pentru acesta îți trebuie subrezultate deterministe, la care iarăși nu ajungi cu modele superficiale ale fenomenului.
 -->
 
 ---
 
 # Cum abordăm fenomenele complexe?
 
-- lume complexă: participă, în măsură diferită, și omul, și IA
+- lume complexă: participă, în măsură diferită, și omul, și AI
 - întrebarea: cum să le avem pe toate?
 - rapid
 - cu înțelegere
 - ...
 
 <!--
-(Deci trăind într-o lume complexă, e nevoie ca să participe într-o anumită măsură și omul și IA.)
+(Deci trăind într-o lume complexă, e nevoie ca să participe într-o anumită măsură și omul și AI.)
 
 Întrebarea importantă cum să abordăm fenomenele complexe astfel încât să le avem pe toate: rapid, înțelegere etc...
 -->
@@ -219,33 +219,33 @@ Fenomenul complex trebuie abordat astfel încât să poți ușor aborda orice al
 
 # Al treilea jucător: modelul
 
-- noi polarizăm: de o parte omul, de cealaltă IA
+- noi polarizăm: de o parte omul, de cealaltă AI
 - al treilea jucător: **modelul**
 - model mintal, model software, cadru științific, cunoștințe
-- la ele avem acces direct, nu ne trebuie IA
+- la ele avem acces direct, nu ne trebuie AI
 
 <!--
 Eu mi-am răspuns la această întrebare. Răspunsul e subiectiv dar e următorul:
 
-În realitatea actuală, noi tindem s-o polarizăm, într-o parte omul, în altă parte IA. Eu am să numesc al treilea jucător modelul.
-Modelul poate fi mintal, poate fi model software, poate fi cadrul științific, cunoștințele ... la care avem acces direct, nu ne trebuie IA.
+În realitatea actuală, noi tindem s-o polarizăm, într-o parte omul, în altă parte AI. Eu am să numesc al treilea jucător modelul.
+Modelul poate fi mintal, poate fi model software, poate fi cadrul științific, cunoștințele ... la care avem acces direct, nu ne trebuie AI.
 -->
 
 ---
 
 # Regula mea
 
-- cine depune efort minim: fenomenul (modelul fenomenului) sau IA?
-- dacă ambii: nu folosim IA
+- cine depune efort minim: fenomenul (modelul fenomenului) sau AI?
+- dacă ambii: nu folosim AI
 - întâi: e posibilă o abordare în care modelul fenomenului depune efort minim?
-- IA o folosim pentru că poate, dar mai există și alți actori care pot, ca modelul
+- AI o folosim pentru că poate, dar mai există și alți actori care pot, ca modelul
 
 <!--
 Deci regula mea este:
-- cine depune efort minim fenomenul (modelul fenomenului) sau IA, dacă ambii atunci nu folosim IA
+- cine depune efort minim fenomenul (modelul fenomenului) sau AI, dacă ambii atunci nu folosim AI
 - întâi trebuie să ne gândim, e posibilă oare așa o abordare în care fenomenul (modelul fenomenului) depune un efort minim?
 
-Noi folosim IA pentru că poate, dar mai există și alți actori care pot, ca de exemplu modelul.
+Noi folosim AI pentru că poate, dar mai există și alți actori care pot, ca de exemplu modelul.
 -->
 
 ---
@@ -307,23 +307,23 @@ Aceste fragmente le pot apoi adapta și: înveți pandas, + obții un instrument
 
 ---
 
-Vă dați seama care diferență în aceste 3 exemple în care am folosit proprietăți ale fenomenului studiat și n-am pus în totalitate în seama IA?
+Vă dați seama care diferență în aceste 3 exemple în care am folosit proprietăți ale fenomenului studiat și n-am pus în totalitate în seama AI?
 Rezultatul ar fi același : problema rezolvată. Dar în primul caz ai și un om care a înțeles ceva mai mult decât înțelesese până la acel fenomen.
 
-Începem să intrăm în tărâmul IA. Avantajele exemplului 3 dar și al următoarelor care vor combina proprietățile fenomenului și IA.
-La fel cum învățăm la școală și universitate fundamentele, ca apoi să le putem combina, așa și învățăm / descoperim proprietăți ale fenomenului, capacități ale IA, capacități ale pandas. Ca în viitor pentru alte fenomene să le combinăm și să abordăm orice problemă complexă.
+Începem să intrăm în tărâmul AI. Avantajele exemplului 3 dar și al următoarelor care vor combina proprietățile fenomenului și AI.
+La fel cum învățăm la școală și universitate fundamentele, ca apoi să le putem combina, așa și învățăm / descoperim proprietăți ale fenomenului, capacități ale AI, capacități ale pandas. Ca în viitor pentru alte fenomene să le combinăm și să abordăm orice problemă complexă.
 
 ---
 
 # Exemplul 4:
 
 Într-un sistem un API întoarce o structură arborescentă. Structura e prea mare, și pică.
-IA artificială spune (răspuns AVG) că trebuie să introducem paginarea. Paginarea pe o structură arborescentă nu e modificare mai complexă dacă ai introduce pe structură liniară.
+AI artificială spune (răspuns AVG) că trebuie să introducem paginarea. Paginarea pe o structură arborescentă nu e modificare mai complexă dacă ai introduce pe structură liniară.
 
 ---
 
 1. am construit câteva teste care folseau acel API și picau.
-2. am rugat IA să comenteze/returneze eroare de la acest API în toate locurile unde e folosit.
+2. am rugat AI să comenteze/returneze eroare de la acest API în toate locurile unde e folosit.
 3. m-am gândit la câteva soluții și am rugat AI să genereze fiecare soluție, adică să schimbe codul apoi să ruleze testele și analizez dacă pică sau nu și pică în aceleași condiții sau nu.
 4. am studiat fiecare loc în parte și am descoperit că unele locuri acest API ar fi putut fi înlocuit cu un API de căutare care deja există, iar în alte locuri era nevoie doar de descendenții de primul nivel, adică copiii nu de întreaga structură arborescentă.
 
@@ -337,12 +337,12 @@ IA artificială spune (răspuns AVG) că trebuie să introducem paginarea. Pagin
 ---
 
 În general exemplul 4 mi-a dat o idee interesantă de a investiga ceva cu AI și anume.
-În situația unei probleme dacă îmi explică, sau sugerează, sau orice care îmi dă mai multe opțiuni, eu prefer să lucrez dinamic cu IA și anume:
+În situația unei probleme dacă îmi explică, sau sugerează, sau orice care îmi dă mai multe opțiuni, eu prefer să lucrez dinamic cu AI și anume:
 Să-mi dea câte unul, și când l-am înțeles fie zic dă-mi următorul fie pun întrebări. De multe ori după întrebări, opțiunile următoare sunt recalculate.
 
 ---
 
-# Enumerarea variantelor: IA umple lista
+# Enumerarea variantelor: AI umple lista
 
 Structura arborescentă e prea mare. Variante:
 
@@ -355,7 +355,7 @@ Structura arborescentă e prea mare. Variante:
 - streaming în loc de un singur răspuns
 
 <!--
-Exemplul 4 evidențiază un aspect la care IA e foarte bună: enumerarea variantelor. Îi cer să facă exemple și umple lista cu elemente apropiate semantic: de la o singură idee (paginarea) obțin o familie întreagă de soluții înrudite. Eu aleg apoi ce are sens, de preferință pe rând: câte o variantă, o înțeleg, apoi cer următoarea.
+Exemplul 4 evidențiază un aspect la care AI e foarte bună: enumerarea variantelor. Îi cer să facă exemple și umple lista cu elemente apropiate semantic: de la o singură idee (paginarea) obțin o familie întreagă de soluții înrudite. Eu aleg apoi ce are sens, de preferință pe rând: câte o variantă, o înțeleg, apoi cer următoarea.
 -->
 
 ---
@@ -373,7 +373,7 @@ git worktree și experimentăm. salvăm rezultatele. comparăm.
 # Exemplul 5.
 
 Am de monitorizat ceva în Grafana, trebuie să fac câteva dashboard-uri noi. E timp.
-Știu dashboard-urile sunt în JSON, rog IA să-mi genereze dashboardurile JSON eu le import.
+Știu dashboard-urile sunt în JSON, rog AI să-mi genereze dashboardurile JSON eu le import.
 
 ---
 
@@ -387,12 +387,12 @@ Am de monitorizat ceva în Grafana, trebuie să fac câteva dashboard-uri noi. E
 # Exemplu 7.
 
 In situatiile cand e nevoie comunicarea masina-masina , de exemplu in teste in care e nevoie de autentificare.
-Am un playwright script , construit de IA ... dara acum totul merge determinist.
+Am un playwright script , construit de AI ... dara acum totul merge determinist.
 
 ---
 
 # Concluzie:
 
-Așa cum am învățat să adunăm și am înțeles esența, dar și am învățat unele lucruri pe de rost ca tabela înmulțirii, ca mai apoi să le putem combina și să rezolvăm orice așa și în abordarea fenomenelor complexe trebuie folosite în combinație proprietățile fenomenului și IA.
+Așa cum am învățat să adunăm și am înțeles esența, dar și am învățat unele lucruri pe de rost ca tabela înmulțirii, ca mai apoi să le putem combina și să rezolvăm orice așa și în abordarea fenomenelor complexe trebuie folosite în combinație proprietățile fenomenului și AI.
 
-Eu consider că acesta e cel mai optimal să folosesc și modelul și IA în așa fel în rezultat se construiesc cunoștințe și capacitate de a aborda următoarele situații complexe.
+Eu consider că acesta e cel mai optimal să folosesc și modelul și AI în așa fel în rezultat se construiesc cunoștințe și capacitate de a aborda următoarele situații complexe.
