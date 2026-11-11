@@ -87,55 +87,55 @@ Metoda se poate generaliza în „gradul de finețe în interacțiunea cu AI”;
 
 ---
 
-Despre fenomene care noi le numim complexe și despre probleme care țin de aceste fenomene.
-Probleme ce țin de fenomene complexe le voi numi probleme complexe.
+# IA e foarte bună la enumerare
 
-<!-- -- cred că aș putea băga exemplele și aici, am putea începe cu introducerea apoi exemplele, am putea începe cu exemple și introducerea s-o intercalăm -->
+- întrebări la care nu m-am gândit
+- riscuri și cazuri limită
+- alternative și variante
+- ipoteze ascunse
+- criterii de comparare
+- ce aș putea să fi uitat
+- exemple și contraexemple
 
----
-
-Toată lumea vorbește acum despre faptul că problemele simple, de rutină, trebuie să le delegăm către IA.
-Dar dacă delegăm problemele simple, cine ne oprește să delegăm și cele complexe? sau altfel,
-dacă IA rezolvă bine problemele simple, de ce să nu delegăm și cele complexe? pentru că am observat că se descurcă foarte bine și cu cele complexe.
-
----
-
-Concluzia mea e simplă, pentru a înțelege un fenomen îți trebuie un model mental al acestui fenomen.
-Delegând sarcinile simple către AI, pentru care avem deja modele mentale formate nu pierdem nimic.
-Delegând însă sarcinile complexe către IA pierdem șansa să ne formăm modelul mental.
-Însă formarea modelului mental necesită timp.
-Deja noi trebuie să decidem, ne trebuie oare acest model mental sau nu, pentru că raportul timp:rezultat atunci când folosești IA e foarte bun.
+<!--
+IA e foarte bună la enumerare: întrebări la care nu m-am gândit, riscuri, variante, ipoteze ascunse, criterii de comparare. Umple lista cu elemente apropiate semantic și îmi arată zone la care nu m-aș fi gândit singur. Eu aleg ce are sens și verific.
+-->
 
 ---
 
-Fenomenul complex trebuie abordat astfel încât să poți ușor aborda orice alte fenomene complexe din aceeași familie.
+# Cere și explicația vizuală de la IA
+
+- articol: „How to 5x your communication effectiveness with Claude Code” (Towards Data Science)
+- agentul scrie rezultatele netriviale ca fișier HTML, deschis în browser, nu ca text în terminal
+- instrucțiunea se pune o dată, în fișierul MD la nivel de utilizator
+- skill-uri pentru sarcini concrete (ex. raport de teste)
+- Archify pentru diagrame
+- concluziile apar la final, rezultatul e prezentat vizual
+
+<!--
+Exemplul precedent arăta că deseori e binevenit să începem abordarea complexității cu IA. Aici vorbesc despre etapele intermediare, sau chiar etapa finală, și mai ales despre prezentarea rezultatelor.
+
+Am întâlnit un articol foarte interesant exact în momentul când obosisem să citesc răspunsurile de la IA. Metoda din articol (agentul scrie rezultatul netrivial ca fișier HTML, deschis în browser, în loc de text în terminal) accelerează înțelegerea: pune concluziile la final și prezintă rezultatul vizual. Instrucțiunea merge o singură dată într-un fișier MD la nivel de utilizator; pentru sarcini concrete (ex. raport de teste) se folosesc skill-uri, iar pentru diagrame Archify.
+
+Generalizare: „Cere și explicația vizuală de la IA”.
+
+Sursa: https://towardsdatascience.com/how-to-5x-your-communication-effectiveness-with-claude-code/
+-->
 
 ---
 
-Însă concentrându-mă pe raportul timp:rezultat nu întotdeauna suficient. Mai apare și dimensiunea calității rezultatului:
-1. rezultatul poate să nu fie optim (sau poate să facă multe iterații), și atunci cel mai des îți trebuie să schimbi felul în care abordează IA problema, dar pentru acesta un model superficial al fenomenului nu e suficient
-2. rezultatul poate să nu fie corect din cauza naturii non-deterministe a IA și pentru acesta îți trebuie subrezultate deterministe, la care iarăși nu ajungi cu modele superficiale ale fenomenului.
+# Din practica mea: carduri cu noțiunile necunoscute
 
----
+- studiez ceva nou, apar noțiuni necunoscute
+- Claude generează carduri pentru ele
+- le pune în cloud, le am la îndemână
+- revin la ele când am nevoie
 
-(Deci trăind într-o lume complexă, e nevoie ca să participe într-o anumită măsură și omul și IA.)
+<!--
+Din practica mea: când studiez ceva nou, obișnuiesc să generez carduri cu noțiunile necunoscute. Claude le face și le pune în cloud. Încă o formă de prezentare a rezultatelor, în ajutorul înțelegerii.
+-->
 
-Întrebarea importantă cum să abordăm fenomenele complexe astfel încât să le avem pe toate: rapid, înțelegere etc...
-
----
-
-Eu mi-am răspuns la această întrebare. Răspunsul e subiectiv dar e următorul:
-
-În realitatea actuală, noi tindem s-o polarizăm, într-o parte omul, în altă parte IA. Eu am să numesc al treilea jucător modelul.
-Modelul poate fi mintal, poate fi model software, poate fi cadrul științific, cunoștințele ... la care avem acces direct, nu ne trebuie IA.
-
----
-
-Deci regula mea este:
-- cine depune efort minim fenomenul (modelul fenomenului) sau IA, dacă ambii atunci nu folosim IA
-- întâi trebuie să ne gândim, e posibilă oare așa o abordare în care fenomenul (modelul fenomenului) depune un efort minim?
-
-Noi folosim IA pentru că poate, dar mai există și alți actori care pot, ca de exemplu modelul.
+<!-- TODO: de adăugat un exemplu concret (captură de ecran a unui card) -->
 
 ---
 
@@ -228,6 +228,76 @@ IA artificială spune (răspuns AVG) că trebuie să introducem paginarea. Pagin
 În general exemplul 4 mi-a dat o idee interesantă de a investiga ceva cu AI și anume.
 În situația unei probleme dacă îmi explică, sau sugerează, sau orice care îmi dă mai multe opțiuni, eu prefer să lucrez dinamic cu IA și anume:
 Să-mi dea câte unul, și când l-am înțeles fie zic dă-mi următorul fie pun întrebări. De multe ori după întrebări, opțiunile următoare sunt recalculate.
+
+---
+
+# Enumerarea variantelor: IA umple lista
+
+Structura arborescentă e prea mare. Variante:
+
+- paginare
+- limitarea adâncimii (doar copiii de primul nivel)
+- încărcare leneșă (lazy loading) a subarborilor
+- structură plată (listă de noduri cu `parentId`)
+- selectarea câmpurilor (doar ce e necesar)
+- API de căutare / filtrare în loc de întregul arbore
+- streaming în loc de un singur răspuns
+
+<!--
+Exemplul 4 evidențiază un aspect la care IA e foarte bună: enumerarea variantelor. Îi cer să facă exemple și umple lista cu elemente apropiate semantic: de la o singură idee (paginarea) obțin o familie întreagă de soluții înrudite. Eu aleg apoi ce are sens, de preferință pe rând: câte o variantă, o înțeleg, apoi cer următoarea.
+-->
+
+---
+
+Despre fenomene care noi le numim complexe și despre probleme care țin de aceste fenomene.
+Probleme ce țin de fenomene complexe le voi numi probleme complexe.
+
+<!-- -- cred că aș putea băga exemplele și aici, am putea începe cu introducerea apoi exemplele, am putea începe cu exemple și introducerea s-o intercalăm -->
+
+---
+
+Toată lumea vorbește acum despre faptul că problemele simple, de rutină, trebuie să le delegăm către IA.
+Dar dacă delegăm problemele simple, cine ne oprește să delegăm și cele complexe? sau altfel,
+dacă IA rezolvă bine problemele simple, de ce să nu delegăm și cele complexe? pentru că am observat că se descurcă foarte bine și cu cele complexe.
+
+---
+
+Concluzia mea e simplă, pentru a înțelege un fenomen îți trebuie un model mental al acestui fenomen.
+Delegând sarcinile simple către AI, pentru care avem deja modele mentale formate nu pierdem nimic.
+Delegând însă sarcinile complexe către IA pierdem șansa să ne formăm modelul mental.
+Însă formarea modelului mental necesită timp.
+Deja noi trebuie să decidem, ne trebuie oare acest model mental sau nu, pentru că raportul timp:rezultat atunci când folosești IA e foarte bun.
+
+---
+
+Fenomenul complex trebuie abordat astfel încât să poți ușor aborda orice alte fenomene complexe din aceeași familie.
+
+---
+
+Însă concentrându-mă pe raportul timp:rezultat nu întotdeauna suficient. Mai apare și dimensiunea calității rezultatului:
+1. rezultatul poate să nu fie optim (sau poate să facă multe iterații), și atunci cel mai des îți trebuie să schimbi felul în care abordează IA problema, dar pentru acesta un model superficial al fenomenului nu e suficient
+2. rezultatul poate să nu fie corect din cauza naturii non-deterministe a IA și pentru acesta îți trebuie subrezultate deterministe, la care iarăși nu ajungi cu modele superficiale ale fenomenului.
+
+---
+
+(Deci trăind într-o lume complexă, e nevoie ca să participe într-o anumită măsură și omul și IA.)
+
+Întrebarea importantă cum să abordăm fenomenele complexe astfel încât să le avem pe toate: rapid, înțelegere etc...
+
+---
+
+Eu mi-am răspuns la această întrebare. Răspunsul e subiectiv dar e următorul:
+
+În realitatea actuală, noi tindem s-o polarizăm, într-o parte omul, în altă parte IA. Eu am să numesc al treilea jucător modelul.
+Modelul poate fi mintal, poate fi model software, poate fi cadrul științific, cunoștințele ... la care avem acces direct, nu ne trebuie IA.
+
+---
+
+Deci regula mea este:
+- cine depune efort minim fenomenul (modelul fenomenului) sau IA, dacă ambii atunci nu folosim IA
+- întâi trebuie să ne gândim, e posibilă oare așa o abordare în care fenomenul (modelul fenomenului) depune un efort minim?
+
+Noi folosim IA pentru că poate, dar mai există și alți actori care pot, ca de exemplu modelul.
 
 ---
 
