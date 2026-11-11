@@ -27,9 +27,28 @@ La fel, din același punct de vedere, sunt probleme care, în paralel cu soluți
 Unele dintre problemele de mai sus sunt exemple de probleme care țin de așa-numitele fenomene complexe. 
 Fenomene care constau din factori interconectați, între care nu sunt granițe clare și ale căror interacțiuni nu pot fi prezise în totalitate.
 
-Și fiindcă subiectul acestei prezentări sunt fenomenele complexe, haideți să vedem cum le putem aborda.
+Toate aceste tipuri de probleme pot fi delegate către inteligența artificială, mai ales cele simple, pentru că toată
+lumea spune că ele trebuie delegate către AI, dar și mai ales cele complexe, pentru că ți-ar face-o AI-ul.
 
-Există strategii cognitive care dau direcție atunci când nu ai o metodă sigură. Voi porni de la câteva exemple de probleme.
+Din punct de vedere al raportului timp-rezultat, merită delegate inteligenței artificiale, dar dacă introducem alte
+dimensiuni, nu sunt atât de sigur. De exemplu, din punct de vedere al menținerii contactului cu esența problemei,
+dacă folosim des inteligența artificială, pierdem din acest contact.
+Sau din punct de vedere al dezvoltării personale: dacă ne legăm de toate sarcinile, problemele ne iau timpul și
+dezvoltarea personală stagnează.
+Este un alt punct de vedere, dintr-o altă dimensiune, și anume a efortului depus. Dacă efortul depus e minim, cu sau
+fără inteligență artificială, atunci aleg fără inteligență artificială. Dacă efortul depus e minim doar cu
+inteligență artificială, atunci aleg inteligența artificială.
+
+Mai departe am să vă povestesc despre experiența mea în abordarea problemelor complexe cu ajutorul acestei dimensiuni și a inteligenței artificiale. Am să încep și să povestesc pe baza unor exemple.
+
+Vreau sa va povestesc despre experienta mea...
+Si aspectul cel mai intresant care u il consdier ...
+Experienta mea s-a conecntrat pe dimensiuean "efortul" minim in primul rand al omului
+te face sa cotnii eprmanenet intelegera problemei.
+- este important deaorece experienta mea arata ca daca delegi apropae toata problema catre AI pierzi contextul.
+
+Eu am numit acesta prezentare "navigare" deoarece nu preting in a da metode care rezolva 100% dar pretind sau dau metode care dau directia
+prin complex m-am gandit la situatii comeplxe de soltionat sau lucrul cand esti doar la icneput care-s dark amterr.
 
 2. Exemplu 1
 ------------

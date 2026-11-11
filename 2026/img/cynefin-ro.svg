@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 520" width="820" height="520" font-family="'Segoe UI', Arial, sans-serif">
+  <rect x="10" y="10" width="395" height="245" rx="14" fill="#c6f6d5" stroke="#276749" stroke-width="3"/>
+  <rect x="415" y="10" width="395" height="245" rx="14" fill="#bee3f8" stroke="#2b6cb0" stroke-width="3"/>
+  <rect x="10" y="265" width="395" height="245" rx="14" fill="#fed7d7" stroke="#c53030" stroke-width="3"/>
+  <rect x="415" y="265" width="395" height="245" rx="14" fill="#fefcbf" stroke="#b7791f" stroke-width="3"/>
+
+  <g text-anchor="middle" fill="#1a202c">
+    <text x="207" y="60" font-size="34" font-weight="700" fill="#22543d">Complex</text>
+    <text x="207" y="100" font-size="20">Cauza și efectul se văd</text>
+    <text x="207" y="125" font-size="20">doar retrospectiv</text>
+    <text x="207" y="180" font-size="21" font-weight="600">probează – simte – răspunde</text>
+    <text x="207" y="215" font-size="18" fill="#276749">practică emergentă</text>
+
+    <text x="612" y="60" font-size="34" font-weight="700" fill="#2a4365">Complicat</text>
+    <text x="612" y="100" font-size="20">Cauza și efectul există,</text>
+    <text x="612" y="125" font-size="20">dar cer analiză de expert</text>
+    <text x="612" y="180" font-size="21" font-weight="600">simte – analizează – răspunde</text>
+    <text x="612" y="215" font-size="18" fill="#2b6cb0">practică bună</text>
+
+    <text x="207" y="315" font-size="34" font-weight="700" fill="#742a2a">Haotic</text>
+    <text x="207" y="355" font-size="20">Nicio relație cauză–efect</text>
+    <text x="207" y="380" font-size="20">care să se poată descoperi</text>
+    <text x="207" y="435" font-size="21" font-weight="600">acționează – simte – răspunde</text>
+    <text x="207" y="470" font-size="18" fill="#c53030">practică nouă</text>
+
+    <text x="612" y="315" font-size="34" font-weight="700" fill="#744210">Simplu</text>
+    <text x="612" y="355" font-size="20">Cauza și efectul sunt</text>
+    <text x="612" y="380" font-size="20">evidente pentru toți</text>
+    <text x="612" y="435" font-size="21" font-weight="600">simte – categorizează – răspunde</text>
+    <text x="612" y="470" font-size="18" fill="#b7791f">practică cea mai bună</text>
+  </g>
+
+  <circle cx="410" cy="260" r="62" fill="#ffffff" stroke="#4a5568" stroke-width="3"/>
+  <text x="410" y="266" text-anchor="middle" font-size="22" font-weight="700" fill="#2d3748">Dezordine</text>
+</svg>
