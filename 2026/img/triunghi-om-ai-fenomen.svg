@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 560" font-family="Segoe UI, Arial, sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#52606d"/></marker></defs>
+<rect width="1100" height="560" fill="#fff"/>
+<text x="40" y="46" font-size="26" font-weight="700" fill="#1a365d">Persoană, AI și fenomen</text>
+<text x="620" y="46" font-size="22" font-weight="600" fill="#1a365d">Cunoștințe despre fenomen</text>
+<!-- triangle edges -->
+<line x1="190" y1="140" x2="400" y2="140" stroke="#52606d" stroke-width="3" marker-start="url(#a)" marker-end="url(#a)"/>
+<text x="295" y="128" font-size="18" fill="#52606d" text-anchor="middle">interacțiune</text>
+<line x1="150" y1="180" x2="265" y2="385" stroke="#52606d" stroke-width="3" marker-end="url(#a)"/>
+<line x1="440" y1="180" x2="325" y2="385" stroke="#52606d" stroke-width="3" marker-end="url(#a)"/>
+<text x="150" y="300" font-size="18" fill="#52606d" text-anchor="end">cunoaște</text>
+<text x="440" y="300" font-size="18" fill="#52606d">cunoaște</text>
+<!-- nodes -->
+<rect x="60" y="100" width="160" height="80" rx="40" fill="#2f855a"/>
+<text x="140" y="148" font-size="26" font-weight="700" fill="#fff" text-anchor="middle">Persoană</text>
+<rect x="370" y="100" width="160" height="80" rx="40" fill="#2b6cb0"/>
+<text x="450" y="148" font-size="26" font-weight="700" fill="#fff" text-anchor="middle">AI</text>
+<rect x="195" y="385" width="200" height="80" rx="40" fill="#975a16"/>
+<text x="295" y="433" font-size="26" font-weight="700" fill="#fff" text-anchor="middle">Fenomen</text>
+<!-- venn -->
+<circle cx="780" cy="300" r="160" fill="#2b6cb0" fill-opacity="0.28" stroke="#2b6cb0" stroke-width="3"/>
+<circle cx="930" cy="300" r="100" fill="#2f855a" fill-opacity="0.35" stroke="#2f855a" stroke-width="3"/>
+<text x="730" y="308" font-size="28" font-weight="700" fill="#1a365d" text-anchor="middle">AI</text>
+<text x="885" y="296" font-size="16" fill="#1a365d" text-anchor="middle">cunoscut</text>
+<text x="885" y="316" font-size="16" fill="#1a365d" text-anchor="middle">de ambii</text>
+<text x="985" y="308" font-size="18" font-weight="700" fill="#1c4532" text-anchor="middle">doar</text>
+<text x="985" y="330" font-size="18" font-weight="700" fill="#1c4532" text-anchor="middle">omul</text>
+<text x="780" y="500" font-size="18" fill="#52606d" text-anchor="middle">sfera AI e mare, sfera omului mai mică,</text>
+<text x="780" y="524" font-size="18" fill="#52606d" text-anchor="middle">dar nu e cuprinsă toată în AI</text>
+</svg>

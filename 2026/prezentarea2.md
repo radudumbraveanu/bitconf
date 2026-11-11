@@ -233,6 +233,12 @@ Modelul poate fi mintal, poate fi model software, poate fi cadrul științific, 
 
 ---
 
+<!-- _class: img -->
+
+![](img/triunghi-om-ai-fenomen.svg)
+
+---
+
 # Regula mea
 
 - cine depune efort minim: fenomenul (modelul fenomenului) sau AI?
