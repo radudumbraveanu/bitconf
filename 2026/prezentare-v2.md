@@ -100,7 +100,7 @@ Variantă de traducere: Nu a existat niciodată un moment mai interesant pentru 
 - sisteme / fenomene / probleme cu mulți factori interconectați
 - granițe neclare între factori
 - combinații greu de prevazut exhaustiv
-- și situații care doar par complexe (formulă sau perspectivă)
+- și situații care doar par complexe: sunt noi pentru mine sau formulate neclar
 
 <!-- 
 Prin complexitate mă voi referi la situații, sisteme, fenomene, probleme, care constau din mai mulți factori
@@ -108,14 +108,14 @@ Prin complexitate mă voi referi la situații, sisteme, fenomene, probleme, care
 prevezi toate combinațiile posibile ale acestora. 
 La fel, prin complexitate mă voi referi și la situațiile care
 par așa (adică par complexe la prima vedere) fie din cauza formulării, fie din cauza subiectului care abordează
-situația.
+situația, fie pentru că sunt noi pentru mine și nu știu de unde să încep.
 -->
 
 ---
 
 # Wayfinder (Matt Pocock)
 
-- început dificil: formulare neclară sau primii pași costisitori
+- problemă nouă: nu știu de unde să încep (formulare neclară sau primii pași costisitori)
 - Wayfinder pune întrebări, construiește lanțul de pași, ține evidența
 - AI execută pașii tehnici (librării, programe) în câteva minute
 - eu rulez, văd rezultatele, analizez
@@ -138,6 +138,8 @@ Metoda se poate generaliza în „gradul de finețe în interacțiunea cu AI”;
 
 # AI e foarte bună la enumerare
 
+Problema nouă, pasul următor: ce opțiuni am?
+
 - întrebări la care nu m-am gândit
 - riscuri și cazuri limită
 - alternative și variante
@@ -153,6 +155,8 @@ AI e foarte bună la enumerare: întrebări la care nu m-am gândit, riscuri, va
 ---
 
 # Cere și explicația vizuală de la AI
+
+Problema nouă, pasul următor: înțeleg rezultatul repede.
 
 - articol: „How to 5x your communication effectiveness with Claude Code” (Towards Data Science)
 - agentul scrie rezultatele netriviale ca fișier HTML, deschis în browser, nu ca text în terminal
