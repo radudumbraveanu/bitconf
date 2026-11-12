@@ -585,6 +585,24 @@ git worktree și experimentăm. salvăm rezultatele. comparăm.
 
 ---
 
+# Exemplu: upgrade cu probleme
+
+- după upgrade, aplicația consumă mai multă memorie
+- AI generează un benchmark: pentru un endpoint de API măsoară și salvează numărul de bytes alocați
+- git worktree: rulez același benchmark pe ramura curentă și pe un commit dinainte de upgrade
+- numerele diferă: acum am o referință
+- îi dau AI numerele și îi cer să găsească cauza: a găsit exact biblioteca care, după upgrade, a început să se comporte așa
+
+<!--
+După upgrade am văzut că se consumă mai multă memorie.
+Am generat cu AI un benchmark care, pentru un endpoint de API, măsoară și salvează numărul de bytes alocați.
+Cu git worktree am rulat benchmark-ul pe ramura curentă și pe un commit de dinainte de upgrade, și am comparat numerele. S-a adeverit că diferă.
+Având numerele ca o referință, am rugat AI să găsească problema, și mi-a găsit exact biblioteca care, după upgrade, a început să se comporte așa.
+Observație: AI a construit instrumentul de măsură, dar măsurătoarea e deterministă și o controlez eu; apoi AI lucrează pe numere, nu pe presupuneri.
+-->
+
+---
+
 # Exemplu: dashboard-uri Grafana
 
 - de monitorizat ceva în Grafana, câteva dashboard-uri noi
