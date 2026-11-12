@@ -57,6 +57,9 @@ style: |
   section.log .b { background: #bfdbfe; }
   section.log .c { background: #bbf7d0; }
   section.log small { font-size: 20px; color: #52606d; display: block; margin-top: 12px; }
+  section .cols { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; }
+  section .cols { font-size: 29px; line-height: 1.4; }
+  section .cols ol, section .cols ul { margin-top: 0.3em; }
   section.img {
     padding: 24px 40px;
     justify-content: flex-start;
@@ -433,15 +436,54 @@ Aici n-am delegat către AI. Am folosit abstractizarea: rândurile identice din 
 
 ---
 
-# Exemplu: problema interogărilor care nu se termină
+# Cum rezolvăm o problemă? (Pólya)
 
-- în anumite condiții interogarea din browser nu se termină, apare aleator
-- timeout-uri: presupunem că nu le avem
+<div class="cols">
+<div>
+
+**Cele 4 etape**
+
+1. înțelege problema
+2. face un plan
+3. execută planul
+4. privește înapoi
+
+</div>
+<div>
+
+**Euristici**
+
+- problemă asemănătoare / analogie
+- specializare (cazul particular)
+- generalizare
+- problemă auxiliară (mai simplă)
+- descompune în părți
+- desenează o figură
+
+</div>
+</div>
+
+<small>George Pólya, *How to Solve It* (1945). Deadlock N=1 = specializare; N+1 = problemă auxiliară (clasele de echivalență); desenele și simularea = figura.</small>
+
+<!--
+Exemplele de până acum nu sunt întâmplătoare. Urmează un tipar vechi: George Pólya, How to Solve It, 1945.
+Patru etape: înțelegi problema (ce se cere, ce date ai, care e condiția), faci un plan, execuți planul, te uiți înapoi (verifici rezultatul și te întrebi dacă metoda se poate folosi în altă parte).
+Etapa 2 e cea grea, și aici vin euristicile: ai mai întâlnit o problemă asemănătoare? poți specializa, adică rezolva un caz particular? sau generaliza? poți rezolva o problemă auxiliară, mai simplă? poți descompune problema? poți desena o figură?
+În exemplele mele: la deadlock am folosit specializarea, cazul particular N=1, și am desenat figura (gridlock, simularea). La N+1 am folosit o problemă auxiliară: grupez rândurile identice din jurnal în clase de echivalență și lucrez cu clasele, nu cu jurnalul întreg.
+Euristicile sunt proprietăți ale modului de gândire, nu ale fenomenului. Le putem cere și AI-ului, dar trebuie să le știm noi.
+-->
+
+---
+
+# Exemplu: cerere din browser fără răspuns
+
+- în anumite condiții cererea din browser rămâne fără răspuns, apare aleator
+- timeout-uri: presupunem că nu le avem și nu le putem seta
 - avem log-ul aplicației în CSV, dar nu știm când s-a reprodus eroarea
 
 <!--
-Problema în care în anumite condiții interogarea din browser nu se termină. Apare aleator.
-Prima soluție punem timeout-uri la interogări. Presupunem că nu le avem.
+Problema în care în anumite condiții cererea din browser rămâne fără răspuns. Apare aleator.
+Prima soluție: punem timeout-uri la cereri. Presupunem că nu le avem și nu le putem seta.
 Dar avem log-ul aplicației în CSV pentru o anumită perioadă de timp. Dar nu știm timpul (timpii) când eroarea a fost reprodusă.
 Fragment de CSV.
 -->
@@ -471,26 +513,49 @@ Fragment de CSV: id-ul firului (thread), timestamp, mesaj. Firul exec-7 a încep
 
 ---
 
+<!-- _class: img -->
+
+![](img/thread-pool-blocat.svg)
+
+---
+
 # Aceeași metodă: clase de echivalență
 
-- clase de echivalență după repetarea thread-N
+- clase de echivalență după repetarea `http-nio-8080-exec-N`
 - firele care n-au răspuns sunt blocate și nu pot fi refolosite: repetările lor sunt mai puține
-- CSV, deci Pandas: cer AI un cod pandas, nu o analiză
-- adaptez fragmentele: învăț pandas și obțin un instrument determinist
+- CSV, deci pandas: cer AI un cod pandas, nu o analiză
+- adaptez fragmentul și obțin un instrument determinist
 
 <!--
-Se poate aplica metoda de mai sus. Clase de echivalență: repetarea thread-N, teoretic cele care n-au răspuns, sunt blocate și nu pot fi refolosite, deci repetările trebuie să fie mai mici.
+Se poate aplica metoda de mai sus. Clase de echivalență: repetarea http-nio-8080-exec-N, teoretic cele care n-au răspuns, sunt blocate și nu pot fi refolosite, deci repetările trebuie să fie mai mici.
 
-Eu când văd CSV mă gândesc la Pandas. "dacă am o listă de înregistrări într-un CSV cu coloane id, timestamp și message. Dă-mi un cod pandas care afișează fiecare id cu ultimul timestamp văzut într-un anumit interval de timp"
-Aceste fragmente le pot apoi adapta și: înveți pandas, + obții un instrument determinist.
+Eu când văd CSV mă gândesc la pandas. "dacă am o listă de înregistrări într-un CSV cu coloane id (id-ul firului de execuție), timestamp și message (mesajul). Dă-mi un cod pandas care afișează fiecare id cu ultimul timestamp văzut într-un anumit interval de timp"
+Acest fragment îl pot apoi adapta și obțin un instrument determinist.
 -->
 
 ---
 
-<!-- _class: img -->
-<small>Sursa desenului: https://commons.wikimedia.org/wiki/File:Thread_pool.svg</small>
+# Promptul pentru codul pandas
 
-![](img/thread-pool.png)
+> Am o listă de înregistrări într-un CSV, cu coloane id (id-ul firului de execuție), timestamp și message (mesajul). Dă-mi un cod pandas care afișează fiecare id cu ultimul timestamp văzut într-un anumit interval de timp.
+
+---
+
+# Codul pandas
+
+```python
+import pandas as pd
+
+df = pd.read_csv("log.csv", parse_dates=["timestamp"])
+
+start, end = "10:15:00", "10:16:00"
+interval = df[(df["timestamp"] >= start) & (df["timestamp"] <= end)]
+
+last_seen = interval.groupby("id")["timestamp"].max()
+print(last_seen.sort_values())
+```
+
+<small>Firele cu ultimul timestamp cel mai vechi, primele în listă, sunt candidații pentru „blocate”.</small>
 
 ---
 
@@ -499,7 +564,7 @@ Aceste fragmente le pot apoi adapta și: înveți pandas, + obții un instrument
 - 3 exemple în care am folosit proprietățile fenomenului, nu am lăsat totul pe AI
 - rezultatul ar fi fost același: problema rezolvată
 - diferența: omul a înțeles mai mult decât înainte
-- exemplul cu interogările care nu se termină și următoarele combină proprietățile fenomenului cu AI
+- exemplul cu cererea fără răspuns și următoarele combină proprietățile fenomenului cu AI
 - ca la școală: fundamentele întâi, apoi combinarea lor
 - învățăm proprietăți ale fenomenului, capacități ale AI, capacități ale pandas, pentru fenomenele viitoare
 
@@ -507,7 +572,7 @@ Aceste fragmente le pot apoi adapta și: înveți pandas, + obții un instrument
 Vă dați seama care diferență în aceste 3 exemple în care am folosit proprietăți ale fenomenului studiat și n-am pus în totalitate în seama AI?
 Rezultatul ar fi același : problema rezolvată. Dar în primul caz ai și un om care a înțeles ceva mai mult decât înțelesese până la acel fenomen.
 
-Începem să intrăm în tărâmul AI. Avantajele exemplului cu interogările care nu se termină dar și al următoarelor care vor combina proprietățile fenomenului și AI.
+Începem să intrăm în tărâmul AI. Avantajele exemplului cu cererea fără răspuns dar și al următoarelor care vor combina proprietățile fenomenului și AI.
 La fel cum învățăm la școală și universitate fundamentele, ca apoi să le putem combina, așa și învățăm / descoperim proprietăți ale fenomenului, capacități ale AI, capacități ale pandas. Ca în viitor pentru alte fenomene să le combinăm și să abordăm orice problemă complexă.
 -->
 
