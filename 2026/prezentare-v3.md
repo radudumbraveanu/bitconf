@@ -322,19 +322,14 @@ Aici n-am delegat către AI. Am folosit abstractizarea: rândurile identice din 
 
 # Ce diferență fac proprietățile fenomenului
 
-- 3 exemple în care am folosit proprietățile fenomenului, nu am lăsat totul pe AI
-- rezultatul ar fi fost același: problema rezolvată
+- 2 exemple (deadlock, N+1): am folosit proprietățile fenomenului, nu am lăsat totul pe AI
+- dacă lăsam totul pe AI, rezultatul ar fi fost același: problema rezolvată
 - diferența: omul a înțeles mai mult decât înainte
-- exemplul cu cererea fără răspuns și următoarele combină proprietățile fenomenului cu AI
-- ca la școală: fundamentele întâi, apoi combinarea lor
-- învățăm proprietăți ale fenomenului, capacități ale AI, capacități ale pandas, pentru fenomenele viitoare
+- ce am înțeles se aplică și la fenomenele viitoare
 
 <!--
-Vă dați seama care diferență în aceste 3 exemple în care am folosit proprietăți ale fenomenului studiat și n-am pus în totalitate în seama AI?
-Rezultatul ar fi același : problema rezolvată. Dar în primul caz ai și un om care a înțeles ceva mai mult decât înțelesese până la acel fenomen.
-
-Începem să intrăm în tărâmul AI. Avantajele exemplului cu cererea fără răspuns dar și al următoarelor care vor combina proprietățile fenomenului și AI.
-La fel cum învățăm la școală și universitate fundamentele, ca apoi să le putem combina, așa și învățăm / descoperim proprietăți ale fenomenului, capacități ale AI, capacități ale pandas. Ca în viitor pentru alte fenomene să le combinăm și să abordăm orice problemă complexă.
+Ce diferență e între aceste 2 exemple, în care am folosit proprietăți ale fenomenului studiat, și situația în care aș fi pus totul în seama AI?
+Rezultatul ar fi același: problema rezolvată. Dar în cazul nostru ai și un om care a înțeles ceva mai mult decât înțelesese până la acel fenomen, și înțelegerea asta rămâne pentru fenomenele viitoare.
 -->
 
 ---
@@ -516,6 +511,13 @@ AI artificială spune (răspuns AVG) că trebuie să introducem paginarea. Pagin
 
 ---
 
+<!-- _class: img -->
+<small>Sursa desenului: https://commons.wikimedia.org/wiki/File:Tree-data-structure.svg</small>
+
+![](img/tree.png)
+
+---
+
 # Exemplu: API care întoarce un arbore – pașii
 
 1. teste care folosesc API-ul și pică
@@ -528,27 +530,6 @@ AI artificială spune (răspuns AVG) că trebuie să introducem paginarea. Pagin
 2. am rugat AI să comenteze/returneze eroare de la acest API în toate locurile unde e folosit.
 3. m-am gândit la câteva soluții și am rugat AI să genereze fiecare soluție, adică să schimbe codul apoi să ruleze testele și analizez dacă pică sau nu și pică în aceleași condiții sau nu.
 4. am studiat fiecare loc în parte și am descoperit că unele locuri acest API ar fi putut fi înlocuit cu un API de căutare care deja există, iar în alte locuri era nevoie doar de descendenții de primul nivel, adică copiii nu de întreaga structură arborescentă.
--->
-
----
-
-<!-- _class: img -->
-<small>Sursa desenului: https://commons.wikimedia.org/wiki/File:Tree-data-structure.svg</small>
-
-![](img/tree.png)
-
----
-
-# Opțiune cu opțiune, nu toate deodată
-
-- când AI îmi dă mai multe opțiuni, lucrez dinamic
-- să-mi dea câte una; când am înțeles-o, zic „dă-mi următoarea” sau pun întrebări
-- după întrebări, opțiunile următoare se recalculează
-
-<!--
-În general exemplul cu arborele mi-a dat o idee interesantă de a investiga ceva cu AI.
-În situația unei probleme, dacă îmi explică, sau sugerează, sau orice care îmi dă mai multe opțiuni, eu prefer să lucrez dinamic cu AI și anume:
-Să-mi dea câte unul, și când l-am înțeles fie zic dă-mi următorul fie pun întrebări. De multe ori după întrebări, opțiunile următoare sunt recalculate.
 -->
 
 ---
@@ -699,21 +680,6 @@ Fenomenul complex trebuie abordat astfel încât să poți ușor aborda orice al
 <!--
 Videoul nu e în prezentare, drepturile rămân la autorul postării de pe Reddit. Link-ul duce la postare.
 Ideea: modelul nu reproduce exact nici când i se cere explicit. Erorile mici se acumulează la fiecare pas, deci rezultatul nu e determinist și nu putem presupune că „nu schimbă nimic”.
--->
-
----
-
-# Ce vrem de la abordare?
-
-- lume complexă: participă, în măsură diferită, și omul, și AI
-- întrebarea: cum să le avem pe toate?
-- rapid
-- cu înțelegere
-
-<!--
-(Deci trăind într-o lume complexă, e nevoie ca să participe într-o anumită măsură și omul și AI.)
-
-Întrebarea importantă cum să abordăm fenomenele complexe astfel încât să le avem pe toate: rapid, înțelegere etc...
 -->
 
 ---
