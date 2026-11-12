@@ -256,37 +256,76 @@ Noi folosim AI pentru că poate, dar mai există și alți actori care pot, ca d
 
 ---
 
-# Exemplu 1: deadlock
+# Exemplu: deadlock (interblocare)
 
-- mulți utilizatori: sistem greu de depanat
-- puțini utilizatori: ușor de depanat, dar greu de reprodus
-- la N+1 fenomenul converge singur spre starea dorită: problema se reproduce și e ușor de studiat
-- alt exemplu: OOM
+- din experiența mea: eroarea „nu mai sunt conexiuni pentru baza de date”
+- mai multe procese gestionează resurse, printre care și conexiunile la baza de date, luate dintr-un pool de conexiuni (număr limitat)
+- procesul A ține o conexiune și mai cere o resursă
+- resursa e ocupată de procesul B
+- B, înainte să o elibereze, are nevoie de o conexiune la baza de date
+- fiecare așteaptă după altul: nimeni nu mai înaintează
 
 <!--
-Este destul de complicat de depanat sistemul când avem mulți utilizatori, dar în cazul când ai un număr mic de utilizatori, e ușor de depanat, dar e mai greu de reprodus.
-La N+1 fenomenul însăși converge către starea dorită, se reproduce problema și e ușor de studiat.
-
-Alt exemplu OOM.
+Un exemplu din experiența mea: în anumite momente apărea eroarea că nu mai sunt conexiuni pentru baza de date. Ce se întâmpla de fapt: mai multe procese gestionau resurse, printre care și conexiunile la baza de date, care veneau dintr-un pool de conexiuni, deci în număr limitat. Uneori un proces cere o conexiune la baza de date și, înainte de a o elibera, mai cere o resursă, dar aceasta e ocupată de alt proces care, înainte de a o elibera, are nevoie de o conexiune la baza de date.
 -->
 
 ---
 
 <!-- _class: img -->
-<small>Sursa desenului: https://commons.wikimedia.org/wiki/File:Process_deadlock.svg</small>
+<small>Sursa desenului: https://commons.wikimedia.org/wiki/File:Gridlock.svg</small>
 
-![](img/deadlock.png)
+![](img/gridlock.svg)
+
+---
+
+# Deadlock: de ce e greu de studiat
+
+- mulți utilizatori: sistem greu de depanat
+- puțini utilizatori: ușor de depanat, dar greu de reprodus
+
+<!--
+Este destul de complicat de depanat sistemul când avem mulți utilizatori, dar în cazul când ai un număr mic de utilizatori, e ușor de depanat, dar e mai greu de reprodus.
+-->
 
 ---
 
 <!-- _class: img -->
-<small>Simulare generată de Claude: pool de conexiuni, micșorat de la 10 la 1</small>
+<small>Simulare generată de Claude: pool de conexiuni, micșorat de la 10 la 1 · <a href="connection_pool_deadlock.html" target="_blank">deschide direct</a></small>
 
 <iframe src="connection_pool_deadlock.html" style="width:1180px;height:580px;border:0;border-radius:8px;background:#fff"></iframe>
 
 ---
 
-# Exemplu 2: problema N+1
+# Deadlock N=1 vs. AI
+
+- la N=1 fenomenul converge singur spre starea dorită: problema se reproduce și e ușor de studiat
+- alt exemplu: OOM
+  - uneori sistemul afișează mesajul `OutOfMemory`
+  - soluție: micșorăm memoria totală și eroarea se reproduce mult mai repede
+  - astfel se vede mai clar cauza: cine cere multă memorie sau cine ocupă prea multă memorie
+
+<!--
+La N=1 fenomenul însăși converge către starea dorită, se reproduce problema și e ușor de studiat.
+
+Alt exemplu OOM: uneori un sistem afișează mesajul OutOfMemory. Soluție: dacă micșorăm memoria totală, vom reproduce eroarea mult mai repede și se va vedea mai clar cauza: cine cere multă memorie sau cine ocupă prea multă memorie.
+-->
+
+---
+
+# Deadlock: cazul particular în locul celui general
+
+- nu am delegat problema către AI
+- în loc de problema generală, am luat un caz particular, mai simplu (N=1, memorie mică)
+- cazul particular s-a dovedit mai ușor de reprodus și de studiat
+- prin el am găsit soluția și pentru problema generală
+
+<!--
+Nu am delegat problema către AI. În loc de problema generală am luat un caz particular, care s-a dovedit mai simplu, și prin care am găsit soluția și pentru problema generală.
+-->
+
+---
+
+# Exemplu: problema N+1
 
 - problemă de performanță: primul lucru de verificat e N+1
 - presupunem: fără bibliotecă care o detectează, dar cu acces la jurnalul de SQL-uri
@@ -318,7 +357,7 @@ Am construit o altă problemă, care se rezolvă simplu. În care putem s-o stud
 
 ---
 
-# Exemplu 3: problema interogărilor care nu se termină
+# Exemplu: problema interogărilor care nu se termină
 
 - în anumite condiții interogarea din browser nu se termină, apare aleator
 - timeout-uri: presupunem că nu le avem
@@ -384,7 +423,7 @@ Aceste fragmente le pot apoi adapta și: înveți pandas, + obții un instrument
 - 3 exemple în care am folosit proprietățile fenomenului, nu am lăsat totul pe AI
 - rezultatul ar fi fost același: problema rezolvată
 - diferența: omul a înțeles mai mult decât înainte
-- exemplul 3 și următoarele combină proprietățile fenomenului cu AI
+- exemplul cu interogările care nu se termină și următoarele combină proprietățile fenomenului cu AI
 - ca la școală: fundamentele întâi, apoi combinarea lor
 - învățăm proprietăți ale fenomenului, capacități ale AI, capacități ale pandas, pentru fenomenele viitoare
 
@@ -392,13 +431,13 @@ Aceste fragmente le pot apoi adapta și: înveți pandas, + obții un instrument
 Vă dați seama care diferență în aceste 3 exemple în care am folosit proprietăți ale fenomenului studiat și n-am pus în totalitate în seama AI?
 Rezultatul ar fi același : problema rezolvată. Dar în primul caz ai și un om care a înțeles ceva mai mult decât înțelesese până la acel fenomen.
 
-Începem să intrăm în tărâmul AI. Avantajele exemplului 3 dar și al următoarelor care vor combina proprietățile fenomenului și AI.
+Începem să intrăm în tărâmul AI. Avantajele exemplului cu interogările care nu se termină dar și al următoarelor care vor combina proprietățile fenomenului și AI.
 La fel cum învățăm la școală și universitate fundamentele, ca apoi să le putem combina, așa și învățăm / descoperim proprietăți ale fenomenului, capacități ale AI, capacități ale pandas. Ca în viitor pentru alte fenomene să le combinăm și să abordăm orice problemă complexă.
 -->
 
 ---
 
-# Exemplul 4: API care întoarce un arbore
+# Exemplu: API care întoarce un arbore
 
 - API întoarce o structură arborescentă, prea mare: pică
 - AI (răspuns mediu): introduceți paginarea
@@ -411,7 +450,7 @@ AI artificială spune (răspuns AVG) că trebuie să introducem paginarea. Pagin
 
 ---
 
-# Exemplul 4: pașii
+# Exemplu: API care întoarce un arbore – pașii
 
 1. teste care folosesc API-ul și pică
 2. AI face ca API-ul să returneze eroare în toate locurile unde e folosit
@@ -434,7 +473,7 @@ AI artificială spune (răspuns AVG) că trebuie să introducem paginarea. Pagin
 
 ---
 
-În general exemplul 4 mi-a dat o idee interesantă de a investiga ceva cu AI și anume.
+În general exemplul cu arborele mi-a dat o idee interesantă de a investiga ceva cu AI și anume.
 În situația unei probleme dacă îmi explică, sau sugerează, sau orice care îmi dă mai multe opțiuni, eu prefer să lucrez dinamic cu AI și anume:
 Să-mi dea câte unul, și când l-am înțeles fie zic dă-mi următorul fie pun întrebări. De multe ori după întrebări, opțiunile următoare sunt recalculate.
 
@@ -453,12 +492,12 @@ Structura arborescentă e prea mare. Variante:
 - streaming în loc de un singur răspuns
 
 <!--
-Exemplul 4 evidențiază un aspect la care AI e foarte bună: enumerarea variantelor. Îi cer să facă exemple și umple lista cu elemente apropiate semantic: de la o singură idee (paginarea) obțin o familie întreagă de soluții înrudite. Eu aleg apoi ce are sens, de preferință pe rând: câte o variantă, o înțeleg, apoi cer următoarea.
+Exemplul cu arborele evidențiază un aspect la care AI e foarte bună: enumerarea variantelor. Îi cer să facă exemple și umple lista cu elemente apropiate semantic: de la o singură idee (paginarea) obțin o familie întreagă de soluții înrudite. Eu aleg apoi ce are sens, de preferință pe rând: câte o variantă, o înțeleg, apoi cer următoarea.
 -->
 
 ---
 
-# Exemplul 4: git worktree
+# Exemplu: API care întoarce un arbore – git worktree
 
 - problemă de performanță
 - opțiuni: modific ce există sau fac upgrade la o versiune nouă a librăriilor
@@ -475,7 +514,7 @@ git worktree și experimentăm. salvăm rezultatele. comparăm.
 
 ---
 
-# Exemplul 5: dashboard-uri Grafana
+# Exemplu: dashboard-uri Grafana
 
 - de monitorizat ceva în Grafana, câteva dashboard-uri noi
 - dashboard-urile sunt JSON
@@ -495,7 +534,7 @@ Am de monitorizat ceva în Grafana, trebuie să fac câteva dashboard-uri noi. E
 
 ---
 
-# Exemplu 7: comunicare mașină-mașină
+# Exemplu: comunicare mașină-mașină
 
 - teste care cer autentificare
 - script Playwright construit de AI
@@ -514,6 +553,8 @@ Am un playwright script , construit de AI ... dara acum totul merge determinist.
 - la fel pentru fenomene complexe: proprietățile fenomenului + AI
 - optim: și modelul, și AI
 - rezultat: cunoștințe și capacitatea de a aborda următoarele situații complexe
+
+<small>Imaginile din această prezentare fără sursă indicată (inclusiv cea de pe slide-ul de titlu) au fost generate cu ajutorul Claude Code.</small>
 
 <!--
 Așa cum am învățat să adunăm și am înțeles esența, dar și am învățat unele lucruri pe de rost ca tabela înmulțirii, ca mai apoi să le putem combina și să rezolvăm orice așa și în abordarea fenomenelor complexe trebuie folosite în combinație proprietățile fenomenului și AI.
