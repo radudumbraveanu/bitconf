@@ -45,6 +45,18 @@ style: |
     color: #fff;
   }
   section.motto p { font-size: 34px; color: #90cdf4; margin: 0; }
+  section.log { padding: 36px 80px; justify-content: flex-start; }
+  section.log h1 { font-size: 40px; margin-bottom: 0.4em; }
+  section.log pre {
+    font-family: 'IBM Plex Mono', 'DejaVu Sans Mono', monospace;
+    font-size: 19px; line-height: 1.45; margin: 0;
+    background: #fff; border: 1px solid #cdd5de; border-radius: 8px; padding: 14px 18px;
+  }
+  section.log pre span { display: block; padding: 0 6px; border-radius: 3px; white-space: pre; }
+  section.log .a { background: #fde68a; }
+  section.log .b { background: #bfdbfe; }
+  section.log .c { background: #bbf7d0; }
+  section.log small { font-size: 20px; color: #52606d; display: block; margin-top: 12px; }
   section.img {
     padding: 24px 40px;
     justify-content: flex-start;
@@ -341,21 +353,11 @@ Nu am delegat problema către AI. În loc de problema generală am luat un caz p
 
 # Exemplu: problema N+1
 
-- problemă de performanță: primul lucru de verificat e N+1
-- presupunem: fără bibliotecă care o detectează, dar cu acces la jurnalul de SQL-uri
-- foarte multe interogări, mai ales cu mulți utilizatori
-- clase de echivalență după numărul de repetări ale interogării: `[1]` excludem, `[2]`, `[3]`... ne interesează
-- am construit o altă problemă, care se rezolvă simplu și se studiază ușor
+- din experiența mea, la o problemă de performanță primul lucru de verificat: nu cumva e problema N+1?
 
 <!--
 Foarte des când avem problemă de performanță primul lucru ar trebui să verificăm, sunt probleme N+1.
-Sunt biblioteci care au funcția dată activată, dar să presupunem că nu folosim asemenea biblioteci. Să presupunem că avem acces la jurnalul de SQL-uri.
-Sunt foarte multe interogări, și mai ales dacă ai mai mulți utilizatori.
-Dar dacă definim clase de echivalență, în funcție de numărul de repetări ale unei interogări. [1] - le exclude, [2], [3] ... ne interesează.
-
-Am construit o altă problemă, care se rezolvă simplu. În care putem s-o studiem ușor.
 -->
-
 ---
 
 <!-- _class: img -->
@@ -368,6 +370,66 @@ Am construit o altă problemă, care se rezolvă simplu. În care putem s-o stud
 <!-- _class: img -->
 
 ![](img/n-plus-1-cost.svg)
+
+---
+
+# Exemplu: problema N+1 – metoda
+
+- presupunem: fără bibliotecă care o detectează, dar cu acces la jurnalul de SQL-uri
+- foarte multe interogări, mai ales cu mulți utilizatori
+- clase de echivalență după numărul de repetări ale interogării: `[1]` excludem, `[2]`, `[3]`... ne interesează
+- am construit o altă problemă, care se rezolvă simplu și se studiază ușor
+  - putem delega către AI să extragă clasele, sau să scrie un fragment de cod care le extrage
+
+<!--
+Sunt biblioteci care au funcția dată activată, dar să presupunem că nu folosim asemenea biblioteci. Să presupunem că avem acces la jurnalul de SQL-uri.
+Sunt foarte multe interogări, și mai ales dacă ai mai mulți utilizatori.
+Dar dacă definim clase de echivalență, în funcție de numărul de repetări ale unei interogări. [1] - le exclude, [2], [3] ... ne interesează.
+
+Am construit o altă problemă, care se rezolvă simplu. În care putem s-o studiem ușor.
+-->
+
+---
+
+<!-- _class: log -->
+
+# Cum arată în jurnalul de SQL
+
+<pre><span>10:15:01.101  SELECT id, user_id FROM orders WHERE user_id = ?</span>
+<span class="a">10:15:01.104  SELECT * FROM order_items WHERE order_id = ?</span>
+<span class="b">10:15:01.106  SELECT name, price FROM products WHERE id = ?</span>
+<span class="b">10:15:01.107  SELECT name, price FROM products WHERE id = ?</span>
+<span class="a">10:15:01.109  SELECT * FROM order_items WHERE order_id = ?</span>
+<span class="b">10:15:01.110  SELECT name, price FROM products WHERE id = ?</span>
+<span class="c">10:15:01.112  SELECT label FROM categories WHERE id = ?</span>
+<span class="a">10:15:01.113  SELECT * FROM order_items WHERE order_id = ?</span>
+<span class="b">10:15:01.115  SELECT name, price FROM products WHERE id = ?</span>
+<span class="c">10:15:01.116  SELECT label FROM categories WHERE id = ?</span>
+<span class="a">10:15:01.118  SELECT * FROM order_items WHERE order_id = ?</span>
+<span class="b">10:15:01.119  SELECT name, price FROM products WHERE id = ?</span>
+<span class="a">10:15:01.121  SELECT * FROM order_items WHERE order_id = ?</span>
+<span class="b">10:15:01.122  SELECT name, price FROM products WHERE id = ?</span>
+<span class="c">10:15:01.124  SELECT label FROM categories WHERE id = ?</span>
+<span class="a">10:15:01.125  SELECT * FROM order_items WHERE order_id = ?</span>
+<span>10:15:01.127  SELECT COUNT(*) FROM notifications WHERE user_id = ?</span></pre>
+
+<small>Date ilustrative. Același text = aceeași interogare (parametrul <code>?</code>, valorile nu apar în log). Culoare = aceeași interogare repetată.</small>
+
+<!--
+Jurnalul pare complicat, sunt multe interogări diferite. Dar dacă ne uităm atent, unele rânduri se repetă identic. Le-am evidențiat cu culori: aceeași culoare înseamnă aceeași interogare, repetată de multe ori. Doar primul și ultimul rând apar o singură dată.
+-->
+
+---
+
+# N+1: abstractizare, nu delegare
+
+- nu am delegat problema către AI
+- am folosit abstractizarea: rândurile identice formează o clasă
+- clase de echivalență după numărul de repetări ale interogării
+
+<!--
+Aici n-am delegat către AI. Am folosit abstractizarea: rândurile identice din jurnal le grupez în clase, după numărul de repetări.
+-->
 
 ---
 
