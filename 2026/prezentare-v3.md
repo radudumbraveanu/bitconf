@@ -45,6 +45,7 @@ style: |
     color: #fff;
   }
   section.motto p { font-size: 34px; color: #90cdf4; margin: 0; }
+  section.motto p.label { font-size: 22px; letter-spacing: 0.3em; text-transform: uppercase; color: #90cdf4; opacity: 0.8; margin-bottom: 1.4em; }
   section.log { padding: 36px 80px; justify-content: flex-start; }
   section.log h1 { font-size: 40px; margin-bottom: 0.4em; }
   section.log pre {
@@ -85,6 +86,8 @@ Bălți · BitConf 2026
 <!-- _class: motto -->
 <!-- _paginate: false -->
 
+<p class="label">Motto</p>
+
 > There has never been a more interesting time to think than in the age of AI.
 
 Niciodată nu a fost mai interesant să gândești decât în epoca inteligenței artificiale.
@@ -115,17 +118,17 @@ situația, fie pentru că sunt noi pentru mine și nu știu de unde să încep.
 
 # Cum abordăm complexitatea?
 
-- **A.** folosim proprietățile fenomenului, unde putem, fără AI
-- **B.** delegăm altcuiva: AI
+- **A.** înțelegem fenomenul din spatele problemei și folosim proprietățile lui, unde putem
+- **B.** ce rămâne, delegăm altcuiva: AI
 
 <!--
-Două abordări. A: folosesc proprietățile fenomenului acolo unde pot, fără AI. B: delegăm altcuiva, în cazul nostru AI.
+Două abordări, care se completează. A: folosesc proprietățile fenomenului acolo unde pot, fără AI. B: ce rămâne, delegăm altcuiva, în cazul nostru AI.
 Încep cu A, cu două exemple din experiența mea, apoi trec la B.
 -->
 
 ---
 
-# Cum rezolvăm o problemă? (Pólya)
+# A. Cum rezolvăm o problemă? (Pólya)
 
 <div class="cols">
 <div>
@@ -336,7 +339,7 @@ La fel cum învățăm la școală și universitate fundamentele, ca apoi să le
 
 ---
 
-# De la euristici la AI
+# De la A la B: de la euristici la AI
 
 - euristicile nu sunt exhaustive, iar unele probleme nu se rezolvă prin ele: ce rămâne, delegăm
 - dar euristicile ne ajută și aici: micșorează ce delegăm
@@ -436,7 +439,7 @@ print(last_seen.sort_values())
 
 ---
 
-# Wayfinder (Matt Pocock)
+# B. Wayfinder (Matt Pocock)
 
 - problemă nouă: nu știu de unde să încep (formulare neclară sau primii pași costisitori)
 - Wayfinder pune întrebări, construiește lanțul de pași, ține evidența
