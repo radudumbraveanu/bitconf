@@ -222,12 +222,18 @@ Fenomenul complex trebuie abordat astfel încât să poți ușor aborda orice al
 
 ---
 
-<!-- _class: img -->
-<small>Sursa: Reddit, r/ChatGPT · <a href="https://www.reddit.com/r/ChatGPT/comments/1kbj71z/i_tried_the_create_the_exact_replica_of_this/" target="_blank">deschide postarea</a></small>
+# Experiment: „copiază imaginea” de 101 ori
 
-<small>I tried the "Create the exact replica of this image, don't change a thing" 101 times, but with Dwayne Johnson</small>
+- postare pe Reddit (r/ChatGPT): aceeași poză cu Dwayne Johnson, recreată de ChatGPT de 101 ori, de fiecare dată pornind de la rezultatul anterior
+- cerința: „Create the exact replica of this image, don't change a thing”
+- primele variante seamănă cu originalul, apoi trăsăturile se deformează până la artă abstractă
 
-<video src="the_rock_mutating.mp4" controls loop style="height:580px;max-width:1180px;border-radius:8px;background:#000"></video>
+<small><a href="https://www.reddit.com/r/ChatGPT/comments/1kbj71z/i_tried_the_create_the_exact_replica_of_this/" target="_blank">Postarea originală (Reddit, u/Foreign_Builder_2238)</a> · publicații similare: <a href="https://www.techradar.com/computing/artificial-intelligence/viral-chatgpt-trend-gone-wrong-the-rock-is-turned-into-horrible-abstract-art-after-reddit-user-recreates-image-101-times" target="_blank">TechRadar</a>, <a href="https://knowyourmeme.com/memes/replicate-this-image-100-times" target="_blank">Know Your Meme</a>, <a href="https://dailydot.com/chatgpt-100x-ai-image-loop" target="_blank">Daily Dot</a>, <a href="https://www.kapwing.com/resources/how-to-do-the-100x-chatgpt-image-trend/" target="_blank">Kapwing</a></small>
+
+<!--
+Videoul nu e în prezentare, drepturile rămân la autorul postării de pe Reddit. Link-ul duce la postare.
+Ideea: modelul nu reproduce exact nici când i se cere explicit. Erorile mici se acumulează la fiecare pas, deci rezultatul nu e determinist și nu putem presupune că „nu schimbă nimic”.
+-->
 
 ---
 
