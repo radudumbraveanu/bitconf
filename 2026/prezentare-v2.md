@@ -463,7 +463,7 @@ Aici n-am delegat către AI. Am folosit abstractizarea: rândurile identice din 
 </div>
 </div>
 
-<small>George Pólya, *How to Solve It* (1945). Deadlock N=1 = specializare; N+1 = problemă auxiliară (clasele de echivalență); desenele și simularea = figura.</small>
+<small>George Pólya, [*How to Solve It*](https://en.wikipedia.org/wiki/How_to_Solve_It) (1945). Deadlock N=1 = specializare; N+1 = problemă auxiliară (clasele de echivalență); desenele și simularea = figura.</small>
 
 <!--
 Exemplele de până acum nu sunt întâmplătoare. Urmează un tipar vechi: George Pólya, How to Solve It, 1945.
