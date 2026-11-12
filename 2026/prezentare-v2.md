@@ -27,6 +27,24 @@ style: |
   section.title strong { color: #fff; font-size: 38px; }
   section.title em { color: #90cdf4; font-size: 30px; }
   section.title img { position: absolute; left: 50%; transform: translateX(-50%); bottom: -20px; height: 320px; }
+  section.motto {
+    justify-content: center;
+    text-align: center;
+    background: #1a365d;
+    color: #e2e8f0;
+    border-left: none;
+  }
+  section.motto blockquote {
+    border: none;
+    background: none;
+    margin: 0 0 1em;
+    padding: 0;
+    font-size: 54px;
+    line-height: 1.3;
+    font-style: italic;
+    color: #fff;
+  }
+  section.motto p { font-size: 34px; color: #90cdf4; margin: 0; }
   section.img {
     padding: 24px 40px;
     justify-content: flex-start;
@@ -46,6 +64,19 @@ style: |
 Bălți · BitConf 2026
 
 ![](img/factori.svg)
+
+---
+
+<!-- _class: motto -->
+<!-- _paginate: false -->
+
+> There has never been a more interesting time to think than in the age of AI.
+
+Niciodată nu a fost mai interesant să gândești decât în epoca inteligenței artificiale.
+
+<!--
+Variantă de traducere: Nu a existat niciodată un moment mai interesant pentru gândire decât cel pe care îl trăim acum, în plină revoluție AI.
+-->
 
 ---
 
@@ -74,6 +105,9 @@ situația.
 - AI execută pașii tehnici (librării, programe) în câteva minute
 - eu rulez, văd rezultatele, analizez
 - generalizare: **gradul de finețe în interacțiunea cu AI**
+  - înlocuiesc prezentarea tuturor opțiunilor cu prezentarea opțiune cu opțiune
+
+<small>Sursa: https://github.com/mattpocock/skills/tree/main/skills/engineering/wayfinder</small>
 
 <!--
 Primul exemplu: situațiile când suntem la început, și fie avem o formulare la care chiar dacă o citim de 10 ori nu știm de unde să începem și încotro să ne ducem, sau pașii inițiali necesită mult efort.
@@ -121,34 +155,6 @@ Generalizare: „Cere și explicația vizuală de la AI”.
 
 Sursa: https://towardsdatascience.com/how-to-5x-your-communication-effectiveness-with-claude-code/
 -->
-
----
-
-# Din practica mea: carduri cu noțiunile necunoscute
-
-- studiez ceva nou, apar noțiuni necunoscute
-- Claude generează carduri pentru ele
-- le pune în cloud, le am la îndemână
-- revin la ele când am nevoie
-
-<!--
-Din practica mea: când studiez ceva nou, obișnuiesc să generez carduri cu noțiunile necunoscute. Claude le face și le pune în cloud. Încă o formă de prezentare a rezultatelor, în ajutorul înțelegerii.
--->
-
-<!-- TODO: de adăugat un exemplu concret (captură de ecran a unui card) -->
-
----
-
-Despre fenomene care noi le numim complexe și despre probleme care țin de aceste fenomene.
-Probleme ce țin de fenomene complexe le voi numi probleme complexe.
-
-<!-- -- cred că aș putea băga exemplele și aici, am putea începe cu introducerea apoi exemplele, am putea începe cu exemple și introducerea s-o intercalăm -->
-
----
-
-Toată lumea vorbește acum despre faptul că problemele simple, de rutină, trebuie să le delegăm către AI.
-Dar dacă delegăm problemele simple, cine ne oprește să delegăm și cele complexe? sau altfel,
-dacă AI rezolvă bine problemele simple, de ce să nu delegăm și cele complexe? pentru că am observat că se descurcă foarte bine și cu cele complexe.
 
 ---
 
@@ -201,6 +207,15 @@ Fenomenul complex trebuie abordat astfel încât să poți ușor aborda orice al
 
 ---
 
+<!-- _class: img -->
+<small>Sursa: Reddit, r/ChatGPT · <a href="https://www.reddit.com/r/ChatGPT/comments/1kbj71z/i_tried_the_create_the_exact_replica_of_this/" target="_blank">deschide postarea</a></small>
+
+<small>I tried the "Create the exact replica of this image, don't change a thing" 101 times, but with Dwayne Johnson</small>
+
+<video src="the_rock_mutating.mp4" controls loop style="height:580px;max-width:1180px;border-radius:8px;background:#000"></video>
+
+---
+
 # Cum abordăm fenomenele complexe?
 
 - lume complexă: participă, în măsură diferită, și omul, și AI
@@ -217,18 +232,18 @@ Fenomenul complex trebuie abordat astfel încât să poți ușor aborda orice al
 
 ---
 
-# Al treilea jucător: modelul
+# Al treilea participant: modelul (fenomenul)
 
-- noi polarizăm: de o parte omul, de cealaltă AI
-- al treilea jucător: **modelul**
-- model mintal, model software, cadru științific, cunoștințe
-- la ele avem acces direct, nu ne trebuie AI
+- am observat o polarizare: de o parte omul, de cealaltă AI
+- al treilea participant: **modelul** (fenomenul)
+- model mental, model software, cadru științific, cunoștințe, ...
+- sunt la îndemână: le putem folosi direct, fără AI
 
 <!--
 Eu mi-am răspuns la această întrebare. Răspunsul e subiectiv dar e următorul:
 
-În realitatea actuală, noi tindem s-o polarizăm, într-o parte omul, în altă parte AI. Eu am să numesc al treilea jucător modelul.
-Modelul poate fi mintal, poate fi model software, poate fi cadrul științific, cunoștințele ... la care avem acces direct, nu ne trebuie AI.
+În realitatea actuală, am observat o polarizare: într-o parte omul, în altă parte AI. Eu am să numesc al treilea participant modelul (fenomenul).
+Modelul poate fi mental, poate fi model software, poate fi cadrul științific, cunoștințele ... la care avem acces direct, nu ne trebuie AI.
 -->
 
 ---
@@ -241,17 +256,16 @@ Modelul poate fi mintal, poate fi model software, poate fi cadrul științific, 
 
 # Regula mea
 
-- cine depune efort minim: fenomenul (modelul fenomenului) sau AI?
-- dacă ambii: nu folosim AI
-- întâi: e posibilă o abordare în care modelul fenomenului depune efort minim?
-- AI o folosim pentru că poate, dar mai există și alți actori care pot, ca modelul
+- întâi: poate modelul fenomenului „să rezolve” problema cu efort minim?
+- dacă pot amândoi (modelul fenomenului și AI), nu folosim AI
+- folosim AI pentru că poate, dar nu e singurul participant care poate: poate și modelul
 
 <!--
-Deci regula mea este:
-- cine depune efort minim fenomenul (modelul fenomenului) sau AI, dacă ambii atunci nu folosim AI
-- întâi trebuie să ne gândim, e posibilă oare așa o abordare în care fenomenul (modelul fenomenului) depune un efort minim?
+Regula mea este următoarea. Mă întreb cine poate rezolva problema cu efort minim: modelul fenomenului sau AI. Dacă pot amândoi, nu folosim AI.
 
-Noi folosim AI pentru că poate, dar mai există și alți actori care pot, ca de exemplu modelul.
+De aceea, întâi trebuie să ne gândim: e posibilă oare o abordare în care modelul fenomenului depune un efort minim?
+
+Noi folosim AI pentru că poate, dar mai există și alți participanți care pot, ca de exemplu modelul.
 -->
 
 ---
