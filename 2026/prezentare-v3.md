@@ -778,6 +778,23 @@ Dashboard-ul Grafana e doar un JSON. Pentru AI, un JSON e doar text pe care îl 
 
 ---
 
+# Exemplu: delegăm AI telemetria
+
+- rulăm testele (sau chiar procesul) și colectăm:
+  - **log-urile** aplicației
+  - **metrici Prometheus**
+  - **flamegraph** (unde își petrece programul timpul)
+- delegăm toate acestea către AI
+- o singură întrebare: **„Vezi ceva anormal în aceste date?”**
+- AI ne ajută să **convergem foarte repede** spre cauza problemei
+
+<!--
+După ce testele rulează automat, colectez ce produce procesul: log-uri, metrici Prometheus și un flamegraph. Flamegraph-ul e o vizualizare a profilării: fiecare bară e o funcție, lățimea ei arată cât din timp (sau din eșantioanele CPU) a petrecut programul în ea, iar înălțimea arată adâncimea apelurilor. Axa orizontală nu e timpul, e doar grupare; ce contează e lățimea.
+Le dau AI-ului pe toate și pun o singură întrebare, fără să-i spun ce să caute: „Vezi ceva anormal în aceste date?” AI ne ajută să convergem foarte repede spre cauza problemei.
+-->
+
+---
+
 # De ce nu delegăm totul către AI?
 
 - problemele simple, de rutină, le delegăm deja
@@ -892,6 +909,7 @@ Modelul poate fi mental, poate fi model software, poate fi un cadru științific
 
 - **primul pas**: poate modelul fenomenului să rezolve problema cu efort minim?
 - **dacă pot amândoi** (modelul fenomenului și AI), nu folosim AI
+  - proprietățile fenomenului fac ca acesta să **convergă singur spre starea dorită**, iar soluția iese în evidență
 - AI poate rezolva multe probleme, dar **nu e singurul participant** care poate: poate și modelul
 
 <!--
@@ -904,17 +922,39 @@ Noi folosim AI pentru că poate, dar mai există și alți participanți care po
 
 ---
 
-# Eratostene: Pământul măsurat cu un băț și o umbră
+<small>Imaginile din această prezentare fără sursă indicată (inclusiv cea de pe slide-ul de titlu) au fost generate cu ajutorul Claude Code.</small>
+
+---
+
+# În loc de concluzie: cum a măsurat Eratostene Pământul cu un simplu băț
 
 - **Eratostene din Cirene** (cca 276–194 î.Hr.), în jurul anului 240 î.Hr.
-- la solstițiul de vară, la amiază, în Syene soarele era la zenit: bățul nu avea umbră
-- în același moment, în Alexandria, umbra bățului arăta un unghi de ≈ 7,2°, adică 1/50 dintr-un cerc
-- distanța dintre orașe: ≈ 5000 de stadii
-- circumferința Pământului: ≈ 50 × 5000 = **250 000 de stadii**
+- la solstițiul de vară, la amiază, în Syene (azi Assuan, în Egipt) soarele era la zenit: bățul nu avea umbră
+- în același moment, în Alexandria, bățul făcea cu razele Soarelui un unghi de ≈ 7,2° (măsurat după umbră), adică 1/50 dintr-un cerc
+  - un cerc întreg are 360°, iar 360° : 7,2° = 50
+- razele Soarelui sunt **paralele**, deci același unghi apare și la centrul Pământului, între cele două orașe
 
 <!--
-Un exemplu clasic de problemă complexă rezolvată cu un model simplu: Eratostene a transformat problema globului într-o problemă de geometrie, cu un unghi și o proporție (euristicile „desenează o figură” și „problemă auxiliară”). Fără calculator și fără AI, doar cu înțelegerea fenomenului: razele Soarelui sunt paralele, iar Pământul e rotund.
-Mărimea exactă a stadiului folosit e disputată, deci cât de aproape de valoarea reală a ieșit rezultatul depinde de ea.
+Un exemplu clasic de problemă complexă rezolvată cu un model simplu: Eratostene a transformat problema globului într-o problemă de geometrie, cu un unghi și o proporție (euristicile „desenează o figură” și „problemă auxiliară”). Fără calculator și fără AI, doar cu înțelegerea fenomenului: razele Soarelui sunt paralele, iar Pământul e rotund. Unghiul de 7,2° e cel dintre băț și raza de soare; fiindcă razele sunt paralele, același unghi apare la centrul Pământului, între cele două orașe.
+-->
+
+---
+
+<!-- _class: img -->
+
+![](img/eratostene-felii.svg)
+
+---
+
+# În loc de concluzie: Eratostene, stadii și circumferința
+
+- **stadiu** = unitate de lungime din Grecia antică, după lungimea pistei de alergare dintr-un stadion
+  - stadiul egiptean ≈ 157,5 m, cel atic ≈ 185 m: nu se știe sigur care a fost folosit
+- distanța dintre orașe: ≈ 5000 de stadii (≈ 800–925 km)
+- circumferința Pământului: ≈ 50 × 5000 = **250 000 de stadii** (≈ 39 000–46 000 km; valoarea reală: ≈ 40 075 km)
+
+<!--
+Stadiul e o unitate de lungime din antichitate, de la pista de alergare dintr-un stadion. Mărimea exactă a stadiului folosit e disputată, deci cât de aproape de valoarea reală a ieșit rezultatul depinde de ea.
 -->
 
 ---
@@ -925,4 +965,8 @@ Mărimea exactă a stadiului folosit e disputată, deci cât de aproape de valoa
 
 ---
 
-<small>Imaginile din această prezentare fără sursă indicată (inclusiv cea de pe slide-ul de titlu) au fost generate cu ajutorul Claude Code.</small>
+# Câți tokeni a cheltuit Eratostene din Cirene?
+
+<!--
+Întrebare-glumă, ca să încheiem cu zâmbetul pe buze: Eratostene a măsurat Pământul fără AI, deci fără niciun token.
+-->

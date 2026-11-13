@@ -37,8 +37,11 @@
 <!-- Unghiuri egale -->
 <path d="M460 300 A60 60 0 0 0 452.98 271.83" fill="none" stroke="#c53030" stroke-width="3"/>
 <text x="468" y="288" font-size="22" font-weight="700" fill="#c53030">α</text>
-<path d="M589.6 178 A40 40 0 0 0 594.3 196.8" fill="none" stroke="#c53030" stroke-width="3"/>
-<text x="562" y="198" font-size="22" font-weight="700" fill="#c53030" text-anchor="end">α</text>
+<path d="M629.6 178 H558.5" stroke="#dd6b20" stroke-width="3" stroke-dasharray="6 4"/>
+<path d="M629.6 178 L591.6 178 A38 38 0 0 0 596 195.8 Z" fill="#fed7d7" stroke="#c53030" stroke-width="2"/>
+<path d="M688 150 L601 184" stroke="#c53030" stroke-width="1.5"/>
+<text x="692" y="148" font-size="18" font-weight="700" fill="#c53030">α = unghiul dintre băț și raza de soare</text>
+<text x="420" y="332" font-size="16" fill="#c53030">același unghi α</text>
 
 <!-- Distanța dintre orașe -->
 <path d="M615 300 A215 215 0 0 0 589.8 199.2" fill="none" stroke="#2b6cb0" stroke-width="3"/>
@@ -46,5 +49,5 @@
 
 <rect x="40" y="530" width="1020" height="70" rx="10" fill="#fff5f5" stroke="#c53030" stroke-width="2"/>
 <text x="64" y="562" font-size="22" fill="#9b2c2c" font-weight="700">α ≈ 7,2° = 1/50 dintr-un cerc, deci circumferința ≈ 50 × 5000 = 250 000 stadii</text>
-<text x="64" y="587" font-size="18" fill="#742a2a">unghiul umbrei din Alexandria este egal cu unghiul dintre cele două orașe, văzut din centrul Pământului</text>
+<text x="64" y="587" font-size="18" fill="#742a2a">unghiul dintre băț și raza de soare (în Alexandria) este egal cu unghiul dintre cele două orașe, văzut din centrul Pământului</text>
 </svg>
