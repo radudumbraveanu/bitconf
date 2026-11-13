@@ -387,7 +387,7 @@ Rezultatul ar fi același: problema rezolvată. Dar în cazul nostru ai și o pe
 - dar euristicile ne ajută și aici: micșorează ce delegăm
 - specializarea dă un caz care se reproduce, problema auxiliară dă o sarcină îngustă, bine definită
 - AI primește ceva mic și verificabil (un fragment de cod), nu problema întreagă
-- exemplu: cererea fără răspuns: problema auxiliară (clase de echivalență) + AI scrie codul
+- exemplu, cererea fără răspuns: problema auxiliară (clase de echivalență) + AI scrie codul
 
 <!--
 Cele două metode nu sunt exhaustive, sunt doar două exemple. Cum ajungem la AI? Ce nu putem rezolva noi, sau ce nu merită efortul, delegăm.
@@ -446,13 +446,13 @@ Fragment de CSV: id-ul firului (thread), timestamp, mesaj. Firul exec-7 a încep
 # Cerere fără răspuns: aceeași metodă, clase de echivalență
 
 - clase de echivalență după repetarea `http-nio-8080-exec-N`
-- firele care n-au răspuns sunt blocate și nu pot fi refolosite: repetările lor sunt mai puține
+- firele care n-au răspuns sunt blocate și nu pot fi reutilizate: repetările lor sunt mai puține
 - datele sunt în format CSV, iar pentru el există un instrument potrivit: [pandas](https://pandas.pydata.org/) (bibliotecă Python pentru analiza datelor tabelare)
 - îi cer AI-ului codul pandas, nu analiza în sine
 - adaptez codul (dacă e cazul) și obțin un instrument determinist
 
 <!--
-Se poate aplica metoda de mai sus. Clase de echivalență: repetarea http-nio-8080-exec-N, teoretic, cele care n-au răspuns sunt blocate și nu pot fi refolosite, deci repetările trebuie să fie mai mici.
+Se poate aplica metoda de mai sus. Clase de echivalență: repetarea http-nio-8080-exec-N, teoretic, cele care n-au răspuns sunt blocate și nu pot fi reutilizate, deci repetările trebuie să fie mai mici.
 
 Eu când văd CSV mă gândesc la pandas: „Am o listă de înregistrări într-un CSV, cu coloane id (id-ul firului de execuție), timestamp și message (mesajul). Dă-mi un cod pandas care afișează fiecare id cu ultimul timestamp văzut într-un anumit interval de timp.”
 Acest fragment îl pot apoi adapta și obțin un instrument determinist.
@@ -586,7 +586,7 @@ AI e foarte bună la enumerare: întrebări la care nu m-am gândit, riscuri, va
 
 ---
 
-# Exemplu: schimbăm modul de prezentare, cere și explicația vizuală de la AI
+# Exemplu: schimbăm modul de prezentare, cerem și explicația vizuală de la AI
 
 Problema nouă, pasul următor: înțeleg rezultatul repede.
 
@@ -668,7 +668,7 @@ Observație: AI a construit instrumentul de măsură, dar măsurătoarea e deter
 
 # Exemplu: API care întoarce un arbore prea mare
 
-- API întoarce o structură arborescentă, prea mare: programul pică
+- API-ul întoarce o structură arborescentă, prea mare: programul pică
 - soluția propusă de AI (răspuns mediu): introduceți paginarea
 - se poate, dar răspunsul nu mă aranjează și nu mă grăbesc să-l aplic
   * paginarea pe arbore e mai complexă decât pe o structură liniară
@@ -893,7 +893,7 @@ Ideea: AI e non-deterministă și dă ceva nou de fiecare dată, chiar și când
 <!--
 Eu mi-am răspuns la această întrebare. Răspunsul e subiectiv, dar este următorul:
 
-În realitatea actuală, am observat o polarizare: într-o parte omul, în altă parte AI. Eu am să numesc al treilea participant modelul (fenomenul).
+În realitatea actuală, am observat o polarizare: într-o parte omul, în cealaltă AI. Eu am să numesc al treilea participant modelul (fenomenul).
 Modelul poate fi mental, poate fi model software, poate fi un cadru științific, cunoștințe ... la care avem acces direct, fără AI.
 -->
 
