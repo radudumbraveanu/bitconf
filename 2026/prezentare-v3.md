@@ -102,7 +102,7 @@ Variantă de traducere: Nu a existat niciodată un moment mai interesant pentru 
 
 - sisteme / fenomene / probleme cu mulți factori interconectați
 - granițe neclare între factori
-- combinații greu de prevazut exhaustiv
+- combinații greu de prevăzut exhaustiv
 - și situații care doar par complexe: sunt noi pentru mine sau formulate neclar
 
 <!-- 
@@ -198,7 +198,7 @@ Un exemplu din experiența mea: în anumite momente apărea eroarea că nu mai s
 - puțini utilizatori: ușor de depanat, dar greu de reprodus
 
 <!--
-Este destul de complicat de depanat sistemul când avem mulți utilizatori, dar în cazul când ai un număr mic de utilizatori, e ușor de depanat, dar e mai greu de reprodus.
+Este destul de complicat de depanat sistemul când avem mulți utilizatori, dar în cazul în care ai un număr mic de utilizatori, e ușor de depanat, însă mai greu de reprodus.
 -->
 
 ---
@@ -219,7 +219,7 @@ Este destul de complicat de depanat sistemul când avem mulți utilizatori, dar 
   - astfel se vede mai clar cauza: cine cere multă memorie sau cine ocupă prea multă memorie
 
 <!--
-La N=1 fenomenul însăși converge către starea dorită, se reproduce problema și e ușor de studiat.
+La N=1 fenomenul însuși converge către starea dorită, se reproduce problema și e ușor de studiat.
 
 Alt exemplu OOM: uneori un sistem afișează mesajul OutOfMemory. Soluție: dacă micșorăm memoria totală, vom reproduce eroarea mult mai repede și se va vedea mai clar cauza: cine cere multă memorie sau cine ocupă prea multă memorie.
 -->
@@ -244,7 +244,7 @@ Nu am delegat problema către AI. În loc de problema generală am luat un caz p
 - din experiența mea, la o problemă de performanță primul lucru de verificat: nu cumva e problema N+1?
 
 <!--
-Foarte des când avem problemă de performanță primul lucru ar trebui să verificăm, sunt probleme N+1.
+Foarte des, când avem o problemă de performanță, primul lucru pe care ar trebui să-l verificăm este dacă nu cumva e problema N+1.
 -->
 
 ---
@@ -268,8 +268,8 @@ Foarte des când avem problemă de performanță primul lucru ar trebui să veri
 - foarte multe interogări, mai ales cu mulți utilizatori
 
 <!--
-Sunt biblioteci care au funcția dată activată, dar să presupunem că nu folosim asemenea biblioteci. Să presupunem că avem acces la jurnalul de SQL-uri.
-Sunt foarte multe interogări, și mai ales dacă ai mai mulți utilizatori.
+Sunt biblioteci care au această funcție activată, dar să presupunem că nu folosim asemenea biblioteci. Să presupunem că avem acces la jurnalul de SQL-uri.
+Sunt foarte multe interogări, mai ales dacă ai mulți utilizatori.
 -->
 
 ---
@@ -311,9 +311,9 @@ Jurnalul pare complicat, sunt multe interogări diferite.
   - putem delega către AI să extragă clasele, sau să scrie un fragment de cod care le extrage
 
 <!--
-Dar dacă definim clase de echivalență, în funcție de numărul de repetări ale unei interogări. [1] - le exclude, [2], [3] ... ne interesează.
+Dar dacă definim clase de echivalență în funcție de numărul de repetări ale unei interogări: [1] excludem, [2], [3] ... ne interesează.
 
-Am construit o altă problemă, care se rezolvă simplu. În care putem s-o studiem ușor.
+Am construit o altă problemă, care se rezolvă simplu și pe care o putem studia ușor.
 -->
 
 ---
@@ -385,7 +385,7 @@ Rezultatul ar fi același: problema rezolvată. Dar în cazul nostru ai și o pe
 - exemplu: cererea fără răspuns: problema auxiliară (clase de echivalență) + AI scrie codul
 
 <!--
-Cele două metode nu sunt exhaustive, sunt doar două exemple. Cum ajungem la AI? Prin ce nu putem rezolva noi, sau ce nu merită efortul: delegăm.
+Cele două metode nu sunt exhaustive, sunt doar două exemple. Cum ajungem la AI? Ce nu putem rezolva noi, sau ce nu merită efortul, delegăm.
 Dar și aici euristicile ajută: nu dau AI-ului problema întreagă. Specializarea îmi dă un caz care se reproduce. Problema auxiliară îmi dă o sarcină îngustă, bine definită, de exemplu „extrage clasele” sau „scrie un fragment de cod”. Ce deleg e mic și îl pot verifica.
 Exemplul următor combină cele două lumi.
 -->
@@ -401,7 +401,7 @@ Exemplul următor combină cele două lumi.
 <!--
 Problema în care în anumite condiții cererea din browser rămâne fără răspuns. Apare aleator.
 Prima soluție: punem timeout-uri la cereri. Presupunem că nu le avem și nu le putem seta.
-Dar avem log-ul aplicației în CSV pentru o anumită perioadă de timp. Dar nu știm timpul (timpii) când eroarea a fost reprodusă.
+Avem log-ul aplicației în CSV pentru o anumită perioadă de timp, dar nu știm când a fost reprodusă eroarea.
 Fragment de CSV.
 -->
 
@@ -447,9 +447,9 @@ Fragment de CSV: id-ul firului (thread), timestamp, mesaj. Firul exec-7 a încep
 - adaptez codul (dacă e cazul) și obțin un instrument determinist
 
 <!--
-Se poate aplica metoda de mai sus. Clase de echivalență: repetarea http-nio-8080-exec-N, teoretic cele care n-au răspuns, sunt blocate și nu pot fi refolosite, deci repetările trebuie să fie mai mici.
+Se poate aplica metoda de mai sus. Clase de echivalență: repetarea http-nio-8080-exec-N, teoretic, cele care n-au răspuns sunt blocate și nu pot fi refolosite, deci repetările trebuie să fie mai mici.
 
-Eu când văd CSV mă gândesc la pandas. "dacă am o listă de înregistrări într-un CSV cu coloane id (id-ul firului de execuție), timestamp și message (mesajul). Dă-mi un cod pandas care afișează fiecare id cu ultimul timestamp văzut într-un anumit interval de timp"
+Eu când văd CSV mă gândesc la pandas: „Am o listă de înregistrări într-un CSV, cu coloane id (id-ul firului de execuție), timestamp și message (mesajul). Dă-mi un cod pandas care afișează fiecare id cu ultimul timestamp văzut într-un anumit interval de timp.”
 Acest fragment îl pot apoi adapta și obțin un instrument determinist.
 -->
 
@@ -509,9 +509,9 @@ Codul afișează fiecare fir cu ultimul timestamp văzut, sortat crescător. Pe 
 <small>Sursa: https://github.com/mattpocock/skills/tree/main/skills/engineering/wayfinder</small>
 
 <!--
-A doua abordare, delegăm AI. Prima situație: când suntem la început, și fie avem o formulare la care chiar dacă o citim de 10 ori nu știm de unde să începem și încotro să ne ducem, sau pașii inițiali necesită mult efort.
+A doua abordare: delegăm către AI. Prima situație: când suntem la început și fie avem o formulare pe care, chiar dacă o citim de 10 ori, nu știm de unde s-o începem și încotro să ne ducem, fie pașii inițiali necesită mult efort.
 
-În așa situație am o experiență foarte bună cu un instrument public, Wayfinder, de Matt Pocock. Instrumentul pune întrebări, pe baza răspunsurilor definește un lanț de pași și memorează care pas l-ai executat și care mai ai. Îl utilizez și când citesc un articol tehnic cu fragmente de cod de executat, sau care discută algoritmi: cu Wayfinder îmi definesc pașii care îmi trebuie; pașii care presupun instalare de librării și scriere de programe sunt executați de AI în câteva minute, iar eu pot rula programele, vedea rezultatele și analiza. Astfel pot analiza și scoate concluziile dintr-un articol complicat foarte repede.
+Într-o astfel de situație am o experiență foarte bună cu un instrument public, Wayfinder, de Matt Pocock. Instrumentul pune întrebări, pe baza răspunsurilor definește un lanț de pași și memorează ce pași ai executat și care au mai rămas. Îl utilizez și când citesc un articol tehnic cu fragmente de cod de executat, sau care discută algoritmi: cu Wayfinder îmi definesc pașii care îmi trebuie; pașii care presupun instalare de librării și scriere de programe sunt executați de AI în câteva minute, iar eu pot rula programele, vedea rezultatele și analiza. Astfel pot analiza și scoate concluziile dintr-un articol complicat foarte repede.
 
 Metoda se poate generaliza în „gradul de finețe în interacțiunea cu AI”; ambele cuvinte sunt importante: „finețe” (cât de fină vs grosieră) și „interacțiune”.
 -->
@@ -569,7 +569,7 @@ Sursa: https://towardsdatascience.com/how-to-5x-your-communication-effectiveness
 
 <!--
 Într-un sistem un API întoarce o structură arborescentă. Structura e prea mare, și programul pică.
-AI artificială spune (răspuns AVG) că trebuie să introducem paginarea. Se poate, dar răspunsul nu mă aranjează și nu mă grăbesc să-l aplic: paginarea pe o structură arborescentă e o modificare mai complexă decât pe o structură liniară.
+AI-ul spune (răspuns mediu) că trebuie să introducem paginarea. Se poate, dar răspunsul nu mă aranjează și nu mă grăbesc să-l aplic: paginarea pe o structură arborescentă e o modificare mai complexă decât pe o structură liniară.
 -->
 
 ---
@@ -592,10 +592,10 @@ AI artificială spune (răspuns AVG) că trebuie să introducem paginarea. Se po
    - eu verific dacă testele pică în aceleași condiții
 
 <!--
-1. am construit câteva teste care folseau acel API și picau.
+1. am construit câteva teste care foloseau acel API și picau.
 2. am rugat AI să comenteze/returneze eroare de la acest API în toate locurile unde e folosit.
-3. m-am gândit la câteva soluții și am rugat AI să genereze fiecare soluție, adică să schimbe codul apoi să ruleze testele și analizez dacă pică sau nu și pică în aceleași condiții sau nu.
-4. am studiat fiecare loc în parte și am descoperit că unele locuri acest API ar fi putut fi înlocuit cu un API de căutare care deja există, iar în alte locuri era nevoie doar de descendenții de primul nivel, adică copiii nu de întreaga structură arborescentă.
+3. m-am gândit la câteva soluții și am rugat AI să genereze fiecare soluție, adică să schimbe codul și apoi să ruleze testele, iar eu analizez dacă pică sau nu și dacă pică în aceleași condiții sau nu.
+4. am studiat fiecare loc în parte și am descoperit că în unele locuri acest API ar fi putut fi înlocuit cu un API de căutare care există deja, iar în alte locuri era nevoie doar de descendenții de primul nivel, adică de copii, nu de întreaga structură arborescentă.
 -->
 
 ---
@@ -613,7 +613,7 @@ Structura arborescentă e prea mare. Variante:
 - streaming în loc de un singur răspuns
 
 <!--
-Exemplul cu arborele evidențiază un aspect la care AI e foarte bună: enumerarea variantelor. Îi cer să facă exemple și umple lista cu elemente apropiate semantic: de la o singură idee (paginarea) obțin o familie întreagă de soluții înrudite. Eu aleg apoi ce are sens, de preferință pe rând: câte o variantă, o înțeleg, apoi cer următoarea.
+Exemplul cu arborele evidențiază un aspect la care AI e foarte bună: enumerarea variantelor. Îi cer să facă exemple, iar AI umple lista cu elemente apropiate semantic: de la o singură idee (paginarea) obțin o familie întreagă de soluții înrudite. Eu aleg apoi ce are sens, de preferință pe rând: câte o variantă, o înțeleg, apoi cer următoarea.
 -->
 
 ---
@@ -628,7 +628,7 @@ Exemplul cu arborele evidențiază un aspect la care AI e foarte bună: enumerar
 <!--
 Am o problemă de performanță. Presupun că pot s-o rezolv modificând ceva existent sau făcând upgrade la o nouă versiune a librăriilor.
 Ce să aleg? Cum să măsor?
-git worktree și experimentăm. salvăm rezultatele. comparăm.
+Cu git worktree experimentăm, salvăm rezultatele și comparăm.
 -->
 
 <!-- TODO desen: nu am găsit o diagramă bună pentru git worktree -->
@@ -663,7 +663,7 @@ Observație: AI a construit instrumentul de măsură, dar măsurătoarea e deter
 
 <!--
 Am de monitorizat ceva în Grafana, trebuie să fac câteva dashboard-uri noi. E timp.
-Știu dashboard-urile sunt în JSON, rog AI să-mi genereze dashboardurile JSON eu le import.
+Știu că dashboard-urile sunt în JSON, îi cer AI să-mi genereze dashboard-urile JSON, iar eu le import.
 -->
 
 ---
@@ -716,11 +716,11 @@ Din toate exemplele prezentate se poate trage concluzia că abordarea mea este s
 - noi decidem: ne trebuie modelul sau nu? (raportul timp:rezultat cu AI e foarte bun)
 
 <!--
-Concluzia mea e simplă, pentru a înțelege un fenomen îți trebuie un model mental al acestui fenomen.
-Delegând sarcinile simple către AI, pentru care avem deja modele mentale formate nu pierdem nimic.
+Concluzia mea e simplă: pentru a înțelege un fenomen îți trebuie un model mental al acestui fenomen.
+Delegând sarcinile simple către AI, pentru care avem deja modele mentale formate, nu pierdem nimic.
 Delegând însă sarcinile complexe către AI pierdem șansa să ne formăm modelul mental.
 Însă formarea modelului mental necesită timp.
-Deja noi trebuie să decidem, ne trebuie oare acest model mental sau nu, pentru că raportul timp:rezultat atunci când folosești AI e foarte bun.
+Noi trebuie să decidem dacă ne trebuie acest model mental sau nu, pentru că raportul timp:rezultat atunci când folosești AI e foarte bun.
 -->
 
 ---
@@ -734,11 +734,11 @@ Deja noi trebuie să decidem, ne trebuie oare acest model mental sau nu, pentru 
 - ambele cer mai mult decât un model superficial al fenomenului
 
 <!--
-Fenomenul complex trebuie abordat astfel încât să poți ușor aborda orice alte fenomene complexe din aceeași familie.
+Fenomenul complex trebuie abordat astfel încât să poți aborda ușor orice alte fenomene complexe din aceeași familie.
 
-Însă concentrându-mă pe raportul timp:rezultat nu întotdeauna suficient. Mai apare și dimensiunea calității rezultatului:
-1. rezultatul poate să nu fie optim (sau poate să facă multe iterații), și atunci cel mai des îți trebuie să schimbi felul în care abordează AI problema, dar pentru acesta un model superficial al fenomenului nu e suficient
-2. rezultatul poate să nu fie corect din cauza naturii non-deterministe a AI și pentru acesta îți trebuie subrezultate deterministe, la care iarăși nu ajungi cu modele superficiale ale fenomenului.
+Însă raportul timp:rezultat nu e întotdeauna suficient. Mai apare și dimensiunea calității rezultatului:
+1. rezultatul poate să nu fie optim (sau poate să facă multe iterații), și atunci cel mai des trebuie să schimbi felul în care abordează AI problema, dar pentru asta un model superficial al fenomenului nu e suficient
+2. rezultatul poate să nu fie corect din cauza naturii non-deterministe a AI și pentru asta îți trebuie subrezultate deterministe, la care iarăși nu ajungi cu modele superficiale ale fenomenului.
 -->
 
 ---
@@ -786,10 +786,10 @@ Ideea: AI e non-deterministă și dă ceva nou de fiecare dată, chiar și când
 - **la îndemână**: le putem folosi direct, fără AI
 
 <!--
-Eu mi-am răspuns la această întrebare. Răspunsul e subiectiv dar e următorul:
+Eu mi-am răspuns la această întrebare. Răspunsul e subiectiv, dar este următorul:
 
 În realitatea actuală, am observat o polarizare: într-o parte omul, în altă parte AI. Eu am să numesc al treilea participant modelul (fenomenul).
-Modelul poate fi mental, poate fi model software, poate fi cadrul științific, cunoștințele ... la care avem acces direct, nu ne trebuie AI.
+Modelul poate fi mental, poate fi model software, poate fi un cadru științific, cunoștințe ... la care avem acces direct, fără AI.
 -->
 
 ---
