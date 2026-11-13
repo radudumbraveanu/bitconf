@@ -497,7 +497,7 @@ Codul afișează fiecare fir cu ultimul timestamp văzut, sortat crescător. Pe 
 
 ---
 
-# B. Wayfinder (Matt Pocock)
+# B. Exemplu: skillul /wayfinder pentru situații necunoscute
 
 - problemă nouă: nu știu de unde să încep (formulare neclară sau primii pași costisitori)
 - Wayfinder pune întrebări, construiește lanțul de pași, ține evidența
@@ -520,7 +520,7 @@ Metoda se poate generaliza în „gradul de finețe în interacțiunea cu AI”;
 
 ---
 
-# AI e foarte bună la enumerare
+# Situații necunoscute: AI e foarte bună la enumerare
 
 Problema nouă, pasul următor: ce opțiuni am?
 
@@ -538,21 +538,20 @@ AI e foarte bună la enumerare: întrebări la care nu m-am gândit, riscuri, va
 
 ---
 
-# Cere și explicația vizuală de la AI
+# Exemplu: schimbăm modul de prezentare, cere și explicația vizuală de la AI
 
 Problema nouă, pasul următor: înțeleg rezultatul repede.
 
-- articol: „How to 5x your communication effectiveness with Claude Code” (Towards Data Science)
+- articol: [„How to 5x your communication effectiveness with Claude Code”](https://towardsdatascience.com/how-to-5x-your-communication-effectiveness-with-claude-code/) (Towards Data Science)
 - agentul scrie rezultatele netriviale ca fișier HTML, deschis în browser, nu ca text în terminal
 - instrucțiunea se pune o dată, în fișierul MD la nivel de utilizator
 - skill-uri pentru sarcini concrete (ex. raport de teste)
-- Archify pentru diagrame
 - concluziile apar la final, rezultatul e prezentat vizual
 
 <!--
 Exemplul precedent arăta că deseori e binevenit să începem abordarea complexității cu AI. Aici vorbesc despre etapele intermediare, sau chiar etapa finală, și mai ales despre prezentarea rezultatelor.
 
-Am întâlnit un articol foarte interesant exact în momentul când obosisem să citesc răspunsurile de la AI. Metoda din articol (agentul scrie rezultatul netrivial ca fișier HTML, deschis în browser, în loc de text în terminal) accelerează înțelegerea: pune concluziile la final și prezintă rezultatul vizual. Instrucțiunea merge o singură dată într-un fișier MD la nivel de utilizator; pentru sarcini concrete (ex. raport de teste) se folosesc skill-uri, iar pentru diagrame Archify.
+Am întâlnit un articol foarte interesant exact în momentul când obosisem să citesc răspunsurile de la AI. Metoda din articol (agentul scrie rezultatul netrivial ca fișier HTML, deschis în browser, în loc de text în terminal) accelerează înțelegerea: pune concluziile la final și prezintă rezultatul vizual. Instrucțiunea merge o singură dată într-un fișier MD la nivel de utilizator; pentru sarcini concrete (ex. raport de teste) se folosesc skill-uri.
 
 Generalizare: „Cere și explicația vizuală de la AI”.
 
@@ -561,15 +560,16 @@ Sursa: https://towardsdatascience.com/how-to-5x-your-communication-effectiveness
 
 ---
 
-# Exemplu: API care întoarce un arbore
+# Exemplu: API care întoarce un arbore prea mare
 
-- API întoarce o structură arborescentă, prea mare: pică
-- AI (răspuns mediu): introduceți paginarea
-- paginarea pe arbore e mai complexă decât pe o structură liniară
+- API întoarce o structură arborescentă, prea mare: programul pică
+- soluția propusă de AI (răspuns mediu): introduceți paginarea
+- se poate, dar răspunsul nu mă aranjează și nu mă grăbesc să-l aplic
+  * paginarea pe arbore e mai complexă decât pe o structură liniară
 
 <!--
-Într-un sistem un API întoarce o structură arborescentă. Structura e prea mare, și pică.
-AI artificială spune (răspuns AVG) că trebuie să introducem paginarea. Paginarea pe o structură arborescentă nu e modificare mai complexă dacă ai introduce pe structură liniară.
+Într-un sistem un API întoarce o structură arborescentă. Structura e prea mare, și programul pică.
+AI artificială spune (răspuns AVG) că trebuie să introducem paginarea. Se poate, dar răspunsul nu mă aranjează și nu mă grăbesc să-l aplic: paginarea pe o structură arborescentă e o modificare mai complexă decât pe o structură liniară.
 -->
 
 ---
@@ -581,12 +581,15 @@ AI artificială spune (răspuns AVG) că trebuie să introducem paginarea. Pagin
 
 ---
 
-# Exemplu: API care întoarce un arbore – pașii
+# Arbore prea mare: delegăm AI generarea soluțiilor posibile și verificarea
 
-1. teste care folosesc API-ul și pică
-2. AI face ca API-ul să returneze eroare în toate locurile unde e folosit
-3. pentru fiecare soluție: AI schimbă codul, rulează testele, eu analizez dacă pică și în aceleași condiții
-4. studiez fiecare loc: uneori există deja un API de căutare, alteori ajung doar copiii de primul nivel, nu tot arborele
+- **construiesc teste** care folosesc API-ul și pică
+- **AI marchează toate locurile** unde e folosit API-ul, făcându-l să returneze eroare
+- **studiez fiecare loc** în parte
+   - uneori există deja un API de căutare
+   - alteori sunt de ajuns copiii de primul nivel, nu tot arborele
+- **AI încearcă fiecare soluție**: schimbă codul și rulează testele
+   - eu verific dacă testele pică în aceleași condiții
 
 <!--
 1. am construit câteva teste care folseau acel API și picau.
@@ -597,7 +600,7 @@ AI artificială spune (răspuns AVG) că trebuie să introducem paginarea. Pagin
 
 ---
 
-# Enumerarea variantelor: AI umple lista
+# Arbore prea mare: enumerarea variantelor, AI umple lista
 
 Structura arborescentă e prea mare. Variante:
 
@@ -615,7 +618,7 @@ Exemplul cu arborele evidențiază un aspect la care AI e foarte bună: enumerar
 
 ---
 
-# Exemplu: API care întoarce un arbore – git worktree
+# Exemplu: analiza unei probleme de performanță – git worktree
 
 - problemă de performanță
 - opțiuni: modific ce există sau fac upgrade la o versiune nouă a librăriilor
@@ -632,13 +635,14 @@ git worktree și experimentăm. salvăm rezultatele. comparăm.
 
 ---
 
-# Exemplu: upgrade cu probleme
+# Exemplu: modificarea consumului de memorie după upgrade
 
 - după upgrade, aplicația consumă mai multă memorie
-- AI generează un benchmark: pentru un endpoint de API măsoară și salvează numărul de bytes alocați
-- git worktree: rulez același benchmark pe ramura curentă și pe un commit dinainte de upgrade
-- numerele diferă: acum am o referință
-- îi dau AI numerele și îi cer să găsească cauza: a găsit exact biblioteca care, după upgrade, a început să se comporte așa
+- **AI generează un benchmark** care, pentru un endpoint de API, măsoară și salvează numărul de bytes alocați
+- **git worktree**: același benchmark rulează pe ramura curentă și pe un commit dinainte de upgrade
+- numerele diferă, deci avem o referință măsurabilă
+- **AI primește numerele** și caută cauza
+  - a găsit exact biblioteca care, după upgrade, a început să consume mai multă memorie
 
 <!--
 După upgrade am văzut că se consumă mai multă memorie.
@@ -650,11 +654,12 @@ Observație: AI a construit instrumentul de măsură, dar măsurătoarea e deter
 
 ---
 
-# Exemplu: dashboard-uri Grafana
+# Exemplu: dashboard-uri Grafana generate de AI
 
-- de monitorizat ceva în Grafana, câteva dashboard-uri noi
-- dashboard-urile sunt JSON
-- AI generează JSON-ul, eu îl import
+- **nevoia**: monitorizăm ceva în Grafana, cu câteva dashboard-uri noi
+- **formatul**: dashboard-urile Grafana sunt fișiere JSON
+- **AI generează** JSON-ul, iar eu îl import în Grafana
+- **rezultatul**: sunt scutit de munca manuală de a crea dashboard-urile
 
 <!--
 Am de monitorizat ceva în Grafana, trebuie să fac câteva dashboard-uri noi. E timp.
@@ -670,37 +675,43 @@ Am de monitorizat ceva în Grafana, trebuie să fac câteva dashboard-uri noi. E
 
 ---
 
-# Exemplu: comunicare mașină-mașină
+# Exemplu: autentificare automată în teste
 
-- teste care cer autentificare
-- script Playwright construit de AI
-- acum totul merge determinist
+- **problema**: testele necesită autentificare
+- **script Playwright de login**, construit de AI, obține un bearer token
+- **credențialele** sunt într-un fișier `.env`, iar tokenul se salvează în `auth.json`
+- testele citesc automat `auth.json`
+- dacă tokenul a expirat, se pornește singur scriptul Playwright și obține unul nou
+- **rezultatul**: totul merge determinist, fără intervenția mea
 
 <!--
-In situatiile cand e nevoie comunicarea masina-masina , de exemplu in teste in care e nevoie de autentificare.
-Am un playwright script , construit de AI ... dara acum totul merge determinist.
+În situațiile în care e nevoie de autentificare, de exemplu în teste, am un script Playwright construit de AI. Credențialele sunt într-un fișier .env, iar bearer token-ul se salvează într-un auth.json, pe care testele îl citesc automat. Dacă tokenul e vechi, se pornește scriptul Playwright. Nu mai e nevoie de implicarea mea, totul merge determinist.
 -->
 
 ---
 
-# Obiecție: delegăm totul AI?
+# De ce nu delegăm totul către AI?
 
 - problemele simple, de rutină, le delegăm deja
 - AI se descurcă bine și cu cele complexe
 - deci de ce nu delegăm întreaga complexitate?
-- fără skill-uri, fără formate de prezentare: dăm problema, luăm răspunsul
+  - dăm problema, luăm răspunsul
+- **răspunsul din exemplele de mai sus**: abordarea mea e să stabilesc corect ce parte delegăm AI și ce parte nu
 
 <!--
 Mulți ar putea obiecta și spune că putem delega întreaga complexitate către AI, fără skill-uri sau formate de prezentare. Dacă AI rezolvă bine problemele simple, de ce să nu delegăm și cele complexe?
+Din toate exemplele prezentate se poate trage concluzia că abordarea mea este să stabilesc corect ce parte delegăm AI și ce parte nu.
 -->
 
 ---
 
-# Răspunsul: modelul mental
+# Ce pierdem dacă delegăm totul: modelul mental
 
-- pentru a înțelege un fenomen, îți trebuie un model mental al lui
-- sarcini simple: modelul mental există deja, nu pierdem nimic
-- sarcini complexe: delegându-le, pierdem șansa să ne formăm modelul
+- înțelegerea unui fenomen cere un model mental al acestuia
+- sarcini simple: modelul mental există deja
+  - nu pierdem nimic delegând către AI
+- sarcini complexe: modelul mental încă nu există
+  - delegându-le către AI, pierdem șansa să ne formăm modelul
 - formarea modelului mental necesită timp
 - noi decidem: ne trebuie modelul sau nu? (raportul timp:rezultat cu AI e foarte bun)
 
@@ -716,10 +727,10 @@ Deja noi trebuie să decidem, ne trebuie oare acest model mental sau nu, pentru 
 
 # De ce îți trebuie modelul mental?
 
-- fenomenul complex trebuie abordat astfel încât să abordezi ușor alte fenomene din aceeași familie
-- raportul timp:rezultat nu e suficient, contează și calitatea rezultatului
-- rezultatul poate să nu fie optim (multe iterații): trebuie să schimbi cum abordează AI problema
-- rezultatul poate să nu fie corect (AI e non-deterministă): îți trebuie subrezultate deterministe
+- **abordare reutilizabilă**: un fenomen complex înțeles bine ne ajută să abordăm mai ușor alte fenomene din aceeași familie
+- **calitatea rezultatului**: raportul timp:rezultat nu e suficient
+  - rezultatul poate fi **neoptim** (multe iterații): trebuie să schimbăm felul în care AI abordează problema
+  - rezultatul poate fi **incorect**, pentru că AI e non-deterministă: avem nevoie de subrezultate deterministe
 - ambele cer mai mult decât un model superficial al fenomenului
 
 <!--
@@ -728,6 +739,26 @@ Fenomenul complex trebuie abordat astfel încât să poți ușor aborda orice al
 Însă concentrându-mă pe raportul timp:rezultat nu întotdeauna suficient. Mai apare și dimensiunea calității rezultatului:
 1. rezultatul poate să nu fie optim (sau poate să facă multe iterații), și atunci cel mai des îți trebuie să schimbi felul în care abordează AI problema, dar pentru acesta un model superficial al fenomenului nu e suficient
 2. rezultatul poate să nu fie corect din cauza naturii non-deterministe a AI și pentru acesta îți trebuie subrezultate deterministe, la care iarăși nu ajungi cu modele superficiale ale fenomenului.
+-->
+
+---
+
+> **Interviewer:** “I heard you were extremely quick at math.”
+>
+> **Me:** “Yes, as a matter of fact I am.”
+>
+> **Interviewer:** “What is 14 × 27?”
+>
+> **Me:** “49.”
+>
+> **Interviewer:** “That’s not even close.”
+>
+> **Me:** “Yeah, but it was fast.”
+
+<small>Glumă populară pe internet.</small>
+
+<!--
+O glumă populară pe internet, fără autor cunoscut, care ilustrează slide-ul precedent: AI poate da soluții neoptime sau greșite. Rapid, dar greșit: viteza nu garantează corectitudinea (14 × 27 = 378).
 -->
 
 ---
@@ -742,17 +773,17 @@ Fenomenul complex trebuie abordat astfel încât să poți ușor aborda orice al
 
 <!--
 Videoul nu e în prezentare, drepturile rămân la autorul postării de pe Reddit. Link-ul duce la postare.
-Ideea: modelul nu reproduce exact nici când i se cere explicit. Erorile mici se acumulează la fiecare pas, deci rezultatul nu e determinist și nu putem presupune că „nu schimbă nimic”.
+Ideea: AI e non-deterministă și dă ceva nou de fiecare dată, chiar și când i se cere explicit să reproducă exact. Erorile mici se acumulează la fiecare pas, deci rezultatul nu e determinist și nu putem presupune că „nu schimbă nimic”.
 -->
 
 ---
 
 # Al treilea participant: modelul (fenomenul)
 
-- am observat o polarizare: de o parte omul, de cealaltă AI
-- al treilea participant: **modelul** (fenomenul)
-- model mental, model software, cadru științific, cunoștințe, ...
-- sunt la îndemână: le putem folosi direct, fără AI
+- **polarizarea de azi**: de o parte omul, de cealaltă AI
+- **al treilea participant**: modelul (fenomenul)
+  - poate fi un model mental, un model software, un cadru științific, cunoștințe, ...
+- **la îndemână**: le putem folosi direct, fără AI
 
 <!--
 Eu mi-am răspuns la această întrebare. Răspunsul e subiectiv dar e următorul:
@@ -771,9 +802,9 @@ Modelul poate fi mental, poate fi model software, poate fi cadrul științific, 
 
 # Regula mea
 
-- întâi: poate modelul fenomenului „să rezolve” problema cu efort minim?
-- dacă pot amândoi (modelul fenomenului și AI), nu folosim AI
-- folosim AI pentru că poate, dar nu e singurul participant care poate: poate și modelul
+- **primul pas**: poate modelul fenomenului să rezolve problema cu efort minim?
+- **dacă pot amândoi** (modelul fenomenului și AI), nu folosim AI
+- AI poate rezolva multe probleme, dar **nu e singurul participant** care poate: poate și modelul
 
 <!--
 Regula mea este următoarea. Mă întreb cine poate rezolva problema cu efort minim: modelul fenomenului sau AI. Dacă pot amândoi, nu folosim AI.
@@ -785,17 +816,4 @@ Noi folosim AI pentru că poate, dar mai există și alți participanți care po
 
 ---
 
-# Concluzie
-
-- învățăm esența (adunarea) și pe de rost (tabla înmulțirii), apoi combinăm
-- la fel pentru fenomene complexe: proprietățile fenomenului + AI
-- optim: și modelul, și AI
-- rezultat: cunoștințe și capacitatea de a aborda următoarele situații complexe
-
 <small>Imaginile din această prezentare fără sursă indicată (inclusiv cea de pe slide-ul de titlu) au fost generate cu ajutorul Claude Code.</small>
-
-<!--
-Așa cum am învățat să adunăm și am înțeles esența, dar și am învățat unele lucruri pe de rost ca tabela înmulțirii, ca mai apoi să le putem combina și să rezolvăm orice așa și în abordarea fenomenelor complexe trebuie folosite în combinație proprietățile fenomenului și AI.
-
-Eu consider că acesta e cel mai optimal să folosesc și modelul și AI în așa fel în rezultat se construiesc cunoștințe și capacitate de a aborda următoarele situații complexe.
--->
