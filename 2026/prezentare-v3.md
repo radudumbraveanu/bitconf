@@ -119,7 +119,8 @@ situația, fie pentru că sunt noi pentru mine și nu știu de unde să încep.
 # Cum abordăm complexitatea?
 
 - **A.** înțelegem fenomenul din spatele problemei și folosim proprietățile lui, unde putem
-- **B.** ce rămâne, delegăm altcuiva: AI
+- **B.** ce rămâne, delegăm altcuiva:
+  * **AI**
 
 <!--
 Două abordări, care se completează. A: folosesc proprietățile fenomenului acolo unde pot, fără AI. B: ce rămâne, delegăm altcuiva, în cazul nostru AI.
@@ -146,6 +147,7 @@ Două abordări, care se completează. A: folosesc proprietățile fenomenului a
 **Euristici**
 
 - problemă asemănătoare / analogie
+  - poți folosi o problemă înrudită deja rezolvată?
 - **specializare** (cazul particular)
 - generalizare
 - **problemă auxiliară** (mai simplă)
@@ -155,7 +157,7 @@ Două abordări, care se completează. A: folosesc proprietățile fenomenului a
 </div>
 </div>
 
-<small>George Pólya, [*How to Solve It*](https://en.wikipedia.org/wiki/How_to_Solve_It) (1945): un caz particular de abordare, nu orice problemă se rezolvă așa. Lista nu e exhaustivă. Urmează două euristici, pe exemple: specializare (deadlock) și problemă auxiliară (N+1).</small>
+<small>George Pólya, [*How to Solve It*](https://en.wikipedia.org/wiki/How_to_Solve_It) (1945). Lista de euristici nu e exhaustivă: dicționarul lui Pólya are 67 de intrări.</small>
 
 <!--
 Prima abordare: folosim proprietățile fenomenului. Un cadru cunoscut: George Pólya, How to Solve It, 1945.
@@ -171,7 +173,7 @@ Euristicile ne ajută să găsim proprietățile fenomenului. Le putem cere și 
 # Exemplu: deadlock (interblocare)
 
 - din experiența mea: eroarea „nu mai sunt conexiuni pentru baza de date”
-- mai multe procese gestionează resurse, printre care și conexiunile la baza de date, luate dintr-un pool de conexiuni (număr limitat)
+- mai multe procese gestionează resurse, printre care și conexiunile la baza de date, luate dintr-un pool de N conexiuni (număr limitat)
 - procesul A ține o conexiune și mai cere o resursă
 - resursa e ocupată de procesul B
 - B, înainte să o elibereze, are nevoie de o conexiune la baza de date
@@ -224,7 +226,7 @@ Alt exemplu OOM: uneori un sistem afișează mesajul OutOfMemory. Soluție: dac�
 
 ---
 
-# Deadlock: cazul particular în locul celui general
+# Deadlock: cazul particular în locul celui general (specializare)
 
 - nu am delegat problema către AI
 - în loc de problema generală, am luat un caz particular, mai simplu (N=1, memorie mică)
@@ -237,7 +239,7 @@ Nu am delegat problema către AI. În loc de problema generală am luat un caz p
 
 ---
 
-# Exemplu: problema N+1
+# Exemplu: problema N+1 (N+1 query)
 
 - din experiența mea, la o problemă de performanță primul lucru de verificat: nu cumva e problema N+1?
 
@@ -260,17 +262,55 @@ Foarte des când avem problemă de performanță primul lucru ar trebui să veri
 
 ---
 
-# Exemplu: problema N+1 – metoda
+# N+1: o problemă mai simplă în locul celei inițiale (problemă auxiliară)
 
 - presupunem: fără bibliotecă care o detectează, dar cu acces la jurnalul de SQL-uri
 - foarte multe interogări, mai ales cu mulți utilizatori
+
+<!--
+Sunt biblioteci care au funcția dată activată, dar să presupunem că nu folosim asemenea biblioteci. Să presupunem că avem acces la jurnalul de SQL-uri.
+Sunt foarte multe interogări, și mai ales dacă ai mai mulți utilizatori.
+-->
+
+---
+
+<!-- _class: log -->
+
+# Cum arată în jurnalul de SQL
+
+<pre><span>10:15:01.101  SELECT id, user_id FROM orders WHERE user_id = ?</span>
+<span>10:15:01.104  SELECT * FROM order_items WHERE order_id = ?</span>
+<span>10:15:01.106  SELECT name, price FROM products WHERE id = ?</span>
+<span>10:15:01.107  SELECT name, price FROM products WHERE id = ?</span>
+<span>10:15:01.109  SELECT * FROM order_items WHERE order_id = ?</span>
+<span>10:15:01.110  SELECT name, price FROM products WHERE id = ?</span>
+<span>10:15:01.112  SELECT label FROM categories WHERE id = ?</span>
+<span>10:15:01.113  SELECT * FROM order_items WHERE order_id = ?</span>
+<span>10:15:01.115  SELECT name, price FROM products WHERE id = ?</span>
+<span>10:15:01.116  SELECT label FROM categories WHERE id = ?</span>
+<span>10:15:01.118  SELECT * FROM order_items WHERE order_id = ?</span>
+<span>10:15:01.119  SELECT name, price FROM products WHERE id = ?</span>
+<span>10:15:01.121  SELECT * FROM order_items WHERE order_id = ?</span>
+<span>10:15:01.122  SELECT name, price FROM products WHERE id = ?</span>
+<span>10:15:01.124  SELECT label FROM categories WHERE id = ?</span>
+<span>10:15:01.125  SELECT * FROM order_items WHERE order_id = ?</span>
+<span>10:15:01.127  SELECT COUNT(*) FROM notifications WHERE user_id = ?</span></pre>
+
+<small>Date ilustrative. Același text = aceeași interogare (parametrul <code>?</code>, valorile nu apar în log).</small>
+
+<!--
+Jurnalul pare complicat, sunt multe interogări diferite.
+-->
+
+---
+
+# N+1: o problemă mai simplă în locul celei inițiale (problemă auxiliară)
+
 - clase de echivalență după numărul de repetări ale interogării: `[1]` excludem, `[2]`, `[3]`... ne interesează
 - am construit o altă problemă, care se rezolvă simplu și se studiază ușor
   - putem delega către AI să extragă clasele, sau să scrie un fragment de cod care le extrage
 
 <!--
-Sunt biblioteci care au funcția dată activată, dar să presupunem că nu folosim asemenea biblioteci. Să presupunem că avem acces la jurnalul de SQL-uri.
-Sunt foarte multe interogări, și mai ales dacă ai mai mulți utilizatori.
 Dar dacă definim clase de echivalență, în funcție de numărul de repetări ale unei interogări. [1] - le exclude, [2], [3] ... ne interesează.
 
 Am construit o altă problemă, care se rezolvă simplu. În care putem s-o studiem ușor.
@@ -303,19 +343,21 @@ Am construit o altă problemă, care se rezolvă simplu. În care putem s-o stud
 <small>Date ilustrative. Același text = aceeași interogare (parametrul <code>?</code>, valorile nu apar în log). Culoare = aceeași interogare repetată.</small>
 
 <!--
-Jurnalul pare complicat, sunt multe interogări diferite. Dar dacă ne uităm atent, unele rânduri se repetă identic. Le-am evidențiat cu culori: aceeași culoare înseamnă aceeași interogare, repetată de multe ori. Doar primul și ultimul rând apar o singură dată.
+Dacă ne uităm atent, unele rânduri se repetă identic. Le-am evidențiat cu culori: aceeași culoare înseamnă aceeași interogare, repetată de multe ori. Doar primul și ultimul rând apar o singură dată.
 -->
 
 ---
 
-# N+1: abstractizare, nu delegare
+# N+1: abstractizare și problemă auxiliară, nu delegare
 
 - nu am delegat problema către AI
 - am folosit abstractizarea: rândurile identice formează o clasă
 - clase de echivalență după numărul de repetări ale interogării
+- problema auxiliară: în loc să citim tot jurnalul, numărăm repetările pe clase
 
 <!--
 Aici n-am delegat către AI. Am folosit abstractizarea: rândurile identice din jurnal le grupez în clase, după numărul de repetări.
+Asta e problema auxiliară: în loc să citesc tot jurnalul, lucrez cu clasele și cu numărul de repetări, o problemă mai simplă, care se rezolvă ușor.
 -->
 
 ---
@@ -324,12 +366,12 @@ Aici n-am delegat către AI. Am folosit abstractizarea: rândurile identice din 
 
 - 2 exemple (deadlock, N+1): am folosit proprietățile fenomenului, nu am lăsat totul pe AI
 - dacă lăsam totul pe AI, rezultatul ar fi fost același: problema rezolvată
-- diferența: omul a înțeles mai mult decât înainte
-- ce am înțeles se aplică și la fenomenele viitoare
+- diferența: persoana a învățat ceva nou și a câștigat experiență
+- ce a învățat se aplică și la fenomenele viitoare (problemele, situațiile)
 
 <!--
 Ce diferență e între aceste 2 exemple, în care am folosit proprietăți ale fenomenului studiat, și situația în care aș fi pus totul în seama AI?
-Rezultatul ar fi același: problema rezolvată. Dar în cazul nostru ai și un om care a înțeles ceva mai mult decât înțelesese până la acel fenomen, și înțelegerea asta rămâne pentru fenomenele viitoare.
+Rezultatul ar fi același: problema rezolvată. Dar în cazul nostru ai și o persoană care a învățat ceva nou și a câștigat experiență, iar ce a învățat rămâne pentru fenomenele viitoare.
 -->
 
 ---
@@ -365,7 +407,7 @@ Fragment de CSV.
 
 ---
 
-# Fragment de log (CSV)
+# Cerere fără răspuns: fragment de log (CSV)
 
 ```csv
 thread,timestamp,message
@@ -374,16 +416,18 @@ http-nio-8080-exec-7,10:15:01.140,GET /report start
 http-nio-8080-exec-3,10:15:01.230,GET /orders done
 http-nio-8080-exec-5,10:15:02.004,GET /orders start
 http-nio-8080-exec-5,10:15:02.118,GET /orders done
-http-nio-8080-exec-3,10:15:03.377,GET /orders start
-http-nio-8080-exec-3,10:15:03.490,GET /orders done
-http-nio-8080-exec-5,10:15:04.021,GET /orders start
-http-nio-8080-exec-5,10:15:04.133,GET /orders done
+...
+http-nio-8080-exec-3,10:16:27.377,GET /orders start
+http-nio-8080-exec-3,10:16:27.490,GET /orders done
+...
+http-nio-8080-exec-5,10:19:41.021,GET /orders start
+http-nio-8080-exec-5,10:19:41.133,GET /orders done
 ```
 
 <small>Date ilustrative. Prefixul `http-nio-8080-exec-N` = firul de execuție al serverului web (Apache Tomcat).</small>
 
 <!--
-Fragment de CSV: id-ul firului (thread), timestamp, mesaj. Firul exec-7 a început o cerere și n-a mai terminat-o.
+Fragment de CSV: id-ul firului (thread), timestamp, mesaj. Firul exec-7 a început o cerere și n-a mai terminat-o, nici după câteva minute. Cu „..." marchez rândurile omise.
 -->
 
 ---
@@ -394,12 +438,13 @@ Fragment de CSV: id-ul firului (thread), timestamp, mesaj. Firul exec-7 a încep
 
 ---
 
-# Aceeași metodă: clase de echivalență
+# Cerere fără răspuns: aceeași metodă, clase de echivalență
 
 - clase de echivalență după repetarea `http-nio-8080-exec-N`
 - firele care n-au răspuns sunt blocate și nu pot fi refolosite: repetările lor sunt mai puține
-- CSV, deci pandas: cer AI un cod pandas, nu o analiză
-- adaptez fragmentul și obțin un instrument determinist
+- datele sunt în format CSV, iar pentru el există un instrument potrivit: [pandas](https://pandas.pydata.org/) (bibliotecă Python pentru analiza datelor tabelare)
+- îi cer AI-ului codul pandas, nu analiza în sine
+- adaptez codul (dacă e cazul) și obțin un instrument determinist
 
 <!--
 Se poate aplica metoda de mai sus. Clase de echivalență: repetarea http-nio-8080-exec-N, teoretic cele care n-au răspuns, sunt blocate și nu pot fi refolosite, deci repetările trebuie să fie mai mici.
@@ -410,20 +455,20 @@ Acest fragment îl pot apoi adapta și obțin un instrument determinist.
 
 ---
 
-# Promptul pentru codul pandas
+# Cerere fără răspuns: promptul pentru codul pandas
 
 > Am o listă de înregistrări într-un CSV, cu coloane id (id-ul firului de execuție), timestamp și message (mesajul). Dă-mi un cod pandas care afișează fiecare id cu ultimul timestamp văzut într-un anumit interval de timp.
 
 ---
 
-# Codul pandas
+# Cerere fără răspuns: codul pandas
 
 ```python
 import pandas as pd
 
 df = pd.read_csv("log.csv", parse_dates=["timestamp"])
 
-start, end = "10:15:00", "10:16:00"
+start, end = "10:15:00", "10:20:00"
 interval = df[(df["timestamp"] >= start) & (df["timestamp"] <= end)]
 
 last_seen = interval.groupby("id")["timestamp"].max()
@@ -434,12 +479,30 @@ print(last_seen.sort_values())
 
 ---
 
+# Cerere fără răspuns: ce afișează codul
+
+```text
+id
+http-nio-8080-exec-7   2026-11-13 10:15:01.140
+http-nio-8080-exec-3   2026-11-13 10:16:27.490
+http-nio-8080-exec-5   2026-11-13 10:19:41.133
+Name: timestamp, dtype: datetime64[ns]
+```
+
+<small>Firul <code>exec-7</code> e primul: ultima activitate a lui e la 10:15:01, cu aproape 5 minute înaintea celorlalte. El e firul blocat.</small>
+
+<!--
+Codul afișează fiecare fir cu ultimul timestamp văzut, sortat crescător. Pe fragmentul nostru, exec-7 apare primul: a început GET /report la 10:15:01 și de atunci nu l-am mai văzut, în timp ce celelalte fire au activitate până la 10:19. Acela e firul blocat.
+-->
+
+---
+
 # B. Wayfinder (Matt Pocock)
 
 - problemă nouă: nu știu de unde să încep (formulare neclară sau primii pași costisitori)
 - Wayfinder pune întrebări, construiește lanțul de pași, ține evidența
 - AI execută pașii tehnici (librării, programe) în câteva minute
-- eu rulez, văd rezultatele, analizez
+- eu rulez programele și analizez rezultatele
 - generalizare: **gradul de finețe în interacțiunea cu AI**
   - înlocuiesc prezentarea tuturor opțiunilor cu prezentarea opțiune cu opțiune
 
