@@ -217,6 +217,22 @@ Fenomenul complex trebuie abordat astfel încât să poți ușor aborda orice al
 
 ---
 
+# Polya — *How to Solve It*
+
+1. **Înțelege problema** — ce e dat? ce se cere? poți reformula?
+2. **Elaborează un plan** — ai mai văzut ceva similar? există o problemă mai simplă?
+3. **Execută planul** — pas cu pas, verificând fiecare etapă
+4. **Revizuiește** — e corect? se poate altfel? ce generalizezi?
+
+<!--
+George Pólya, How to Solve It (1945): un cadru clasic de rezolvare a problemelor.
+Cei patru pași (înțelege → plan → execuție → revizuire) și heuristicile aferente
+(reformulare, problemă similară, problemă mai simplă, desen) rămân utile și când
+lucrăm cu AI: ele ne spun unde rămâne omul și unde poate ajuta AI.
+-->
+
+---
+
 # Al treilea jucător: modelul
 
 - noi polarizăm: de o parte omul, de cealaltă AI
