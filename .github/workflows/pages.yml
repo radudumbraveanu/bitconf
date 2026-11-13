@@ -1,0 +1,51 @@
+name: Deploy presentation to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths: ["2026/**", ".github/workflows/pages.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: 2026/package-lock.json
+      - name: Build slides without speaker notes
+        working-directory: 2026
+        run: |
+          npm ci
+          # drop HTML comments (speaker notes, TODOs); keep Marp directives like <!-- _class: ... -->
+          perl -0pe 's/<!--(?!\s*_)(.*?)-->//gs' prezentare-v3.md > _public.md
+          mkdir -p ../dist
+          npx marp _public.md --html --allow-local-files -o ../dist/index.html
+          cp -r img ../dist/img
+          cp connection_pool_deadlock.html ../dist/
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
