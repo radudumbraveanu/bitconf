@@ -1,7 +1,0 @@
-Imaginea: Process_deadlock.svg (imaginea principală a paginii "Deadlock (computer science)")
-URL direct: https://upload.wikimedia.org/wikipedia/commons/2/28/Process_deadlock.svg
-Pagina Wikipedia: https://en.wikipedia.org/wiki/Deadlock_(computer_science)
-Pagina fișierului (licență): https://commons.wikimedia.org/wiki/File:Process_deadlock.svg
-Dimensiune: 451 x 250 px (SVG)
-Fișier local: Process_deadlock.svg
-Licența: neverificată

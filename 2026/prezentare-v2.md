@@ -27,6 +27,39 @@ style: |
   section.title strong { color: #fff; font-size: 38px; }
   section.title em { color: #90cdf4; font-size: 30px; }
   section.title img { position: absolute; left: 50%; transform: translateX(-50%); bottom: -20px; height: 320px; }
+  section.motto {
+    justify-content: center;
+    text-align: center;
+    background: #1a365d;
+    color: #e2e8f0;
+    border-left: none;
+  }
+  section.motto blockquote {
+    border: none;
+    background: none;
+    margin: 0 0 1em;
+    padding: 0;
+    font-size: 54px;
+    line-height: 1.3;
+    font-style: italic;
+    color: #fff;
+  }
+  section.motto p { font-size: 34px; color: #90cdf4; margin: 0; }
+  section.log { padding: 36px 80px; justify-content: flex-start; }
+  section.log h1 { font-size: 40px; margin-bottom: 0.4em; }
+  section.log pre {
+    font-family: 'IBM Plex Mono', 'DejaVu Sans Mono', monospace;
+    font-size: 19px; line-height: 1.45; margin: 0;
+    background: #fff; border: 1px solid #cdd5de; border-radius: 8px; padding: 14px 18px;
+  }
+  section.log pre span { display: block; padding: 0 6px; border-radius: 3px; white-space: pre; }
+  section.log .a { background: #fde68a; }
+  section.log .b { background: #bfdbfe; }
+  section.log .c { background: #bbf7d0; }
+  section.log small { font-size: 20px; color: #52606d; display: block; margin-top: 12px; }
+  section .cols { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; }
+  section .cols { font-size: 29px; line-height: 1.4; }
+  section .cols ol, section .cols ul { margin-top: 0.3em; }
   section.img {
     padding: 24px 40px;
     justify-content: flex-start;
@@ -49,12 +82,25 @@ Bălți · BitConf 2026
 
 ---
 
+<!-- _class: motto -->
+<!-- _paginate: false -->
+
+> There has never been a more interesting time to think than in the age of AI.
+
+Niciodată nu a fost mai interesant să gândești decât în epoca inteligenței artificiale.
+
+<!--
+Variantă de traducere: Nu a existat niciodată un moment mai interesant pentru gândire decât cel pe care îl trăim acum, în plină revoluție AI.
+-->
+
+---
+
 # Prin complexitate mă refer la:
 
 - sisteme / fenomene / probleme cu mulți factori interconectați
 - granițe neclare între factori
 - combinații greu de prevazut exhaustiv
-- și situații care doar par complexe (formulă sau perspectivă)
+- și situații care doar par complexe: sunt noi pentru mine sau formulate neclar
 
 <!-- 
 Prin complexitate mă voi referi la situații, sisteme, fenomene, probleme, care constau din mai mulți factori
@@ -62,18 +108,21 @@ Prin complexitate mă voi referi la situații, sisteme, fenomene, probleme, care
 prevezi toate combinațiile posibile ale acestora. 
 La fel, prin complexitate mă voi referi și la situațiile care
 par așa (adică par complexe la prima vedere) fie din cauza formulării, fie din cauza subiectului care abordează
-situația.
+situația, fie pentru că sunt noi pentru mine și nu știu de unde să încep.
 -->
 
 ---
 
 # Wayfinder (Matt Pocock)
 
-- început dificil: formulare neclară sau primii pași costisitori
+- problemă nouă: nu știu de unde să încep (formulare neclară sau primii pași costisitori)
 - Wayfinder pune întrebări, construiește lanțul de pași, ține evidența
 - AI execută pașii tehnici (librării, programe) în câteva minute
 - eu rulez, văd rezultatele, analizez
 - generalizare: **gradul de finețe în interacțiunea cu AI**
+  - înlocuiesc prezentarea tuturor opțiunilor cu prezentarea opțiune cu opțiune
+
+<small>Sursa: https://github.com/mattpocock/skills/tree/main/skills/engineering/wayfinder</small>
 
 <!--
 Primul exemplu: situațiile când suntem la început, și fie avem o formulare la care chiar dacă o citim de 10 ori nu știm de unde să începem și încotro să ne ducem, sau pașii inițiali necesită mult efort.
@@ -88,6 +137,8 @@ Metoda se poate generaliza în „gradul de finețe în interacțiunea cu AI”;
 ---
 
 # AI e foarte bună la enumerare
+
+Problema nouă, pasul următor: ce opțiuni am?
 
 - întrebări la care nu m-am gândit
 - riscuri și cazuri limită
@@ -105,6 +156,8 @@ AI e foarte bună la enumerare: întrebări la care nu m-am gândit, riscuri, va
 
 # Cere și explicația vizuală de la AI
 
+Problema nouă, pasul următor: înțeleg rezultatul repede.
+
 - articol: „How to 5x your communication effectiveness with Claude Code” (Towards Data Science)
 - agentul scrie rezultatele netriviale ca fișier HTML, deschis în browser, nu ca text în terminal
 - instrucțiunea se pune o dată, în fișierul MD la nivel de utilizator
@@ -121,34 +174,6 @@ Generalizare: „Cere și explicația vizuală de la AI”.
 
 Sursa: https://towardsdatascience.com/how-to-5x-your-communication-effectiveness-with-claude-code/
 -->
-
----
-
-# Din practica mea: carduri cu noțiunile necunoscute
-
-- studiez ceva nou, apar noțiuni necunoscute
-- Claude generează carduri pentru ele
-- le pune în cloud, le am la îndemână
-- revin la ele când am nevoie
-
-<!--
-Din practica mea: când studiez ceva nou, obișnuiesc să generez carduri cu noțiunile necunoscute. Claude le face și le pune în cloud. Încă o formă de prezentare a rezultatelor, în ajutorul înțelegerii.
--->
-
-<!-- TODO: de adăugat un exemplu concret (captură de ecran a unui card) -->
-
----
-
-Despre fenomene care noi le numim complexe și despre probleme care țin de aceste fenomene.
-Probleme ce țin de fenomene complexe le voi numi probleme complexe.
-
-<!-- -- cred că aș putea băga exemplele și aici, am putea începe cu introducerea apoi exemplele, am putea începe cu exemple și introducerea s-o intercalăm -->
-
----
-
-Toată lumea vorbește acum despre faptul că problemele simple, de rutină, trebuie să le delegăm către AI.
-Dar dacă delegăm problemele simple, cine ne oprește să delegăm și cele complexe? sau altfel,
-dacă AI rezolvă bine problemele simple, de ce să nu delegăm și cele complexe? pentru că am observat că se descurcă foarte bine și cu cele complexe.
 
 ---
 
@@ -201,6 +226,21 @@ Fenomenul complex trebuie abordat astfel încât să poți ușor aborda orice al
 
 ---
 
+# Experiment: „copiază imaginea” de 101 ori
+
+- postare pe Reddit (r/ChatGPT): aceeași poză cu Dwayne Johnson, recreată de ChatGPT de 101 ori, de fiecare dată pornind de la rezultatul anterior
+- cerința: „Create the exact replica of this image, don't change a thing”
+- primele variante seamănă cu originalul, apoi trăsăturile se deformează până la artă abstractă
+
+<small><a href="https://www.reddit.com/r/ChatGPT/comments/1kbj71z/i_tried_the_create_the_exact_replica_of_this/" target="_blank">Postarea originală (Reddit, u/Foreign_Builder_2238)</a> · publicații similare: <a href="https://www.techradar.com/computing/artificial-intelligence/viral-chatgpt-trend-gone-wrong-the-rock-is-turned-into-horrible-abstract-art-after-reddit-user-recreates-image-101-times" target="_blank">TechRadar</a>, <a href="https://knowyourmeme.com/memes/replicate-this-image-100-times" target="_blank">Know Your Meme</a>, <a href="https://dailydot.com/chatgpt-100x-ai-image-loop" target="_blank">Daily Dot</a>, <a href="https://www.kapwing.com/resources/how-to-do-the-100x-chatgpt-image-trend/" target="_blank">Kapwing</a></small>
+
+<!--
+Videoul nu e în prezentare, drepturile rămân la autorul postării de pe Reddit. Link-ul duce la postare.
+Ideea: modelul nu reproduce exact nici când i se cere explicit. Erorile mici se acumulează la fiecare pas, deci rezultatul nu e determinist și nu putem presupune că „nu schimbă nimic”.
+-->
+
+---
+
 # Cum abordăm fenomenele complexe?
 
 - lume complexă: participă, în măsură diferită, și omul, și AI
@@ -233,18 +273,18 @@ lucrăm cu AI: ele ne spun unde rămâne omul și unde poate ajuta AI.
 
 ---
 
-# Al treilea jucător: modelul
+# Al treilea participant: modelul (fenomenul)
 
-- noi polarizăm: de o parte omul, de cealaltă AI
-- al treilea jucător: **modelul**
-- model mintal, model software, cadru științific, cunoștințe
-- la ele avem acces direct, nu ne trebuie AI
+- am observat o polarizare: de o parte omul, de cealaltă AI
+- al treilea participant: **modelul** (fenomenul)
+- model mental, model software, cadru științific, cunoștințe, ...
+- sunt la îndemână: le putem folosi direct, fără AI
 
 <!--
 Eu mi-am răspuns la această întrebare. Răspunsul e subiectiv dar e următorul:
 
-În realitatea actuală, noi tindem s-o polarizăm, într-o parte omul, în altă parte AI. Eu am să numesc al treilea jucător modelul.
-Modelul poate fi mintal, poate fi model software, poate fi cadrul științific, cunoștințele ... la care avem acces direct, nu ne trebuie AI.
+În realitatea actuală, am observat o polarizare: într-o parte omul, în altă parte AI. Eu am să numesc al treilea participant modelul (fenomenul).
+Modelul poate fi mental, poate fi model software, poate fi cadrul științific, cunoștințele ... la care avem acces direct, nu ne trebuie AI.
 -->
 
 ---
@@ -257,68 +297,96 @@ Modelul poate fi mintal, poate fi model software, poate fi cadrul științific, 
 
 # Regula mea
 
-- cine depune efort minim: fenomenul (modelul fenomenului) sau AI?
-- dacă ambii: nu folosim AI
-- întâi: e posibilă o abordare în care modelul fenomenului depune efort minim?
-- AI o folosim pentru că poate, dar mai există și alți actori care pot, ca modelul
+- întâi: poate modelul fenomenului „să rezolve” problema cu efort minim?
+- dacă pot amândoi (modelul fenomenului și AI), nu folosim AI
+- folosim AI pentru că poate, dar nu e singurul participant care poate: poate și modelul
 
 <!--
-Deci regula mea este:
-- cine depune efort minim fenomenul (modelul fenomenului) sau AI, dacă ambii atunci nu folosim AI
-- întâi trebuie să ne gândim, e posibilă oare așa o abordare în care fenomenul (modelul fenomenului) depune un efort minim?
+Regula mea este următoarea. Mă întreb cine poate rezolva problema cu efort minim: modelul fenomenului sau AI. Dacă pot amândoi, nu folosim AI.
 
-Noi folosim AI pentru că poate, dar mai există și alți actori care pot, ca de exemplu modelul.
+De aceea, întâi trebuie să ne gândim: e posibilă oare o abordare în care modelul fenomenului depune un efort minim?
+
+Noi folosim AI pentru că poate, dar mai există și alți participanți care pot, ca de exemplu modelul.
 -->
 
 ---
 
-# Exemplu 1: deadlock
+# Exemplu: deadlock (interblocare)
+
+- din experiența mea: eroarea „nu mai sunt conexiuni pentru baza de date”
+- mai multe procese gestionează resurse, printre care și conexiunile la baza de date, luate dintr-un pool de conexiuni (număr limitat)
+- procesul A ține o conexiune și mai cere o resursă
+- resursa e ocupată de procesul B
+- B, înainte să o elibereze, are nevoie de o conexiune la baza de date
+- fiecare așteaptă după altul: nimeni nu mai înaintează
+
+<!--
+Un exemplu din experiența mea: în anumite momente apărea eroarea că nu mai sunt conexiuni pentru baza de date. Ce se întâmpla de fapt: mai multe procese gestionau resurse, printre care și conexiunile la baza de date, care veneau dintr-un pool de conexiuni, deci în număr limitat. Uneori un proces cere o conexiune la baza de date și, înainte de a o elibera, mai cere o resursă, dar aceasta e ocupată de alt proces care, înainte de a o elibera, are nevoie de o conexiune la baza de date.
+-->
+
+---
+
+<!-- _class: img -->
+<small>Sursa desenului: https://commons.wikimedia.org/wiki/File:Gridlock.svg</small>
+
+![](img/gridlock.svg)
+
+---
+
+# Deadlock: de ce e greu de studiat
 
 - mulți utilizatori: sistem greu de depanat
 - puțini utilizatori: ușor de depanat, dar greu de reprodus
-- la N+1 fenomenul converge singur spre starea dorită: problema se reproduce și e ușor de studiat
-- alt exemplu: OOM
 
 <!--
 Este destul de complicat de depanat sistemul când avem mulți utilizatori, dar în cazul când ai un număr mic de utilizatori, e ușor de depanat, dar e mai greu de reprodus.
-La N+1 fenomenul însăși converge către starea dorită, se reproduce problema și e ușor de studiat.
-
-Alt exemplu OOM.
 -->
 
 ---
 
 <!-- _class: img -->
-<small>Sursa desenului: https://commons.wikimedia.org/wiki/File:Process_deadlock.svg</small>
-
-![](img/deadlock.png)
-
----
-
-<!-- _class: img -->
-<small>Simulare generată de Claude: pool de conexiuni, micșorat de la 10 la 1</small>
+<small>Simulare generată de Claude: pool de conexiuni, micșorat de la 10 la 1 · <a href="connection_pool_deadlock.html" target="_blank">deschide direct</a></small>
 
 <iframe src="connection_pool_deadlock.html" style="width:1180px;height:580px;border:0;border-radius:8px;background:#fff"></iframe>
 
 ---
 
-# Exemplu 2: problema N+1
+# Deadlock N=1 vs. AI
 
-- problemă de performanță: primul lucru de verificat e N+1
-- presupunem: fără bibliotecă care o detectează, dar cu acces la jurnalul de SQL-uri
-- foarte multe interogări, mai ales cu mulți utilizatori
-- clase de echivalență după numărul de repetări ale interogării: `[1]` excludem, `[2]`, `[3]`... ne interesează
-- am construit o altă problemă, care se rezolvă simplu și se studiază ușor
+- la N=1 fenomenul converge singur spre starea dorită: problema se reproduce și e ușor de studiat
+- alt exemplu: OOM
+  - uneori sistemul afișează mesajul `OutOfMemory`
+  - soluție: micșorăm memoria totală și eroarea se reproduce mult mai repede
+  - astfel se vede mai clar cauza: cine cere multă memorie sau cine ocupă prea multă memorie
+
+<!--
+La N=1 fenomenul însăși converge către starea dorită, se reproduce problema și e ușor de studiat.
+
+Alt exemplu OOM: uneori un sistem afișează mesajul OutOfMemory. Soluție: dacă micșorăm memoria totală, vom reproduce eroarea mult mai repede și se va vedea mai clar cauza: cine cere multă memorie sau cine ocupă prea multă memorie.
+-->
+
+---
+
+# Deadlock: cazul particular în locul celui general
+
+- nu am delegat problema către AI
+- în loc de problema generală, am luat un caz particular, mai simplu (N=1, memorie mică)
+- cazul particular s-a dovedit mai ușor de reprodus și de studiat
+- prin el am găsit soluția și pentru problema generală
+
+<!--
+Nu am delegat problema către AI. În loc de problema generală am luat un caz particular, care s-a dovedit mai simplu, și prin care am găsit soluția și pentru problema generală.
+-->
+
+---
+
+# Exemplu: problema N+1
+
+- din experiența mea, la o problemă de performanță primul lucru de verificat: nu cumva e problema N+1?
 
 <!--
 Foarte des când avem problemă de performanță primul lucru ar trebui să verificăm, sunt probleme N+1.
-Sunt biblioteci care au funcția dată activată, dar să presupunem că nu folosim asemenea biblioteci. Să presupunem că avem acces la jurnalul de SQL-uri.
-Sunt foarte multe interogări, și mai ales dacă ai mai mulți utilizatori.
-Dar dacă definim clase de echivalență, în funcție de numărul de repetări ale unei interogări. [1] - le exclude, [2], [3] ... ne interesează.
-
-Am construit o altă problemă, care se rezolvă simplu. În care putem s-o studiem ușor.
 -->
-
 ---
 
 <!-- _class: img -->
@@ -334,15 +402,114 @@ Am construit o altă problemă, care se rezolvă simplu. În care putem s-o stud
 
 ---
 
-# Exemplu 3: problema interogărilor care nu se termină
+# Exemplu: problema N+1 – metoda
 
-- în anumite condiții interogarea din browser nu se termină, apare aleator
-- timeout-uri: presupunem că nu le avem
+- presupunem: fără bibliotecă care o detectează, dar cu acces la jurnalul de SQL-uri
+- foarte multe interogări, mai ales cu mulți utilizatori
+- clase de echivalență după numărul de repetări ale interogării: `[1]` excludem, `[2]`, `[3]`... ne interesează
+- am construit o altă problemă, care se rezolvă simplu și se studiază ușor
+  - putem delega către AI să extragă clasele, sau să scrie un fragment de cod care le extrage
+
+<!--
+Sunt biblioteci care au funcția dată activată, dar să presupunem că nu folosim asemenea biblioteci. Să presupunem că avem acces la jurnalul de SQL-uri.
+Sunt foarte multe interogări, și mai ales dacă ai mai mulți utilizatori.
+Dar dacă definim clase de echivalență, în funcție de numărul de repetări ale unei interogări. [1] - le exclude, [2], [3] ... ne interesează.
+
+Am construit o altă problemă, care se rezolvă simplu. În care putem s-o studiem ușor.
+-->
+
+---
+
+<!-- _class: log -->
+
+# Cum arată în jurnalul de SQL
+
+<pre><span>10:15:01.101  SELECT id, user_id FROM orders WHERE user_id = ?</span>
+<span class="a">10:15:01.104  SELECT * FROM order_items WHERE order_id = ?</span>
+<span class="b">10:15:01.106  SELECT name, price FROM products WHERE id = ?</span>
+<span class="b">10:15:01.107  SELECT name, price FROM products WHERE id = ?</span>
+<span class="a">10:15:01.109  SELECT * FROM order_items WHERE order_id = ?</span>
+<span class="b">10:15:01.110  SELECT name, price FROM products WHERE id = ?</span>
+<span class="c">10:15:01.112  SELECT label FROM categories WHERE id = ?</span>
+<span class="a">10:15:01.113  SELECT * FROM order_items WHERE order_id = ?</span>
+<span class="b">10:15:01.115  SELECT name, price FROM products WHERE id = ?</span>
+<span class="c">10:15:01.116  SELECT label FROM categories WHERE id = ?</span>
+<span class="a">10:15:01.118  SELECT * FROM order_items WHERE order_id = ?</span>
+<span class="b">10:15:01.119  SELECT name, price FROM products WHERE id = ?</span>
+<span class="a">10:15:01.121  SELECT * FROM order_items WHERE order_id = ?</span>
+<span class="b">10:15:01.122  SELECT name, price FROM products WHERE id = ?</span>
+<span class="c">10:15:01.124  SELECT label FROM categories WHERE id = ?</span>
+<span class="a">10:15:01.125  SELECT * FROM order_items WHERE order_id = ?</span>
+<span>10:15:01.127  SELECT COUNT(*) FROM notifications WHERE user_id = ?</span></pre>
+
+<small>Date ilustrative. Același text = aceeași interogare (parametrul <code>?</code>, valorile nu apar în log). Culoare = aceeași interogare repetată.</small>
+
+<!--
+Jurnalul pare complicat, sunt multe interogări diferite. Dar dacă ne uităm atent, unele rânduri se repetă identic. Le-am evidențiat cu culori: aceeași culoare înseamnă aceeași interogare, repetată de multe ori. Doar primul și ultimul rând apar o singură dată.
+-->
+
+---
+
+# N+1: abstractizare, nu delegare
+
+- nu am delegat problema către AI
+- am folosit abstractizarea: rândurile identice formează o clasă
+- clase de echivalență după numărul de repetări ale interogării
+
+<!--
+Aici n-am delegat către AI. Am folosit abstractizarea: rândurile identice din jurnal le grupez în clase, după numărul de repetări.
+-->
+
+---
+
+# Cum rezolvăm o problemă? (Pólya)
+
+<div class="cols">
+<div>
+
+**Cele 4 etape**
+
+1. înțelege problema
+2. face un plan
+3. execută planul
+4. privește înapoi
+
+</div>
+<div>
+
+**Euristici**
+
+- problemă asemănătoare / analogie
+- specializare (cazul particular)
+- generalizare
+- problemă auxiliară (mai simplă)
+- descompune în părți
+- desenează o figură
+
+</div>
+</div>
+
+<small>George Pólya, [*How to Solve It*](https://en.wikipedia.org/wiki/How_to_Solve_It) (1945). Deadlock N=1 = specializare; N+1 = problemă auxiliară (clasele de echivalență); desenele și simularea = figura.</small>
+
+<!--
+Exemplele de până acum nu sunt întâmplătoare. Urmează un tipar vechi: George Pólya, How to Solve It, 1945.
+Patru etape: înțelegi problema (ce se cere, ce date ai, care e condiția), faci un plan, execuți planul, te uiți înapoi (verifici rezultatul și te întrebi dacă metoda se poate folosi în altă parte).
+Etapa 2 e cea grea, și aici vin euristicile: ai mai întâlnit o problemă asemănătoare? poți specializa, adică rezolva un caz particular? sau generaliza? poți rezolva o problemă auxiliară, mai simplă? poți descompune problema? poți desena o figură?
+În exemplele mele: la deadlock am folosit specializarea, cazul particular N=1, și am desenat figura (gridlock, simularea). La N+1 am folosit o problemă auxiliară: grupez rândurile identice din jurnal în clase de echivalență și lucrez cu clasele, nu cu jurnalul întreg.
+Euristicile sunt proprietăți ale modului de gândire, nu ale fenomenului. Le putem cere și AI-ului, dar trebuie să le știm noi.
+-->
+
+---
+
+# Exemplu: cerere din browser fără răspuns
+
+- în anumite condiții cererea din browser rămâne fără răspuns, apare aleator
+- timeout-uri: presupunem că nu le avem și nu le putem seta
 - avem log-ul aplicației în CSV, dar nu știm când s-a reprodus eroarea
 
 <!--
-Problema în care în anumite condiții interogarea din browser nu se termină. Apare aleator.
-Prima soluție punem timeout-uri la interogări. Presupunem că nu le avem.
+Problema în care în anumite condiții cererea din browser rămâne fără răspuns. Apare aleator.
+Prima soluție: punem timeout-uri la cereri. Presupunem că nu le avem și nu le putem seta.
 Dar avem log-ul aplicației în CSV pentru o anumită perioadă de timp. Dar nu știm timpul (timpii) când eroarea a fost reprodusă.
 Fragment de CSV.
 -->
@@ -372,26 +539,49 @@ Fragment de CSV: id-ul firului (thread), timestamp, mesaj. Firul exec-7 a încep
 
 ---
 
+<!-- _class: img -->
+
+![](img/thread-pool-blocat.svg)
+
+---
+
 # Aceeași metodă: clase de echivalență
 
-- clase de echivalență după repetarea thread-N
+- clase de echivalență după repetarea `http-nio-8080-exec-N`
 - firele care n-au răspuns sunt blocate și nu pot fi refolosite: repetările lor sunt mai puține
-- CSV, deci Pandas: cer AI un cod pandas, nu o analiză
-- adaptez fragmentele: învăț pandas și obțin un instrument determinist
+- CSV, deci pandas: cer AI un cod pandas, nu o analiză
+- adaptez fragmentul și obțin un instrument determinist
 
 <!--
-Se poate aplica metoda de mai sus. Clase de echivalență: repetarea thread-N, teoretic cele care n-au răspuns, sunt blocate și nu pot fi refolosite, deci repetările trebuie să fie mai mici.
+Se poate aplica metoda de mai sus. Clase de echivalență: repetarea http-nio-8080-exec-N, teoretic cele care n-au răspuns, sunt blocate și nu pot fi refolosite, deci repetările trebuie să fie mai mici.
 
-Eu când văd CSV mă gândesc la Pandas. "dacă am o listă de înregistrări într-un CSV cu coloane id, timestamp și message. Dă-mi un cod pandas care afișează fiecare id cu ultimul timestamp văzut într-un anumit interval de timp"
-Aceste fragmente le pot apoi adapta și: înveți pandas, + obții un instrument determinist.
+Eu când văd CSV mă gândesc la pandas. "dacă am o listă de înregistrări într-un CSV cu coloane id (id-ul firului de execuție), timestamp și message (mesajul). Dă-mi un cod pandas care afișează fiecare id cu ultimul timestamp văzut într-un anumit interval de timp"
+Acest fragment îl pot apoi adapta și obțin un instrument determinist.
 -->
 
 ---
 
-<!-- _class: img -->
-<small>Sursa desenului: https://commons.wikimedia.org/wiki/File:Thread_pool.svg</small>
+# Promptul pentru codul pandas
 
-![](img/thread-pool.png)
+> Am o listă de înregistrări într-un CSV, cu coloane id (id-ul firului de execuție), timestamp și message (mesajul). Dă-mi un cod pandas care afișează fiecare id cu ultimul timestamp văzut într-un anumit interval de timp.
+
+---
+
+# Codul pandas
+
+```python
+import pandas as pd
+
+df = pd.read_csv("log.csv", parse_dates=["timestamp"])
+
+start, end = "10:15:00", "10:16:00"
+interval = df[(df["timestamp"] >= start) & (df["timestamp"] <= end)]
+
+last_seen = interval.groupby("id")["timestamp"].max()
+print(last_seen.sort_values())
+```
+
+<small>Firele cu ultimul timestamp cel mai vechi, primele în listă, sunt candidații pentru „blocate”.</small>
 
 ---
 
@@ -400,7 +590,7 @@ Aceste fragmente le pot apoi adapta și: înveți pandas, + obții un instrument
 - 3 exemple în care am folosit proprietățile fenomenului, nu am lăsat totul pe AI
 - rezultatul ar fi fost același: problema rezolvată
 - diferența: omul a înțeles mai mult decât înainte
-- exemplul 3 și următoarele combină proprietățile fenomenului cu AI
+- exemplul cu cererea fără răspuns și următoarele combină proprietățile fenomenului cu AI
 - ca la școală: fundamentele întâi, apoi combinarea lor
 - învățăm proprietăți ale fenomenului, capacități ale AI, capacități ale pandas, pentru fenomenele viitoare
 
@@ -408,13 +598,13 @@ Aceste fragmente le pot apoi adapta și: înveți pandas, + obții un instrument
 Vă dați seama care diferență în aceste 3 exemple în care am folosit proprietăți ale fenomenului studiat și n-am pus în totalitate în seama AI?
 Rezultatul ar fi același : problema rezolvată. Dar în primul caz ai și un om care a înțeles ceva mai mult decât înțelesese până la acel fenomen.
 
-Începem să intrăm în tărâmul AI. Avantajele exemplului 3 dar și al următoarelor care vor combina proprietățile fenomenului și AI.
+Începem să intrăm în tărâmul AI. Avantajele exemplului cu cererea fără răspuns dar și al următoarelor care vor combina proprietățile fenomenului și AI.
 La fel cum învățăm la școală și universitate fundamentele, ca apoi să le putem combina, așa și învățăm / descoperim proprietăți ale fenomenului, capacități ale AI, capacități ale pandas. Ca în viitor pentru alte fenomene să le combinăm și să abordăm orice problemă complexă.
 -->
 
 ---
 
-# Exemplul 4: API care întoarce un arbore
+# Exemplu: API care întoarce un arbore
 
 - API întoarce o structură arborescentă, prea mare: pică
 - AI (răspuns mediu): introduceți paginarea
@@ -427,7 +617,7 @@ AI artificială spune (răspuns AVG) că trebuie să introducem paginarea. Pagin
 
 ---
 
-# Exemplul 4: pașii
+# Exemplu: API care întoarce un arbore – pașii
 
 1. teste care folosesc API-ul și pică
 2. AI face ca API-ul să returneze eroare în toate locurile unde e folosit
@@ -450,7 +640,7 @@ AI artificială spune (răspuns AVG) că trebuie să introducem paginarea. Pagin
 
 ---
 
-În general exemplul 4 mi-a dat o idee interesantă de a investiga ceva cu AI și anume.
+În general exemplul cu arborele mi-a dat o idee interesantă de a investiga ceva cu AI și anume.
 În situația unei probleme dacă îmi explică, sau sugerează, sau orice care îmi dă mai multe opțiuni, eu prefer să lucrez dinamic cu AI și anume:
 Să-mi dea câte unul, și când l-am înțeles fie zic dă-mi următorul fie pun întrebări. De multe ori după întrebări, opțiunile următoare sunt recalculate.
 
@@ -469,12 +659,12 @@ Structura arborescentă e prea mare. Variante:
 - streaming în loc de un singur răspuns
 
 <!--
-Exemplul 4 evidențiază un aspect la care AI e foarte bună: enumerarea variantelor. Îi cer să facă exemple și umple lista cu elemente apropiate semantic: de la o singură idee (paginarea) obțin o familie întreagă de soluții înrudite. Eu aleg apoi ce are sens, de preferință pe rând: câte o variantă, o înțeleg, apoi cer următoarea.
+Exemplul cu arborele evidențiază un aspect la care AI e foarte bună: enumerarea variantelor. Îi cer să facă exemple și umple lista cu elemente apropiate semantic: de la o singură idee (paginarea) obțin o familie întreagă de soluții înrudite. Eu aleg apoi ce are sens, de preferință pe rând: câte o variantă, o înțeleg, apoi cer următoarea.
 -->
 
 ---
 
-# Exemplul 4: git worktree
+# Exemplu: API care întoarce un arbore – git worktree
 
 - problemă de performanță
 - opțiuni: modific ce există sau fac upgrade la o versiune nouă a librăriilor
@@ -491,7 +681,7 @@ git worktree și experimentăm. salvăm rezultatele. comparăm.
 
 ---
 
-# Exemplul 5: dashboard-uri Grafana
+# Exemplu: dashboard-uri Grafana
 
 - de monitorizat ceva în Grafana, câteva dashboard-uri noi
 - dashboard-urile sunt JSON
@@ -511,7 +701,7 @@ Am de monitorizat ceva în Grafana, trebuie să fac câteva dashboard-uri noi. E
 
 ---
 
-# Exemplu 7: comunicare mașină-mașină
+# Exemplu: comunicare mașină-mașină
 
 - teste care cer autentificare
 - script Playwright construit de AI
@@ -530,6 +720,8 @@ Am un playwright script , construit de AI ... dara acum totul merge determinist.
 - la fel pentru fenomene complexe: proprietățile fenomenului + AI
 - optim: și modelul, și AI
 - rezultat: cunoștințe și capacitatea de a aborda următoarele situații complexe
+
+<small>Imaginile din această prezentare fără sursă indicată (inclusiv cea de pe slide-ul de titlu) au fost generate cu ajutorul Claude Code.</small>
 
 <!--
 Așa cum am învățat să adunăm și am înțeles esența, dar și am învățat unele lucruri pe de rost ca tabela înmulțirii, ca mai apoi să le putem combina și să rezolvăm orice așa și în abordarea fenomenelor complexe trebuie folosite în combinație proprietățile fenomenului și AI.
