@@ -101,8 +101,8 @@ Variantă de traducere: Nu a existat niciodată un moment mai interesant pentru 
 # Prin complexitate mă refer la:
 
 - sisteme / fenomene / probleme cu mulți factori interconectați
-- granițe neclare între factori
-- combinații greu de prevăzut exhaustiv
+- granițe difuze între factori (greu de delimitat)
+- combinații care nu pot fi prevăzute exhaustiv
 - și situații care doar par complexe: sunt noi pentru mine sau formulate neclar
 
 <!-- 
@@ -119,7 +119,7 @@ situația, fie pentru că sunt noi pentru mine și nu știu de unde să încep.
 # Cum abordăm complexitatea?
 
 - **A.** înțelegem fenomenul din spatele problemei și folosim proprietățile lui, unde putem
-- **B.** ce rămâne, delegăm altcuiva:
+* **B.** ce rămâne, delegăm altcuiva:
   * **AI**
 
 <!--
@@ -129,7 +129,7 @@ Două abordări, care se completează. A: folosesc proprietățile fenomenului a
 
 ---
 
-# A. Cum rezolvăm o problemă? (Pólya)
+# A. Cum rezolvăm o problemă (complexă)? (Pólya)
 
 <div class="cols">
 <div>
@@ -137,9 +137,10 @@ Două abordări, care se completează. A: folosesc proprietățile fenomenului a
 **Cele 4 etape**
 
 1. înțelege problema
-2. face un plan
-3. execută planul
+2. elaborează un plan
+3. execută planul (verifică fiecare pas)
 4. privește înapoi
+   - verificare rezultat, reutilizare la alte probleme
 
 </div>
 <div>
@@ -192,7 +193,7 @@ Un exemplu din experiența mea: în anumite momente apărea eroarea că nu mai s
 
 ---
 
-# Deadlock: de ce e greu de studiat
+# Deadlock: de ce e greu de studiat?
 
 - mulți utilizatori: sistem greu de depanat
 - puțini utilizatori: ușor de depanat, dar greu de reprodus
@@ -212,7 +213,7 @@ Este destul de complicat de depanat sistemul când avem mulți utilizatori, dar 
 
 # Deadlock N=1 vs. AI
 
-- la N=1 fenomenul converge singur spre starea dorită: problema se reproduce și e ușor de studiat
+- la N=1 fenomenul **converge singur spre starea dorită**: problema se reproduce și e ușor de studiat
 - alt exemplu: OOM
   - uneori sistemul afișează mesajul `OutOfMemory`
   - soluție: micșorăm memoria totală și eroarea se reproduce mult mai repede
@@ -230,7 +231,7 @@ Alt exemplu OOM: uneori un sistem afișează mesajul OutOfMemory. Soluție: dac�
 
 - nu am delegat problema către AI
 - în loc de problema generală, am luat un caz particular, mai simplu (N=1, memorie mică)
-- cazul particular s-a dovedit mai ușor de reprodus și de studiat
+- cazul particular **converge singur spre starea dorită**, deci s-a dovedit mai ușor de reprodus și de studiat
 - prin el am găsit soluția și pentru problema generală
 
 <!--
@@ -241,10 +242,10 @@ Nu am delegat problema către AI. În loc de problema generală am luat un caz p
 
 # Exemplu: problema N+1 (N+1 query)
 
-- din experiența mea, la o problemă de performanță primul lucru de verificat: nu cumva e problema N+1?
+- din experiența mea, la o problemă de performanță primul lucru de verificat: avem problema N+1?
 
 <!--
-Foarte des, când avem o problemă de performanță, primul lucru pe care ar trebui să-l verificăm este dacă nu cumva e problema N+1.
+Foarte des, când avem o problemă de performanță, primul lucru pe care ar trebui să-l verificăm este dacă avem problema N+1.
 -->
 
 ---
@@ -264,8 +265,9 @@ Foarte des, când avem o problemă de performanță, primul lucru pe care ar tre
 
 # N+1: o problemă mai simplă în locul celei inițiale (problemă auxiliară)
 
-- presupunem: fără bibliotecă care o detectează, dar cu acces la jurnalul de SQL-uri
-- foarte multe interogări, mai ales cu mulți utilizatori
+- există biblioteci care detectează această problemă, dar presupunem că nu le folosim
+- avem acces la jurnalul de SQL-uri
+  - foarte multe interogări, cu atât mai multe cu cât avem mai mulți utilizatori
 
 <!--
 Sunt biblioteci care au această funcție activată, dar să presupunem că nu folosim asemenea biblioteci. Să presupunem că avem acces la jurnalul de SQL-uri.
@@ -307,11 +309,12 @@ Jurnalul pare complicat, sunt multe interogări diferite.
 # N+1: o problemă mai simplă în locul celei inițiale (problemă auxiliară)
 
 - clase de echivalență după numărul de repetări ale interogării: `[1]` excludem, `[2]`, `[3]`... ne interesează
+  - ordonăm clasele după numărul de repetări, iar când acesta crește, **răspunsul la întrebare iese singur în evidență** (avem problema N+1?)
 - am construit o altă problemă, care se rezolvă simplu și se studiază ușor
   - putem delega către AI să extragă clasele, sau să scrie un fragment de cod care le extrage
 
 <!--
-Dar dacă definim clase de echivalență în funcție de numărul de repetări ale unei interogări: [1] excludem, [2], [3] ... ne interesează.
+Dar dacă definim clase de echivalență în funcție de numărul de repetări ale unei interogări: [1] excludem, [2], [3] ... ne interesează. Dacă ordonăm clasele după numărul de repetări și acesta crește, răspunsul la întrebare iese singur în evidență: avem problema N+1?
 
 Am construit o altă problemă, care se rezolvă simplu și pe care o putem studia ușor.
 -->
@@ -354,10 +357,11 @@ Dacă ne uităm atent, unele rânduri se repetă identic. Le-am evidențiat cu c
 - am folosit abstractizarea: rândurile identice formează o clasă
 - clase de echivalență după numărul de repetări ale interogării
 - problema auxiliară: în loc să citim tot jurnalul, numărăm repetările pe clase
+  - **răspunsul iese singur în evidență**: clasele cu multe repetări indică problema N+1
 
 <!--
 Aici n-am delegat către AI. Am folosit abstractizarea: rândurile identice din jurnal le grupez în clase, după numărul de repetări.
-Asta e problema auxiliară: în loc să citesc tot jurnalul, lucrez cu clasele și cu numărul de repetări, o problemă mai simplă, care se rezolvă ușor.
+Asta e problema auxiliară: în loc să citesc tot jurnalul, lucrez cu clasele și cu numărul de repetări, o problemă mai simplă, care se rezolvă ușor și în care răspunsul iese singur în evidență: clasele cu multe repetări indică problema N+1.
 -->
 
 ---
@@ -365,6 +369,7 @@ Asta e problema auxiliară: în loc să citesc tot jurnalul, lucrez cu clasele �
 # Ce diferență fac proprietățile fenomenului
 
 - 2 exemple (deadlock, N+1): am folosit proprietățile fenomenului, nu am lăsat totul pe AI
+  - am rezolvat fără AI: la deadlock fenomenul a **convergit spre starea dorită**, la N+1 **răspunsul a ieșit singur în evidență**
 - dacă lăsam totul pe AI, rezultatul ar fi fost același: problema rezolvată
 - diferența: persoana a învățat ceva nou și a câștigat experiență
 - ce a învățat se aplică și la fenomenele viitoare (problemele, situațiile)
@@ -497,6 +502,47 @@ Codul afișează fiecare fir cu ultimul timestamp văzut, sortat crescător. Pe 
 
 ---
 
+<style scoped>
+pre code { font-size: 20px; line-height: 1.35; }
+</style>
+
+# Cerere fără răspuns: a doua soluție, desenăm o figură
+
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("log.csv", parse_dates=["timestamp"])
+df["op"] = df["message"].str.split().str[-1]  # start / done
+df["req"] = df.groupby(["thread", "op"]).cumcount()
+
+w = df.pivot(index=["thread", "req"], columns="op", values="timestamp").reset_index()
+begin = (w["start"] - df["timestamp"].min()).dt.total_seconds()
+length = (w["done"].fillna(df["timestamp"].max()) - w["start"]).dt.total_seconds()
+
+plt.barh(w["thread"], length, left=begin, edgecolor="C0", linewidth=2)
+plt.xlabel("secunde de la începutul log-ului")
+plt.show()
+```
+
+<!--
+A doua soluție, tot cu pandas, dar fără grupare: desenez o figură (euristica „desenează o figură”). Pentru fiecare cerere desenez o bară de la start la done. Cererea care n-a primit niciodată done se desenează până la sfârșitul log-ului.
+-->
+
+---
+
+<!-- _class: img -->
+
+![](img/cronologie-fire.png)
+
+<small>Fiecare bară = o cerere, de la start la done. Cererile terminate sunt linii scurte; doar <code>exec-7</code> are o bară care nu se mai termină.</small>
+
+<!--
+Dintr-o privire se vede firul blocat: toate cererile sunt scurte, doar exec-7 începe la 10:15:01 și nu se mai termină. Nu mai e nevoie de cod de grupare.
+-->
+
+---
+
 # B. Exemplu: skillul /wayfinder pentru situații necunoscute
 
 - problemă nouă: nu știu de unde să încep (formulare neclară sau primii pași costisitori)
@@ -532,8 +578,10 @@ Problema nouă, pasul următor: ce opțiuni am?
 - ce aș putea să fi uitat
 - exemple și contraexemple
 
+AI enumeră și ce nici nu știam că există, iar astfel **ne orientăm spre direcția corectă** de rezolvare a problemei.
+
 <!--
-AI e foarte bună la enumerare: întrebări la care nu m-am gândit, riscuri, variante, ipoteze ascunse, criterii de comparare. Umple lista cu elemente apropiate semantic și îmi arată zone la care nu m-aș fi gândit singur. Eu aleg ce are sens și verific.
+AI e foarte bună la enumerare: întrebări la care nu m-am gândit, riscuri, variante, ipoteze ascunse, criterii de comparare. Umple lista cu elemente apropiate semantic și îmi arată zone la care nu m-aș fi gândit singur. Enumerând și ce nici nu știam că există, AI ne ajută să ne orientăm spre direcția corectă de rezolvare a problemei. Eu aleg ce are sens și verific.
 -->
 
 ---
@@ -557,6 +605,64 @@ Generalizare: „Cere și explicația vizuală de la AI”.
 
 Sursa: https://towardsdatascience.com/how-to-5x-your-communication-effectiveness-with-claude-code/
 -->
+
+---
+
+# Explicația vizuală: ce iese în evidență
+
+- explicația vizuală ne ajută să **înțelegem rezultatul mai repede**
+- ce contează **iese singur în evidență**, în loc să fie ascuns în text lung
+- astfel ne orientăm mai repede spre direcția corectă
+
+<!--
+Aceeași idee ca la enumerare, dar la nivelul prezentării: când rezultatul e vizual, ce contează iese în evidență și ne ajută să ne orientăm mai repede spre direcția corectă.
+-->
+
+---
+
+# Exemplu: analiza unei probleme de performanță – git worktree
+
+- problemă de performanță
+- opțiuni: modific ce există sau fac upgrade la o versiune nouă a librăriilor
+- ce aleg? cum măsor?
+- git worktree: experimentăm, salvăm rezultatele, comparăm
+
+<!--
+Am o problemă de performanță. Presupun că pot s-o rezolv modificând ceva existent sau făcând upgrade la o nouă versiune a librăriilor.
+Ce să aleg? Cum să măsor?
+Cu git worktree experimentăm, salvăm rezultatele și comparăm.
+-->
+
+---
+
+<!-- _class: img -->
+
+![](img/git-worktree.svg)
+
+---
+
+# Exemplu: modificarea consumului de memorie după upgrade
+
+- după upgrade, aplicația consumă mai multă memorie
+- **AI generează un benchmark** care, pentru un endpoint de API, măsoară și salvează numărul de bytes alocați
+- **git worktree**: același benchmark rulează pe ramura curentă și pe un commit dinainte de upgrade
+- numerele diferă, deci avem o referință măsurabilă
+- **AI primește numerele** și caută cauza
+  - a găsit exact biblioteca care, după upgrade, a început să consume mai multă memorie
+
+<!--
+După upgrade am văzut că se consumă mai multă memorie.
+Am generat cu AI un benchmark care, pentru un endpoint de API, măsoară și salvează numărul de bytes alocați.
+Cu git worktree am rulat benchmark-ul pe ramura curentă și pe un commit de dinainte de upgrade, și am comparat numerele. S-a adeverit că diferă.
+Având numerele ca o referință, am rugat AI să găsească problema, și mi-a găsit exact biblioteca care, după upgrade, a început să se comporte așa.
+Observație: AI a construit instrumentul de măsură, dar măsurătoarea e deterministă și o controlez eu; apoi AI lucrează pe numere, nu pe presupuneri.
+-->
+
+---
+
+<!-- _class: img -->
+
+![](img/git-worktree-memorie.svg)
 
 ---
 
@@ -618,42 +724,6 @@ Exemplul cu arborele evidențiază un aspect la care AI e foarte bună: enumerar
 
 ---
 
-# Exemplu: analiza unei probleme de performanță – git worktree
-
-- problemă de performanță
-- opțiuni: modific ce există sau fac upgrade la o versiune nouă a librăriilor
-- ce aleg? cum măsor?
-- git worktree: experimentăm, salvăm rezultatele, comparăm
-
-<!--
-Am o problemă de performanță. Presupun că pot s-o rezolv modificând ceva existent sau făcând upgrade la o nouă versiune a librăriilor.
-Ce să aleg? Cum să măsor?
-Cu git worktree experimentăm, salvăm rezultatele și comparăm.
--->
-
-<!-- TODO desen: nu am găsit o diagramă bună pentru git worktree -->
-
----
-
-# Exemplu: modificarea consumului de memorie după upgrade
-
-- după upgrade, aplicația consumă mai multă memorie
-- **AI generează un benchmark** care, pentru un endpoint de API, măsoară și salvează numărul de bytes alocați
-- **git worktree**: același benchmark rulează pe ramura curentă și pe un commit dinainte de upgrade
-- numerele diferă, deci avem o referință măsurabilă
-- **AI primește numerele** și caută cauza
-  - a găsit exact biblioteca care, după upgrade, a început să consume mai multă memorie
-
-<!--
-După upgrade am văzut că se consumă mai multă memorie.
-Am generat cu AI un benchmark care, pentru un endpoint de API, măsoară și salvează numărul de bytes alocați.
-Cu git worktree am rulat benchmark-ul pe ramura curentă și pe un commit de dinainte de upgrade, și am comparat numerele. S-a adeverit că diferă.
-Având numerele ca o referință, am rugat AI să găsească problema, și mi-a găsit exact biblioteca care, după upgrade, a început să se comporte așa.
-Observație: AI a construit instrumentul de măsură, dar măsurătoarea e deterministă și o controlez eu; apoi AI lucrează pe numere, nu pe presupuneri.
--->
-
----
-
 # Exemplu: dashboard-uri Grafana generate de AI
 
 - **nevoia**: monitorizăm ceva în Grafana, cu câteva dashboard-uri noi
@@ -675,6 +745,18 @@ Am de monitorizat ceva în Grafana, trebuie să fac câteva dashboard-uri noi. E
 
 ---
 
+# Ce se poate reprezenta digital, AI produce rapid
+
+- în mediul digital, tot ce se poate reprezenta pur digital (un widget JSON, un dashboard, un fișier de configurare) AI produce în câteva secunde
+- același rezultat, manual, înseamnă o secvență de pași: interfață, click-uri, configurări, verificări
+- rezultatul e un artefact pe care îl import și îl verific eu
+
+<!--
+Dashboard-ul Grafana e doar un JSON. Pentru AI, un JSON e doar text pe care îl generează în câteva secunde. Același lucru, făcut manual în interfață, înseamnă zeci de pași.
+-->
+
+---
+
 # Exemplu: autentificare automată în teste
 
 - **problema**: testele necesită autentificare
@@ -687,6 +769,12 @@ Am de monitorizat ceva în Grafana, trebuie să fac câteva dashboard-uri noi. E
 <!--
 În situațiile în care e nevoie de autentificare, de exemplu în teste, am un script Playwright construit de AI. Credențialele sunt într-un fișier .env, iar bearer token-ul se salvează într-un auth.json, pe care testele îl citesc automat. Dacă tokenul e vechi, se pornește scriptul Playwright. Nu mai e nevoie de implicarea mea, totul merge determinist.
 -->
+
+---
+
+<!-- _class: img -->
+
+![](img/autentificare-teste.svg)
 
 ---
 
@@ -813,6 +901,27 @@ De aceea, întâi trebuie să ne gândim: e posibilă oare o abordare în care m
 
 Noi folosim AI pentru că poate, dar mai există și alți participanți care pot, ca de exemplu modelul.
 -->
+
+---
+
+# Eratostene: Pământul măsurat cu un băț și o umbră
+
+- **Eratostene din Cirene** (cca 276–194 î.Hr.), în jurul anului 240 î.Hr.
+- la solstițiul de vară, la amiază, în Syene soarele era la zenit: bățul nu avea umbră
+- în același moment, în Alexandria, umbra bățului arăta un unghi de ≈ 7,2°, adică 1/50 dintr-un cerc
+- distanța dintre orașe: ≈ 5000 de stadii
+- circumferința Pământului: ≈ 50 × 5000 = **250 000 de stadii**
+
+<!--
+Un exemplu clasic de problemă complexă rezolvată cu un model simplu: Eratostene a transformat problema globului într-o problemă de geometrie, cu un unghi și o proporție (euristicile „desenează o figură” și „problemă auxiliară”). Fără calculator și fără AI, doar cu înțelegerea fenomenului: razele Soarelui sunt paralele, iar Pământul e rotund.
+Mărimea exactă a stadiului folosit e disputată, deci cât de aproape de valoarea reală a ieșit rezultatul depinde de ea.
+-->
+
+---
+
+<!-- _class: img -->
+
+![](img/eratostene.svg)
 
 ---
 

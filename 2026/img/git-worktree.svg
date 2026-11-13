@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 600" font-family="Segoe UI, Arial, sans-serif">
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#52606d"/></marker>
+</defs>
+<rect width="1100" height="600" fill="#fff"/>
+<text x="40" y="44" font-size="28" font-weight="700" fill="#1a365d">git worktree: două experimente în paralel, din același repo</text>
+
+<!-- Repo -->
+<rect x="440" y="80" width="220" height="80" rx="10" fill="#ebf4ff" stroke="#2b6cb0" stroke-width="2"/>
+<text x="550" y="114" font-size="26" font-weight="700" fill="#1a365d" text-anchor="middle">Repo</text>
+<text x="550" y="141" font-size="17" fill="#52606d" text-anchor="middle">un singur .git</text>
+
+<!-- git worktree add -->
+<path d="M480 160 L220 248" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+<path d="M620 160 L880 248" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+<text x="290" y="188" font-size="17" fill="#52606d" text-anchor="middle" font-family="Consolas, monospace">git worktree add</text>
+<text x="810" y="188" font-size="17" fill="#52606d" text-anchor="middle" font-family="Consolas, monospace">git worktree add</text>
+
+<!-- Worktree A -->
+<rect x="60" y="250" width="300" height="100" rx="10" fill="#f0fff4" stroke="#2f855a" stroke-width="2"/>
+<text x="210" y="288" font-size="22" font-weight="700" fill="#22543d" text-anchor="middle">worktree A</text>
+<text x="210" y="320" font-size="18" fill="#22543d" text-anchor="middle">modific ce există</text>
+
+<!-- Worktree B -->
+<rect x="740" y="250" width="300" height="100" rx="10" fill="#f0fff4" stroke="#2f855a" stroke-width="2"/>
+<text x="890" y="288" font-size="22" font-weight="700" fill="#22543d" text-anchor="middle">worktree B</text>
+<text x="890" y="314" font-size="18" fill="#22543d" text-anchor="middle">upgrade la o versiune nouă</text>
+<text x="890" y="336" font-size="18" fill="#22543d" text-anchor="middle">a librăriilor</text>
+
+<!-- în paralel -->
+<path d="M372 300 H728" stroke="#52606d" stroke-width="2" marker-start="url(#a)" marker-end="url(#a)"/>
+<text x="550" y="288" font-size="20" font-weight="600" fill="#52606d" text-anchor="middle">în paralel</text>
+
+<!-- AI -->
+<path d="M210 350 V398" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+<path d="M890 350 V398" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+<rect x="60" y="400" width="300" height="70" rx="10" fill="#fffaf0" stroke="#dd6b20" stroke-width="2"/>
+<text x="210" y="430" font-size="19" font-weight="600" fill="#7b341e" text-anchor="middle">AI schimbă codul</text>
+<text x="210" y="455" font-size="19" fill="#7b341e" text-anchor="middle">și rulează testele</text>
+<rect x="740" y="400" width="300" height="70" rx="10" fill="#fffaf0" stroke="#dd6b20" stroke-width="2"/>
+<text x="890" y="430" font-size="19" font-weight="600" fill="#7b341e" text-anchor="middle">AI schimbă codul</text>
+<text x="890" y="455" font-size="19" fill="#7b341e" text-anchor="middle">și rulează testele</text>
+
+<!-- Comparare -->
+<path d="M210 470 L390 518" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+<path d="M890 470 L710 518" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+<text x="262" y="512" font-size="16" fill="#52606d" text-anchor="middle">rezultate A</text>
+<text x="838" y="512" font-size="16" fill="#52606d" text-anchor="middle">rezultate B</text>
+<rect x="370" y="520" width="360" height="66" rx="10" fill="#fff5f5" stroke="#c53030" stroke-width="2"/>
+<text x="550" y="550" font-size="22" font-weight="700" fill="#9b2c2c" text-anchor="middle">comparăm rezultatele</text>
+<text x="550" y="574" font-size="17" fill="#742a2a" text-anchor="middle">convergem spre soluția cea mai optimă</text>
+</svg>

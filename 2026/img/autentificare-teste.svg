@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 600" font-family="Segoe UI, Arial, sans-serif">
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#52606d"/></marker>
+<marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c53030"/></marker>
+</defs>
+<rect width="1100" height="600" fill="#fff"/>
+<text x="40" y="44" font-size="28" font-weight="700" fill="#1a365d">Teste cu autentificare automată</text>
+
+<!-- .env -->
+<rect x="30" y="110" width="170" height="60" rx="10" fill="#f7fafc" stroke="#718096" stroke-width="2"/>
+<text x="115" y="148" font-size="22" font-weight="700" fill="#2d3748" text-anchor="middle" font-family="Consolas, monospace">.env</text>
+<path d="M115 170 V256" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+<text x="127" y="220" font-size="15" fill="#52606d">credențiale</text>
+
+<!-- login -->
+<rect x="30" y="260" width="170" height="80" rx="10" fill="#fffaf0" stroke="#dd6b20" stroke-width="2"/>
+<text x="115" y="294" font-size="22" font-weight="700" fill="#7b341e" text-anchor="middle">login</text>
+<text x="115" y="320" font-size="16" fill="#7b341e" text-anchor="middle">script Playwright</text>
+
+<!-- auth.json -->
+<path d="M200 300 H272" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+<text x="236" y="288" font-size="15" fill="#52606d" text-anchor="middle">salvează</text>
+<rect x="280" y="260" width="170" height="80" rx="10" fill="#ebf4ff" stroke="#2b6cb0" stroke-width="2"/>
+<text x="365" y="294" font-size="22" font-weight="700" fill="#1a365d" text-anchor="middle" font-family="Consolas, monospace">auth.json</text>
+<text x="365" y="320" font-size="16" fill="#1a365d" text-anchor="middle">bearer token</text>
+
+<!-- teste -->
+<path d="M450 300 H512" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+<text x="481" y="288" font-size="15" fill="#52606d" text-anchor="middle">citesc</text>
+<text x="765" y="250" font-size="20" font-weight="700" fill="#22543d" text-anchor="middle">teste</text>
+<rect x="520" y="270" width="90" height="60" rx="8" fill="#f0fff4" stroke="#2f855a" stroke-width="2"/>
+<text x="565" y="306" font-size="20" fill="#22543d" text-anchor="middle">test 1</text>
+<rect x="625" y="270" width="90" height="60" rx="8" fill="#f0fff4" stroke="#2f855a" stroke-width="2"/>
+<text x="670" y="306" font-size="20" fill="#22543d" text-anchor="middle">test 2</text>
+<rect x="730" y="270" width="90" height="60" rx="8" fill="#f0fff4" stroke="#2f855a" stroke-width="2"/>
+<text x="775" y="306" font-size="20" fill="#22543d" text-anchor="middle">test 3</text>
+<text x="868" y="310" font-size="26" fill="#52606d" text-anchor="middle">⋯</text>
+<rect x="915" y="270" width="95" height="60" rx="8" fill="#f0fff4" stroke="#2f855a" stroke-width="2"/>
+<text x="962" y="306" font-size="20" fill="#22543d" text-anchor="middle">test N</text>
+
+<!-- token expirat -->
+<path d="M765 335 V450 H115 V344" fill="none" stroke="#c53030" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#r)"/>
+<text x="440" y="436" font-size="20" font-weight="600" fill="#c53030" text-anchor="middle">token expirat: se pornește din nou login-ul</text>
+
+<rect x="300" y="510" width="500" height="64" rx="10" fill="#fff5f5" stroke="#c53030" stroke-width="2"/>
+<text x="550" y="539" font-size="21" font-weight="700" fill="#9b2c2c" text-anchor="middle">nu mai e nevoie de intervenția mea</text>
+<text x="550" y="563" font-size="17" fill="#742a2a" text-anchor="middle">totul merge determinist</text>
+</svg>

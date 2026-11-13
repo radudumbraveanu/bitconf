@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 600" font-family="Segoe UI, Arial, sans-serif">
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#52606d"/></marker>
+</defs>
+<rect width="1100" height="600" fill="#fff"/>
+<text x="40" y="44" font-size="28" font-weight="700" fill="#1a365d">git worktree: același benchmark pe două versiuni</text>
+<text x="40" y="70" font-size="16" fill="#52606d">Date ilustrative: memoria alocată de un endpoint de API, pe o cerere.</text>
+
+<!-- Ramura curentă -->
+<rect x="40" y="100" width="320" height="190" rx="10" fill="#fff5f5" stroke="#c53030" stroke-width="2"/>
+<text x="200" y="136" font-size="22" font-weight="700" fill="#9b2c2c" text-anchor="middle">worktree: ramura curentă</text>
+<text x="200" y="162" font-size="17" fill="#742a2a" text-anchor="middle">după upgrade</text>
+<rect x="70" y="190" width="260" height="34" rx="4" fill="#fc8181"/>
+<text x="200" y="255" font-size="21" font-weight="700" fill="#9b2c2c" text-anchor="middle">≈ 480 KB alocați</text>
+
+<!-- Commit dinainte de upgrade -->
+<rect x="740" y="100" width="320" height="190" rx="10" fill="#f0fff4" stroke="#2f855a" stroke-width="2"/>
+<text x="900" y="136" font-size="22" font-weight="700" fill="#22543d" text-anchor="middle">worktree: commit mai vechi</text>
+<text x="900" y="162" font-size="17" fill="#22543d" text-anchor="middle">dinainte de upgrade</text>
+<rect x="770" y="190" width="65" height="34" rx="4" fill="#68d391"/>
+<text x="900" y="255" font-size="21" font-weight="700" fill="#22543d" text-anchor="middle">≈ 120 KB alocați</text>
+
+<!-- Comparare -->
+<path d="M372 195 H728" stroke="#52606d" stroke-width="2" marker-start="url(#a)" marker-end="url(#a)"/>
+<text x="550" y="180" font-size="19" font-weight="600" fill="#52606d" text-anchor="middle">același benchmark</text>
+<text x="550" y="224" font-size="19" fill="#52606d" text-anchor="middle">numere diferite</text>
+
+<!-- AI -->
+<path d="M200 290 L385 357" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+<path d="M900 290 L715 357" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+<rect x="330" y="360" width="440" height="110" rx="10" fill="#fffaf0" stroke="#dd6b20" stroke-width="2"/>
+<text x="550" y="395" font-size="22" font-weight="700" fill="#7b341e" text-anchor="middle">AI primește numerele</text>
+<text x="550" y="425" font-size="19" fill="#7b341e" text-anchor="middle">converge spre biblioteca / clasa / metoda</text>
+<text x="550" y="450" font-size="19" fill="#7b341e" text-anchor="middle">care a produs alocarea mare</text>
+
+<!-- Rezultat -->
+<path d="M550 470 V513" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+<rect x="290" y="515" width="520" height="60" rx="10" fill="#ebf4ff" stroke="#2b6cb0" stroke-width="2"/>
+<text x="550" y="542" font-size="20" font-weight="700" fill="#1a365d" text-anchor="middle">cauza: exact biblioteca care, după upgrade,</text>
+<text x="550" y="566" font-size="20" font-weight="700" fill="#1a365d" text-anchor="middle">a început să consume mai multă memorie</text>
+</svg>
