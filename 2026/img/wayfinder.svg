@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 600" font-family="Segoe UI, Arial, sans-serif">
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#52606d"/></marker>
+</defs>
+<rect width="1100" height="600" fill="#fff"/>
+<text x="40" y="44" font-size="28" font-weight="700" fill="#1a365d">Wayfinder: de la o problemă neclară la pași pe care îi execut</text>
+
+<!-- problema -->
+<rect x="30" y="250" width="190" height="100" rx="10" fill="#fff5f5" stroke="#c53030" stroke-width="2"/>
+<text x="125" y="292" font-size="21" font-weight="700" fill="#9b2c2c" text-anchor="middle">problemă nouă</text>
+<text x="125" y="320" font-size="16" fill="#742a2a" text-anchor="middle">nu știu de unde să încep</text>
+<path d="M220 300 H282" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+
+<!-- eu răspund -->
+<rect x="290" y="100" width="220" height="60" rx="10" fill="#f7fafc" stroke="#718096" stroke-width="2"/>
+<text x="400" y="137" font-size="19" fill="#2d3748" text-anchor="middle">eu: răspund la întrebări</text>
+<path d="M400 160 V220" stroke="#52606d" stroke-width="2" marker-start="url(#a)" marker-end="url(#a)"/>
+
+<!-- Wayfinder -->
+<rect x="290" y="225" width="220" height="150" rx="10" fill="#fffaf0" stroke="#dd6b20" stroke-width="2"/>
+<text x="400" y="262" font-size="24" font-weight="700" fill="#7b341e" text-anchor="middle">Wayfinder</text>
+<text x="400" y="296" font-size="17" fill="#7b341e" text-anchor="middle">pune întrebări</text>
+<text x="400" y="322" font-size="17" fill="#7b341e" text-anchor="middle">construiește lanțul de pași</text>
+<text x="400" y="348" font-size="17" fill="#7b341e" text-anchor="middle">ține evidența</text>
+<path d="M510 300 H592" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+
+<!-- lanț de pași -->
+<text x="690" y="104" font-size="19" font-weight="700" fill="#1a365d" text-anchor="middle">lanțul de pași</text>
+<rect x="600" y="120" width="180" height="52" rx="8" fill="#f0fff4" stroke="#2f855a" stroke-width="2"/>
+<text x="690" y="153" font-size="18" fill="#22543d" text-anchor="middle">pas 1 ✓</text>
+<rect x="600" y="186" width="180" height="52" rx="8" fill="#f0fff4" stroke="#2f855a" stroke-width="2"/>
+<text x="690" y="219" font-size="18" fill="#22543d" text-anchor="middle">pas 2 ✓</text>
+<rect x="600" y="274" width="180" height="52" rx="8" fill="#fffaf0" stroke="#dd6b20" stroke-width="3"/>
+<text x="690" y="307" font-size="18" font-weight="700" fill="#7b341e" text-anchor="middle">pas 3 (curent)</text>
+<rect x="600" y="362" width="180" height="52" rx="8" fill="#f7fafc" stroke="#a0aec0" stroke-width="2"/>
+<text x="690" y="395" font-size="18" fill="#52606d" text-anchor="middle">pas 4</text>
+<text x="690" y="440" font-size="24" fill="#52606d" text-anchor="middle">⋮</text>
+
+<!-- AI execută -->
+<path d="M780 300 H852" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+<rect x="860" y="215" width="200" height="100" rx="10" fill="#ebf4ff" stroke="#2b6cb0" stroke-width="2"/>
+<text x="960" y="250" font-size="20" font-weight="700" fill="#1a365d" text-anchor="middle">AI execută pasul</text>
+<text x="960" y="276" font-size="16" fill="#1a365d" text-anchor="middle">librării, programe</text>
+<text x="960" y="298" font-size="16" fill="#1a365d" text-anchor="middle">în câteva minute</text>
+
+<!-- eu analizez -->
+<path d="M960 315 V372" stroke="#52606d" stroke-width="2" marker-end="url(#a)"/>
+<rect x="860" y="375" width="200" height="80" rx="10" fill="#f7fafc" stroke="#718096" stroke-width="2"/>
+<text x="960" y="408" font-size="19" font-weight="700" fill="#2d3748" text-anchor="middle">eu rulez programele</text>
+<text x="960" y="434" font-size="19" fill="#2d3748" text-anchor="middle">și analizez rezultatele</text>
+
+<!-- înapoi -->
+<path d="M960 455 V505 H400 V380" fill="none" stroke="#c53030" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#a)"/>
+<text x="680" y="496" font-size="18" font-weight="600" fill="#c53030" text-anchor="middle">rezultatele merg înapoi: se actualizează lanțul de pași</text>
+
+<rect x="140" y="534" width="820" height="52" rx="10" fill="#fff5f5" stroke="#c53030" stroke-width="2"/>
+<text x="550" y="566" font-size="19" font-weight="700" fill="#9b2c2c" text-anchor="middle">generalizare: gradul de finețe al interacțiunii cu AI, opțiune cu opțiune</text>
+</svg>

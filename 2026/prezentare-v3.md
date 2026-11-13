@@ -454,7 +454,7 @@ Fragment de CSV: id-ul firului (thread), timestamp, mesaj. Firul exec-7 a încep
 <!--
 Se poate aplica metoda de mai sus. Clase de echivalență: repetarea http-nio-8080-exec-N, teoretic, cele care n-au răspuns sunt blocate și nu pot fi reutilizate, deci repetările trebuie să fie mai mici.
 
-Eu când văd CSV mă gândesc la pandas: „Am o listă de înregistrări într-un CSV, cu coloane id (id-ul firului de execuție), timestamp și message (mesajul). Dă-mi un cod pandas care afișează fiecare id cu ultimul timestamp văzut într-un anumit interval de timp.”
+Eu când văd CSV mă gândesc la pandas: „Am o listă de înregistrări într-un CSV, cu coloane thread (firul de execuție), timestamp și message (mesajul). Dă-mi un cod pandas care afișează fiecare thread cu ultimul timestamp văzut într-un anumit interval de timp.”
 Acest fragment îl pot apoi adapta și obțin un instrument determinist.
 -->
 
@@ -462,7 +462,7 @@ Acest fragment îl pot apoi adapta și obțin un instrument determinist.
 
 # Cerere fără răspuns: promptul pentru codul pandas
 
-> Am o listă de înregistrări într-un CSV, cu coloane id (id-ul firului de execuție), timestamp și message (mesajul). Dă-mi un cod pandas care afișează fiecare id cu ultimul timestamp văzut într-un anumit interval de timp.
+> Am o listă de înregistrări într-un CSV, cu coloane thread (firul de execuție), timestamp și message (mesajul). Dă-mi un cod pandas care afișează fiecare thread cu ultimul timestamp văzut într-un anumit interval de timp.
 
 ---
 
@@ -476,7 +476,7 @@ df = pd.read_csv("log.csv", parse_dates=["timestamp"])
 start, end = "10:15:00", "10:20:00"
 interval = df[(df["timestamp"] >= start) & (df["timestamp"] <= end)]
 
-last_seen = interval.groupby("id")["timestamp"].max()
+last_seen = interval.groupby("thread")["timestamp"].max()
 print(last_seen.sort_values())
 ```
 
@@ -487,11 +487,11 @@ print(last_seen.sort_values())
 # Cerere fără răspuns: ce afișează codul
 
 ```text
-id
+thread
 http-nio-8080-exec-7   2026-11-13 10:15:01.140
 http-nio-8080-exec-3   2026-11-13 10:16:27.490
 http-nio-8080-exec-5   2026-11-13 10:19:41.133
-Name: timestamp, dtype: datetime64[ns]
+Name: timestamp, dtype: datetime64[us]
 ```
 
 <small>Firul <code>exec-7</code> e primul: ultima activitate a lui e la 10:15:01, cu aproape 5 minute înaintea celorlalte. El e firul blocat.</small>
@@ -562,7 +562,11 @@ A doua abordare: delegăm către AI. Prima situație: când suntem la început �
 Metoda se poate generaliza în „gradul de finețe în interacțiunea cu AI”; ambele cuvinte sunt importante: „finețe” (cât de fină vs grosieră) și „interacțiune”.
 -->
 
-<!-- TODO desen: wayfinder nu e clar (unealta ta?), de ales împreună -->
+---
+
+<!-- _class: img -->
+
+![](img/wayfinder.svg)
 
 ---
 
